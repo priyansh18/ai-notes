@@ -1,0 +1,65 @@
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 16px 0 8px;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 16px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--ifm-color-content);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.link:hover {
+  border-color: var(--brand, var(--ifm-color-primary));
+  background: rgba(99, 102, 241, 0.06);
+  color: var(--brand, var(--ifm-color-primary));
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  text-decoration: none;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  width: 18px;
+  height: 18px;
+  opacity: 0.75;
+  flex-shrink: 0;
+}
+
+.icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.link:hover .icon {
+  opacity: 1;
+  color: var(--brand, var(--ifm-color-primary));
+}
+
+.arrow {
+  font-size: 0.75rem;
+  opacity: 0.5;
+  margin-left: -2px;
+}
+
+/* Light mode */
+[data-theme="light"] .link {
+  border-color: rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.02);
+}
+
+[data-theme="light"] .link:hover {
+  background: rgba(99, 102, 241, 0.06);
+}

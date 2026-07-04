@@ -1,0 +1,67 @@
+<svg viewBox="0 0 920 430" xmlns="http://www.w3.org/2000/svg" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif">
+  <rect width="920" height="430" fill="transparent"/>
+
+  <!-- ===== three tier columns ===== -->
+  <!-- column 1: LOCAL STORE -->
+  <rect x="24" y="24" width="280" height="372" rx="14" fill="rgba(34,197,94,0.06)" stroke="#16a34a" stroke-opacity="0.5"/>
+  <text x="44" y="56" font-size="15" font-weight="700" fill="#86efac">① Local store</text>
+  <text x="44" y="76" font-size="11" fill="#a1a1aa">&lt; 1M vectors · prototyping</text>
+
+  <rect x="44" y="94" width="240" height="64" rx="10" fill="#1e1b2e" stroke="#16a34a"/>
+  <text x="60" y="120" font-size="13" font-weight="700" fill="#e4e4e7">InMemoryVectorStore</text>
+  <text x="60" y="140" font-size="10.5" fill="#a1a1aa">demos &amp; tests · nothing persists</text>
+
+  <rect x="44" y="170" width="240" height="64" rx="10" fill="#1e1b2e" stroke="#16a34a"/>
+  <text x="60" y="196" font-size="13" font-weight="700" fill="#e4e4e7">Chroma</text>
+  <text x="60" y="216" font-size="10.5" fill="#a1a1aa">course work · persists to disk</text>
+
+  <rect x="44" y="246" width="240" height="64" rx="10" fill="#1e1b2e" stroke="#16a34a"/>
+  <text x="60" y="272" font-size="13" font-weight="700" fill="#e4e4e7">FAISS</text>
+  <text x="60" y="292" font-size="10.5" fill="#a1a1aa">fastest local · save/load index</text>
+
+  <text x="44" y="344" font-size="11" fill="#86efac" font-weight="600">Pick when:</text>
+  <text x="44" y="364" font-size="10.5" fill="#a1a1aa">building a prototype, full control,</text>
+  <text x="44" y="380" font-size="10.5" fill="#a1a1aa">fastest search, limited budget.</text>
+
+  <!-- column 2: MANAGED DB -->
+  <rect x="320" y="24" width="280" height="372" rx="14" fill="rgba(59,130,246,0.06)" stroke="#3b82f6" stroke-opacity="0.5"/>
+  <text x="340" y="56" font-size="15" font-weight="700" fill="#93c5fd">② Managed database</text>
+  <text x="340" y="76" font-size="11" fill="#a1a1aa">millions+ · zero ops, you pay</text>
+
+  <rect x="340" y="94" width="240" height="64" rx="10" fill="#1e1b2e" stroke="#3b82f6"/>
+  <text x="356" y="120" font-size="13" font-weight="700" fill="#e4e4e7">Pinecone</text>
+  <text x="356" y="140" font-size="10.5" fill="#a1a1aa">fully managed · don't mind cost</text>
+
+  <rect x="340" y="170" width="240" height="64" rx="10" fill="#1e1b2e" stroke="#3b82f6"/>
+  <text x="356" y="196" font-size="13" font-weight="700" fill="#e4e4e7">Qdrant Cloud</text>
+  <text x="356" y="216" font-size="10.5" fill="#a1a1aa">best performance per $</text>
+
+  <rect x="340" y="246" width="240" height="64" rx="10" fill="#1e1b2e" stroke="#3b82f6"/>
+  <text x="356" y="272" font-size="13" font-weight="700" fill="#e4e4e7">Astra DB</text>
+  <text x="356" y="292" font-size="10.5" fill="#a1a1aa">managed, Cassandra-based</text>
+
+  <text x="340" y="344" font-size="11" fill="#93c5fd" font-weight="600">Pick when:</text>
+  <text x="340" y="364" font-size="10.5" fill="#a1a1aa">production scale, high availability,</text>
+  <text x="340" y="380" font-size="10.5" fill="#a1a1aa">you want someone else to run it.</text>
+
+  <!-- column 3: SELF-HOST DB -->
+  <rect x="616" y="24" width="280" height="372" rx="14" fill="rgba(139,92,246,0.06)" stroke="#8b5cf6" stroke-opacity="0.5"/>
+  <text x="636" y="56" font-size="15" font-weight="700" fill="#c4b5fd">③ Self-hosted</text>
+  <text x="636" y="76" font-size="11" fill="#a1a1aa">your infra · open-source control</text>
+
+  <rect x="636" y="94" width="240" height="64" rx="10" fill="#1e1b2e" stroke="#ca8a04"/>
+  <text x="652" y="120" font-size="13" font-weight="700" fill="#e4e4e7">pgvector</text>
+  <text x="652" y="140" font-size="10.5" fill="#a1a1aa">already on Postgres? add it here</text>
+
+  <rect x="636" y="170" width="240" height="64" rx="10" fill="#1e1b2e" stroke="#8b5cf6"/>
+  <text x="652" y="196" font-size="13" font-weight="700" fill="#e4e4e7">Weaviate</text>
+  <text x="652" y="216" font-size="10.5" fill="#a1a1aa">need strong hybrid search</text>
+
+  <rect x="636" y="246" width="240" height="64" rx="10" fill="#1e1b2e" stroke="#8b5cf6"/>
+  <text x="652" y="272" font-size="13" font-weight="700" fill="#e4e4e7">Qdrant / Milvus</text>
+  <text x="652" y="292" font-size="10.5" fill="#a1a1aa">raw speed, high-perf OSS</text>
+
+  <text x="636" y="344" font-size="11" fill="#c4b5fd" font-weight="600">Pick when:</text>
+  <text x="636" y="364" font-size="10.5" fill="#a1a1aa">you want to run it yourself for</text>
+  <text x="636" y="380" font-size="10.5" fill="#a1a1aa">control, privacy, or no per-vector fee.</text>
+</svg>

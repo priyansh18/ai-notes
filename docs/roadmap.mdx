@@ -1,0 +1,284 @@
+---
+id: roadmap
+title: "The AI Engineer Roadmap"
+sidebar_label: "🗺️ The Roadmap"
+sidebar_position: 0
+description: A complete, miss-nothing AI-engineering roadmap — LLMs → Generative AI → Agentic AI — in 9 stages, each mapped to real build-along projects. No classical ML, no data-layer detours.
+tags: [Roadmap, AI Engineering]
+---
+
+# The AI Engineer Roadmap
+
+A **pure AI track**: it deliberately skips classical machine-learning and
+data-analytics paths and goes straight into the part of the field you actually build
+with — **Large Language Models, Generative AI, and autonomous Agents**. The sequence
+mirrors the way the field is learned in 2026: understand LLMs first, then Generative
+AI and RAG, then graduate to Agentic AI.
+
+## How to use this roadmap
+
+Every topic follows one simple loop. Repeat it for each lesson:
+
+1. **Understand** — read the lesson and the "what to understand" points until the
+   concept clicks.
+2. **Study a project** — open a real, mapped project for that topic. Read its
+   description, look at the stack, understand *how* it's built.
+3. **Build your own** — rebuild it yourself (don't copy-paste), then push it to GitHub
+   with a README.
+
+Projects are tagged by difficulty so you always know if you're ready:
+
+- <span style={{color: "#16a34a", fontWeight: 600}}>beginner</span> — do these first;
+  they teach the core idea cleanly.
+- <span style={{color: "#d97706", fontWeight: 600}}>intermediate</span> — once the
+  basics are solid; adds real-world complexity.
+- <span style={{color: "#dc2626", fontWeight: 600}}>advanced</span> — production-grade;
+  tackle after you've shipped a few projects.
+
+You don't have to build *all* of them — but build **at least one per stage** before
+moving on.
+
+## The path at a glance
+
+Nine stages, in order. Stage 0 is a short prerequisite; the real journey is Stages
+1–8. Stages 1–3 are LLM basics + apps, 4–5 are the Generative-AI / RAG path, and 6–8
+are the Agentic-AI path.
+
+| Stage | Focus | What you can build by the end |
+| --- | --- | --- |
+| 0 | [Python for AI](#stage-0--python-for-ai) | Run any LLM script, call an API, use Git |
+| 1 | [LLM Basics](/docs/llm-basics/what-is-an-llm) | A working chatbot that calls an LLM API |
+| 2 | [Calling Models](/docs/calling-models/apis-and-sdks) | Reliable, structured LLM calls from code |
+| 3 | [Prompting & LLM Apps](/docs/prompting/what-is-prompting) | Structured, deployed LLM-powered apps |
+| 4 | [Retrieval (RAG)](/docs/rag-course/rag-course-overview) | A chatbot that answers from your own docs |
+| 5 | [Advanced & Production RAG](#stage-5--advanced--production-rag) | Enterprise RAG: hybrid search, reranking, guardrails |
+| 6 | [Fine-Tuning & Open Models](#stage-6--fine-tuning--open-models) | A customized / fine-tuned model in an app |
+| 7 | [Agentic AI](#stage-7--agentic-ai) | Multi-agent systems with tools & memory |
+| 8 | [AgentOps, MCP & Production](#stage-8--agentops-mcp--production) | Deployed, observable, secure agent systems |
+
+> **Why this order?** Agentic AI means "autonomous systems that use LLMs to plan,
+> reason, and act" — so you must master LLMs and RAG first, then graduate to agents.
+> Spend the most time on Stages 4, 5, and 7 — that's where the jobs are.
+
+## Stage 0 · Python for AI
+
+You don't need statistics or ML algorithms for this track, but you do need to read
+and write Python comfortably, because every LLM and agent framework is Python. Keep
+this short — a few weeks — and come back to fill gaps as needed.
+
+**What to learn:** Python core (variables, lists, dicts, loops, functions, classes) ·
+working with APIs (HTTP calls, JSON, `.env` for keys) · environments & packages
+(venv, pip, requirements) · async basics & error handling · Git & GitHub · a fast UI
+with Streamlit (and a little FastAPI).
+
+**Build-along projects:** a Personal AI Voice Assistant (a JARVIS-style Streamlit app
+with a Gemini call) <span style={{color: "#16a34a"}}>· beginner</span>; an Automated
+content-automation script (scripting, APIs, file handling)
+<span style={{color: "#16a34a"}}>· beginner</span>.
+
+**Move on when:** you can write a Python script that calls an external API and parses
+the JSON, spin up a Streamlit app with an input box and a button, and you have a
+GitHub repo with a real README.
+
+## Stage 5 · Advanced & Production RAG
+
+Basic RAG impresses no one in 2026 — companies want robust, accurate, secure RAG.
+This stage covers the advanced retrieval techniques and the safety/eval layers that
+turn a demo into a product.
+
+**What to learn:** hybrid search (keyword + semantic) and reranking · advanced
+patterns — HyDE, Corrective RAG (CRAG), Self-RAG, query rewriting · Text2SQL (let an
+LLM query a database safely, with human approval) · caching (Redis) & LLM gateways
+for cost and speed · guardrails (input/output filtering, prompt-injection defense) ·
+evaluation (faithfulness, relevance, eval sets instead of eyeballing) · orchestrating
+all of it with LangGraph.
+
+**Build-along projects:** a Flipkart-style Product Recommender chatbot (RAG + GCP)
+<span style={{color: "#d97706"}}>· intermediate</span>; an Enterprise Advanced RAG in
+LangGraph — hybrid search, reranking, HyDE, CRAG, Self-RAG, Text2SQL, caching +
+guardrails <span style={{color: "#dc2626"}}>· advanced</span>; a Production-grade
+cyclic RAG with LangGraph + guardrails + evals
+<span style={{color: "#dc2626"}}>· advanced</span>.
+
+**Move on when:** you can add reranking and a guardrails layer to a RAG system,
+evaluate a pipeline's answer quality (not just eyeball it), and you're comfortable
+orchestrating a RAG flow in LangGraph.
+
+## Stage 6 · Fine-Tuning & Open Models
+
+Sometimes RAG and prompting aren't enough and you need to adapt the model itself.
+This stage is lighter than RAG for most learners, but you should understand *when*
+and *how* to fine-tune, and how to run open-source models for cost and privacy.
+
+**What to learn:** fine-tuning vs RAG vs prompting — when to use each · building &
+formatting instruction/chat datasets · parameter-efficient fine-tuning (LoRA / QLoRA)
+· Hugging Face Transformers for loading models and running inference · running open
+models (Llama via Ollama/Groq) · evaluating a fine-tune · serving a fine-tuned model
+behind an API.
+
+**Build-along projects:** an End-to-End NLP dialogue-summarization system with Hugging
+Face <span style={{color: "#d97706"}}>· intermediate</span>; an AI web app with LLM
+fine-tuning + CI/CD (fine-tune, ship via cloud + DevOps)
+<span style={{color: "#16a34a"}}>· beginner</span>.
+
+**Move on when:** you can articulate when fine-tuning beats RAG (and when it doesn't),
+you've run an open-source model and used it in an app, and you've completed at least
+one Hugging Face / fine-tuning project.
+
+## Stage 7 · Agentic AI
+
+This is the destination — the focus of 2026 AI engineering: autonomous systems that
+use LLMs to **plan, reason, and act** to achieve goals. An agent goes beyond a single
+answer: it decides what to do, calls tools, remembers, and can work with other agents.
+
+**What to learn:** agent fundamentals (the ReAct reasoning/acting loop, planning,
+goals) · tool / function calling to give agents abilities · agent memory (short-term
+vs persistent — Mem0, LangMem) · frameworks: LangGraph (stateful graphs), CrewAI
+(role-based crews), Microsoft AutoGen, OpenAI Agents SDK, Google ADK · multi-agent
+orchestration · agentic RAG · human-in-the-loop approval and safe autonomy.
+
+**Build-along projects:** a Stateful Agent in LangGraph + Llama 3
+<span style={{color: "#16a34a"}}>· beginner</span>; a Notion ReAct Planner Agent
+<span style={{color: "#16a34a"}}>· beginner</span>; an AutoGen data-analyzer crew
+<span style={{color: "#16a34a"}}>· beginner</span>; an AI Customer-Support Agent
+(RAG + Mem0 memory + tools, FastAPI, Docker, CI/CD)
+<span style={{color: "#d97706"}}>· intermediate</span>; an Autonomous Blog-Generation
+Agent (LangGraph + FastAPI) <span style={{color: "#d97706"}}>· intermediate</span>.
+
+**Move on when:** you can build an agent with tool calling and persistent memory,
+you've built at least one multi-agent system (CrewAI / AutoGen / LangGraph), and you
+understand human-in-the-loop and when to add approval gates.
+
+## Stage 8 · AgentOps, MCP & Production
+
+The final stage turns your agents into reliable, observable, deployable systems — the
+difference between a cool demo and something a company will pay for — plus the two
+foundational 2026 protocols: **MCP** and **A2A**.
+
+**What to learn:** MCP (Model Context Protocol — the standard way to connect agents to
+tools/data) · A2A (Agent-to-Agent communication) · AgentOps & observability (tracing
+and debugging with LangSmith, Langfuse, Opik) · agent evaluation (DeepEval, eval sets)
+· agent security (prompt-injection defense, guardrails, least-privilege tool access) ·
+deployment (Docker, CI/CD, cloud) · production monitoring (Prometheus, Grafana, ELK).
+
+**Build-along projects:** MCP with AutoGen — connect an agent to Notion
+<span style={{color: "#16a34a"}}>· beginner</span>; Build & deploy agents to the cloud
+with Google ADK <span style={{color: "#16a34a"}}>· beginner</span>; an Advanced AI
+GitHub PR Reviewer (event-driven LangGraph + FastAPI + Prometheus/Grafana + Langfuse)
+<span style={{color: "#dc2626"}}>· advanced</span>; a Real-Time Voice AI Agent with RAG
+<span style={{color: "#d97706"}}>· intermediate</span>.
+
+**Move on when:** you've connected an agent to a tool using MCP, deployed an agentic
+app to the cloud with observability wired in, and you can talk through security and
+evaluation for an agent in an interview.
+
+## Project index — build at least one per stage
+
+Every project below is a real, live Krish Naik project (browse them all at
+[krishnaik.in/projects](https://krishnaik.in/projects)). Within each stage they're
+listed easiest-first. You don't have to build all of them — but ship **at least one
+per stage**, push it to GitHub with a README, and aim for **6–8 deployed projects** by
+the end.
+
+### Stage 0 · Python for AI
+
+| Project | Level | What it teaches |
+| --- | --- | --- |
+| Personal AI Voice Assistant | beginner | A JARVIS-style Streamlit app + a Gemini call — your first real API call. |
+| Automated Content Automation | beginner | Pure-Python automation — scripting, APIs, file handling. |
+
+### Stage 1 · LLM Basics
+
+| Project | Level | What it teaches |
+| --- | --- | --- |
+| Telegram Chatbot (LLM + memory) | beginner | A stateful chatbot using Gemini/GPT that remembers the previous turn. |
+| AI-Powered Content Summarization | beginner | Use an LLM to summarize long text — prompting for one clear task. |
+
+### Stage 3 · Prompting & LLM Apps
+
+| Project | Level | What it teaches |
+| --- | --- | --- |
+| Resume Genie — AI Career Suite | beginner | Resume checker + cover-letter generator — a full Streamlit app on AWS. |
+| Medical Diagnosis App | beginner | Careful, structured prompting over medical literature. |
+| Automated Candidate Interview & Eval | beginner | Multi-step prompting and synthesis. |
+| Gen AI Clothing Store (Pydantic AI) | intermediate | Validated, structured LLM output + a chatbot, deployed via CI/CD on AWS. |
+
+### Stage 4 · Retrieval (RAG)
+
+| Project | Level | What it teaches |
+| --- | --- | --- |
+| RAG-Based Document Search | beginner | The cleanest intro: ingest → embed → retrieve → answer. Build this first. |
+| End-to-End Medical Chatbot | beginner | The canonical RAG project: PDFs → Pinecone → LangChain → Flask on AWS. |
+| Knowledge Intelligence System | beginner | RAG over your own knowledge base with an admin dashboard. |
+| Realtime Source-Code Analyzer | beginner | RAG over a GitHub repo with conversational memory. |
+| Air India RAG Chatbot | intermediate | A domain RAG chatbot on a realistic support knowledge base. |
+
+### Stage 5 · Advanced & Production RAG
+
+| Project | Level | What it teaches |
+| --- | --- | --- |
+| Flipkart Product Recommender (RAG + GCP) | intermediate | RAG applied to product recommendations, deployed on GCP. |
+| Enterprise Advanced RAG in LangGraph | advanced | Hybrid search, reranking, HyDE, CRAG, Self-RAG, Text2SQL, caching + guardrails. |
+| Production-Grade Cyclic RAG (LangGraph + Guardrails + Evals) | advanced | Enterprise, scalable RAG with LLM gateways, guardrails, and evaluation. |
+
+### Stage 6 · Fine-Tuning & Open Models
+
+| Project | Level | What it teaches |
+| --- | --- | --- |
+| End-to-End NLP: Text Summarization (Hugging Face) | intermediate | A dialogue-summarization system — hands-on with open models. |
+| AI Web App with LLM Fine-Tuning + CI/CD | beginner | Fine-tune (Azure AI Foundry), ship via AWS CodePipeline — fine-tuning + DevOps. |
+
+### Stage 7 · Agentic AI
+
+| Project | Level | What it teaches |
+| --- | --- | --- |
+| Stateful Agent (LangGraph + Llama 3) | beginner | The cleanest intro to agents — build this first in this stage. |
+| YouTube Content Creation Agent | beginner | An agent that researches a topic and writes a script — search tool + LLM. |
+| Notion ReAct Planner Agent | beginner | A ReAct agent that plans and acts on Notion — the reasoning loop + tools. |
+| AutoGen Data Analyzer | beginner | A team of AutoGen agents that analyze CSVs — intro to multi-agent. |
+| SwarmAI — Multi-Agent Assistant | intermediate | Coordinate a swarm of agents into one assistant. |
+| AI Customer-Support Agent (Memory + Tools) | intermediate | RAG + Mem0 + tools, FastAPI, Docker, CI/CD — a production agentic capstone. |
+| Autonomous Blog-Generation Agent | intermediate | A production content agent — LangGraph + FastAPI. |
+
+### Stage 8 · AgentOps, MCP & Production
+
+| Project | Level | What it teaches |
+| --- | --- | --- |
+| MCP with AutoGen — Integrate Agents with Notion | beginner | Connect an AutoGen agent to Notion — your hands-on MCP starter. |
+| Google ADK: Build & Deploy Agents to the Cloud | beginner | Build agents, expose via REST, deploy to Cloud Run. |
+| Advanced AI GitHub PR Reviewer | advanced | Event-driven LangGraph + FastAPI, Celery/Redis, Prometheus/Grafana + Langfuse. |
+| Azure Multi-Modal Compliance Engine | advanced | Production agentic orchestration with LangSmith observability on Azure. |
+| Real-Time Voice AI Agent with RAG | intermediate | A low-latency voice agent + RAG — a production, real-time agentic system. |
+
+## Free resources
+
+The whole track maps to Krish Naik's free material:
+
+- Reference video — [Learn Agentic AI in 2026](https://www.youtube.com/watch?v=ghPb2T0ygSE)
+- All projects (filter by Gen AI / Agentic AI) — [krishnaik.in/projects](https://krishnaik.in/projects)
+- Official AI roadmaps (decision tree) — [krishnaik.in/ai-roadmaps](https://krishnaik.in/ai-roadmaps)
+- YouTube channel (all free playlists) — [@krishnaik06](https://www.youtube.com/@krishnaik06)
+
+## Suggested pace
+
+At ~10–15 hrs/week, a realistic pace through the track:
+
+| Stage | Focus | Suggested time |
+| --- | --- | --- |
+| 0 | Python & setup | 2–3 weeks |
+| 1 | LLM basics | 2 weeks |
+| 2–3 | Calling models, prompting & apps | 2–3 weeks |
+| 4 | RAG (core) | 4 weeks |
+| 5 | Advanced / production RAG | 4 weeks |
+| 6 | Fine-tuning & open models | 2 weeks |
+| 7 | Agentic AI | 6 weeks |
+| 8 | AgentOps, MCP & production | 4 weeks |
+
+Roughly **6–7 months end-to-end** if you stay consistent. Aim to finish with **6–8
+deployed, documented projects** on GitHub.
+
+<div class="takeaway">
+LLMs → Generative AI (RAG) → Agentic AI. Learn a concept, study a real project, then build your own. Spend the most time on RAG and Agents — that's where the 2026 jobs are.
+</div>
+
+Start here: [1 · LLM Basics →](/docs/llm-basics/what-is-an-llm)

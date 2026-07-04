@@ -1,0 +1,10 @@
+{
+  "collapsed": true,
+  "label": "2 · Calling Models",
+  "link": {
+    "type": "generated-index",
+    "title": "2 · Calling Models",
+    "description": "The API layer — chat completions and roles, streaming, structured outputs, tool calling, and multimodal inputs, with runnable code and a system-design view."
+  },
+  "position": 2
+}

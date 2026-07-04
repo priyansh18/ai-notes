@@ -1,0 +1,748 @@
+/**
+ * Priyansh's AI Notes — deep theme to match the portfolio
+ * (priyanshsinghal.com). Palette + fonts pulled from the portfolio's
+ * theme.js and global styles: dark #0a0a0f base, indigo/violet accents,
+ * glass borders, Inter body + JetBrains Mono code.
+ */
+
+/* ───────────── Palette (light fallback; site is dark-first) ───────────── */
+:root {
+  --ifm-color-primary: #6366f1;
+  --ifm-color-primary-dark: #4f46e5;
+  --ifm-color-primary-darker: #4338ca;
+  --ifm-color-primary-darkest: #3730a3;
+  --ifm-color-primary-light: #818cf8;
+  --ifm-color-primary-lighter: #a5b4fc;
+  --ifm-color-primary-lightest: #c7d2fe;
+
+  --ifm-font-family-base: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Helvetica, Arial, sans-serif;
+  --ifm-font-family-monospace: "JetBrains Mono", "SFMono-Regular", Consolas,
+    monospace;
+  --ifm-code-font-size: 90%;
+  --ifm-line-height-base: 1.7;
+  --ifm-heading-font-weight: 700;
+
+  --ifm-navbar-height: 64px;
+}
+
+/* ───────────── Dark theme — the real look ───────────── */
+[data-theme="dark"] {
+  --ifm-color-primary: #a78bfa;
+  --ifm-color-primary-dark: #8b5cf6;
+  --ifm-color-primary-darker: #7c3aed;
+  --ifm-color-primary-darkest: #6d28d9;
+  --ifm-color-primary-light: #c4b5fd;
+  --ifm-color-primary-lighter: #ddd6fe;
+  --ifm-color-primary-lightest: #ede9fe;
+
+  /* Portfolio surfaces */
+  --ifm-background-color: #0a0a0f;
+  --ifm-background-surface-color: #12111c;
+  --ifm-navbar-background-color: rgba(10, 10, 15, 0.75);
+  --ifm-footer-background-color: #050507;
+  --ifm-color-content: #e4e4e7;
+  --ifm-color-content-secondary: #a1a1aa;
+  --ifm-heading-color: #ffffff;
+  --ifm-toc-border-color: rgba(255, 255, 255, 0.06);
+  --ifm-table-border-color: rgba(255, 255, 255, 0.08);
+  --ifm-hr-border-color: rgba(255, 255, 255, 0.06);
+
+  --ifm-link-color: #a78bfa;
+  --ifm-menu-color-active: #a78bfa;
+  --ifm-breadcrumb-color-active: #a78bfa;
+
+  --docusaurus-highlighted-code-line-bg: rgba(167, 139, 250, 0.15);
+
+  /* Glassy code blocks like the portfolio */
+  --ifm-code-background: rgba(255, 255, 255, 0.04);
+  --prism-background-color: rgba(255, 255, 255, 0.02) !important;
+}
+
+/* ───────────── Background: subtle radial glow like the portfolio ───────────── */
+[data-theme="dark"] body {
+  background-color: #0a0a0f;
+  background-image: radial-gradient(
+      900px circle at 12% -5%,
+      rgba(99, 102, 241, 0.1),
+      transparent 45%
+    ),
+    radial-gradient(
+      800px circle at 95% 0%,
+      rgba(139, 92, 246, 0.08),
+      transparent 40%
+    );
+  background-attachment: fixed;
+}
+
+/* ───────────── Navbar — frosted glass ───────────── */
+.navbar {
+  backdrop-filter: saturate(180%) blur(14px);
+  -webkit-backdrop-filter: saturate(180%) blur(14px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0 12px;
+}
+[data-theme="dark"] .navbar {
+  background: rgba(10, 10, 15, 0.72);
+}
+.navbar__logo img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50% !important;
+  border: 2px solid var(--ifm-color-primary);
+  transition: transform 0.2s ease;
+}
+.navbar__logo img:hover {
+  transform: scale(1.1);
+}
+.navbar__title {
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+.navbar__link {
+  font-weight: 500;
+}
+/* ─── "Portfolio" CTA: gradient pill with an arrow that slides on hover ─── */
+.navbar-portfolio-cta {
+  position: relative;
+  display: inline-flex !important;
+  align-items: center;
+  gap: 7px;
+  color: #fff !important;
+  font-weight: 600;
+  font-size: 0.84rem;
+  padding: 6px 15px 6px 16px !important;
+  margin-right: 10px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  box-shadow: 0 3px 12px rgba(99, 102, 241, 0.32);
+  overflow: hidden;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.25s ease;
+}
+/* sheen sweep on hover */
+.navbar-portfolio-cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.28),
+    transparent 60%
+  );
+  transform: translateX(-120%);
+  transition: transform 0.6s ease;
+}
+/* the arrow */
+.navbar-portfolio-cta::after {
+  content: "→";
+  font-size: 0.95rem;
+  line-height: 1;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.navbar-portfolio-cta:hover {
+  color: #fff !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(99, 102, 241, 0.5);
+}
+.navbar-portfolio-cta:hover::before {
+  transform: translateX(120%);
+}
+.navbar-portfolio-cta:hover::after {
+  transform: translate(3px, -3px);
+}
+
+/* ─── Social icon links in navbar: lift + brand tint + pop ─── */
+.header-social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0 !important;
+  margin: 0 2px;
+  border-radius: 10px;
+  opacity: 0.7;
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+    background 0.22s ease, opacity 0.22s ease, box-shadow 0.22s ease;
+}
+.header-social-link:hover {
+  opacity: 1;
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.07);
+}
+[data-theme="light"] .header-social-link:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+.header-social-link::before {
+  content: "";
+  display: block;
+  width: 21px;
+  height: 21px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+/* little pop on the glyph itself */
+.header-social-link:hover::before {
+  transform: scale(1.18);
+}
+/* brand-colored glow per network on hover */
+.header-github-link:hover {
+  box-shadow: 0 4px 14px rgba(140, 140, 150, 0.3);
+}
+.header-linkedin-link:hover {
+  box-shadow: 0 4px 14px rgba(10, 102, 194, 0.4);
+}
+.header-twitter-link:hover {
+  box-shadow: 0 4px 14px rgba(120, 120, 130, 0.3);
+}
+.header-github-link::before {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23e4e4e7' d='M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12'/%3E%3C/svg%3E");
+}
+.header-linkedin-link::before {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%230A66C2' d='M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z'/%3E%3C/svg%3E");
+}
+.header-twitter-link::before {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23e4e4e7' d='M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z'/%3E%3C/svg%3E");
+}
+/* Light mode icon colors */
+[data-theme="light"] .header-github-link::before {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%2324292f' d='M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12'/%3E%3C/svg%3E");
+}
+[data-theme="light"] .header-twitter-link::before {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%2324292f' d='M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z'/%3E%3C/svg%3E");
+}
+
+/* ─── Animated dark/light toggle ─── */
+.navbar .clean-btn,
+.navbar [class*="toggle"] {
+  border-radius: 10px !important;
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+    background 0.22s ease;
+}
+.navbar [class*="toggle"]:hover {
+  background: rgba(255, 255, 255, 0.07) !important;
+  transform: translateY(-2px);
+}
+[data-theme="light"] .navbar [class*="toggle"]:hover {
+  background: rgba(0, 0, 0, 0.05) !important;
+}
+/* the sun/moon glyph: spin + scale when you hover */
+.navbar [class*="toggle"] svg {
+  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.navbar [class*="toggle"]:hover svg {
+  transform: rotate(40deg) scale(1.12);
+}
+
+/* ─── Subtle entrance for the whole right-side nav cluster ─── */
+@keyframes navItemIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.navbar__items--right > * {
+  animation: navItemIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.navbar__items--right > *:nth-child(1) {
+  animation-delay: 0.04s;
+}
+.navbar__items--right > *:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.navbar__items--right > *:nth-child(3) {
+  animation-delay: 0.16s;
+}
+.navbar__items--right > *:nth-child(4) {
+  animation-delay: 0.22s;
+}
+.navbar__items--right > *:nth-child(5) {
+  animation-delay: 0.28s;
+}
+@media (prefers-reduced-motion: reduce) {
+  .navbar__items--right > *,
+  .navbar-portfolio-cta,
+  .header-social-link,
+  .navbar [class*="toggle"] svg {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ───────────── Sidebar ───────────── */
+.menu {
+  font-size: 0.9rem;
+  padding: 1rem 0.6rem !important;
+}
+.menu__link {
+  border-radius: 8px;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.menu__link:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+.menu__link--active {
+  background: rgba(99, 102, 241, 0.12);
+  font-weight: 600;
+}
+.menu__list-item-collapsible:hover {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
+}
+
+/* ───────────── Headings & links ───────────── */
+.markdown h1 {
+  font-size: clamp(2rem, 4.5vw, 2.8rem);
+  letter-spacing: -0.02em;
+}
+.markdown h2 {
+  letter-spacing: -0.01em;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding-bottom: 0.3em;
+  margin-top: 2.2rem;
+}
+article a {
+  text-decoration: none;
+  font-weight: 500;
+}
+article a:hover {
+  text-decoration: underline;
+}
+
+/* ───────────── Code blocks — glassy, bordered ───────────── */
+.theme-code-block,
+pre[class*="language-"] {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px !important;
+}
+[data-theme="dark"] .theme-code-block {
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
+}
+code {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+}
+
+/* ───────────── Tables ───────────── */
+table {
+  display: table;
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+}
+[data-theme="dark"] thead {
+  background: rgba(99, 102, 241, 0.08);
+}
+
+/* ───────────── Admonitions / callouts → glassy ───────────── */
+[data-theme="dark"] .theme-admonition {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-left-width: 3px;
+  border-radius: 10px;
+}
+
+/* ───────────── Tags / pills ───────────── */
+.badge,
+[class*="tag_"] {
+  border-radius: 999px !important;
+}
+
+/* ───────────── Pagination cards (prev/next) ───────────── */
+.pagination-nav__link {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  transition: border-color 0.18s ease, transform 0.18s ease;
+}
+.pagination-nav__link:hover {
+  border-color: rgba(99, 102, 241, 0.5);
+  transform: translateY(-2px);
+}
+
+/* Footer is now a custom swizzled component (src/theme/Footer) */
+
+/* ───────────── Helpers used in note markdown ───────────── */
+.yt {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%;
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 1.4rem 0;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
+}
+.yt iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.takeaway {
+  border-left: 3px solid var(--ifm-color-primary);
+  background: rgba(99, 102, 241, 0.07);
+  padding: 0.85rem 1.1rem;
+  border-radius: 0 10px 10px 0;
+  margin: 1.3rem 0;
+  font-weight: 500;
+}
+
+/* ───────────── TL;DR key-takeaways box (top of page) ───────────── */
+.tldr {
+  border: 1px solid rgba(99, 102, 241, 0.25);
+  background: rgba(99, 102, 241, 0.05);
+  border-radius: 12px;
+  padding: 0.9rem 1.2rem 0.5rem;
+  margin: 0 0 1.6rem;
+}
+.tldr > strong {
+  display: block;
+  color: var(--ifm-color-primary);
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+.tldr ul {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+/* ───────────── ⚠ Common mistakes / gotchas callout ───────────── */
+.gotcha {
+  border-left: 3px solid #f59e0b;
+  background: rgba(245, 158, 11, 0.08);
+  padding: 0.85rem 1.1rem 0.4rem;
+  border-radius: 0 10px 10px 0;
+  margin: 1.3rem 0;
+}
+.gotcha > strong {
+  display: block;
+  color: #fbbf24;
+  margin-bottom: 0.4rem;
+}
+.gotcha ul {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+/* ───────────── Self-quiz (collapsible Q&A) ───────────── */
+.quiz {
+  border: 1px solid rgba(34, 197, 94, 0.25);
+  background: rgba(34, 197, 94, 0.04);
+  border-radius: 12px;
+  padding: 1rem 1.2rem 0.4rem;
+  margin: 1.6rem 0;
+}
+.quiz > .quiz-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin-bottom: 0.6rem;
+  color: #4ade80;
+}
+.quiz > .quiz-title::before {
+  content: "🧠";
+}
+.quiz details {
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  padding: 0.55rem 0;
+}
+.quiz details:last-of-type {
+  border-bottom: none;
+}
+.quiz summary {
+  cursor: pointer;
+  font-weight: 600;
+  list-style: none;
+  display: flex;
+  gap: 8px;
+}
+.quiz summary::-webkit-details-marker {
+  display: none;
+}
+.quiz summary::before {
+  content: "▸";
+  color: #4ade80;
+  flex-shrink: 0;
+}
+.quiz details[open] summary::before {
+  content: "▾";
+}
+.quiz details > p {
+  margin: 0.5rem 0 0.2rem 1.4rem;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--ifm-color-content-secondary);
+}
+
+/* ───────────── "Interview questions you can now answer" block ───────────── */
+.interview-block {
+  border: 1px solid rgba(99, 102, 241, 0.25);
+  background: rgba(99, 102, 241, 0.04);
+  border-radius: 12px;
+  padding: 1rem 1.2rem 0.4rem;
+  margin: 1.6rem 0;
+}
+.interview-block > .interview-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin-bottom: 0.6rem;
+  color: var(--ifm-color-primary);
+}
+.interview-block > .interview-title::before {
+  content: "🎯";
+}
+/* Each question is a collapsible <details> */
+.interview-block details {
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  padding: 0.55rem 0;
+}
+.interview-block details:last-of-type {
+  border-bottom: none;
+}
+.interview-block summary {
+  cursor: pointer;
+  font-weight: 600;
+  list-style: none;
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+}
+.interview-block summary::-webkit-details-marker {
+  display: none;
+}
+.interview-block summary::before {
+  content: "▸";
+  color: var(--ifm-color-primary);
+  transition: transform 0.15s ease;
+  flex-shrink: 0;
+}
+.interview-block details[open] summary::before {
+  content: "▾";
+}
+.interview-block .qnum {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--ifm-color-primary);
+  background: rgba(99, 102, 241, 0.12);
+  border-radius: 6px;
+  padding: 1px 7px;
+  flex-shrink: 0;
+}
+.interview-block details > p {
+  margin: 0.5rem 0 0.2rem 1.6rem;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--ifm-color-content-secondary);
+}
+
+/* ───────────── "Coming soon" sidebar items (non-clickable) ───────────── */
+.soon-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  padding: 6px 12px;
+  font-size: 0.88rem;
+  color: var(--ifm-color-content-secondary);
+  opacity: 0.55;
+  cursor: not-allowed;
+  user-select: none;
+}
+.soon-badge {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: 999px;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  color: var(--ifm-color-content-secondary);
+  flex-shrink: 0;
+}
+
+/* ───────────── "Project" sidebar items (build-along, with a pill) ───────────── */
+.project-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  padding: 6px 12px;
+  font-size: 0.86rem;
+  line-height: 1.3;
+  color: var(--ifm-color-content-secondary);
+  user-select: none;
+}
+.project-badge {
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: 999px;
+  flex-shrink: 0;
+  border: 1px solid transparent;
+}
+/* difficulty colors */
+.project-badge.lvl-beginner {
+  color: #16a34a;
+  background: rgba(22, 163, 74, 0.12);
+  border-color: rgba(22, 163, 74, 0.3);
+}
+.project-badge.lvl-intermediate {
+  color: #d97706;
+  background: rgba(217, 119, 6, 0.12);
+  border-color: rgba(217, 119, 6, 0.3);
+}
+.project-badge.lvl-advanced {
+  color: #dc2626;
+  background: rgba(220, 38, 38, 0.12);
+  border-color: rgba(220, 38, 38, 0.3);
+}
+.menu__list-item .project-item {
+  line-height: 1.3;
+}
+/* Section sub-headers inside the Coming soon category */
+.soon-group {
+  display: block;
+  width: 100%;
+  padding: 14px 12px 4px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ifm-color-primary);
+  opacity: 0.85;
+}
+/* Tighten the html list items so they read as a clean list */
+.menu__list-item .soon-item,
+.menu__list-item .soon-group {
+  line-height: 1.3;
+}
+
+/* ───────────── Sidebar menu: clean row look (matches soon-item rows) ───────────── */
+/* Every clickable link + collapsible category header gets the same padded,
+   rounded-on-hover row treatment so live items read as a polished list. */
+.menu__link,
+.menu__list-item-collapsible {
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 0.88rem;
+  line-height: 1.35;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+/* Hover: subtle indigo wash, same accent family as soon badges */
+.menu__link:hover,
+.menu__list-item-collapsible:hover {
+  background: rgba(99, 102, 241, 0.08);
+  color: var(--ifm-color-primary);
+}
+
+/* Active page: clear filled pill so you always know where you are */
+.menu__link--active:not(.menu__link--sublist) {
+  background: rgba(99, 102, 241, 0.12);
+  color: var(--ifm-color-primary);
+  font-weight: 600;
+}
+
+/* Category / section headers: a touch heavier so groups stand out */
+.menu__list-item-collapsible .menu__link {
+  font-weight: 600;
+}
+
+/* Top-level numbered sections (1 ·, 2 ·, …): give them a bit more presence */
+.theme-doc-sidebar-menu
+  > .menu__list-item
+  > .menu__list-item-collapsible
+  > .menu__link,
+.theme-doc-sidebar-menu > .menu__list-item > .menu__link {
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* ── Nested sub-topic links: indented list with a guide line + dot marker ── */
+/* A faint vertical "rail" runs down each nested group so sub-items read as a
+   connected list under their parent section. */
+.menu__list .menu__list {
+  position: relative;
+  margin-left: 14px;
+  padding-left: 10px;
+  border-left: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.menu__list .menu__list .menu__link {
+  position: relative;
+  font-size: 0.84rem;
+  color: var(--ifm-color-content-secondary);
+  padding-left: 16px;
+}
+
+/* Small dot marker before each sub-item, sitting on the rail */
+.menu__list .menu__list .menu__link::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 50%;
+  width: 5px;
+  height: 5px;
+  margin-top: -2.5px;
+  border-radius: 50%;
+  background: var(--ifm-color-emphasis-400);
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.menu__list .menu__list .menu__link:hover {
+  color: var(--ifm-color-primary);
+}
+.menu__list .menu__list .menu__link:hover::before {
+  background: var(--ifm-color-primary);
+}
+
+/* Active sub-item: filled dot + a soft highlight bar on the rail */
+.menu__list .menu__list .menu__link--active {
+  color: var(--ifm-color-primary);
+  font-weight: 600;
+}
+.menu__list .menu__list .menu__link--active::before {
+  background: var(--ifm-color-primary);
+  transform: scale(1.3);
+}
+
+/* A little breathing room between rows */
+.menu__list-item {
+  margin-top: 2px;
+}
+
+/* Keep the soon rows visually consistent with the new row padding */
+.menu__list-item .soon-item {
+  border-radius: 8px;
+}
+
+/* Smooth scroll like the portfolio */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+::selection {
+  background: var(--ifm-color-primary);
+  color: #fff;
+}

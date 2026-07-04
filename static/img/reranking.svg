@@ -1,0 +1,50 @@
+<svg viewBox="0 0 900 340" xmlns="http://www.w3.org/2000/svg" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif">
+  <defs>
+    <marker id="rr-arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#8b5cf6"/>
+    </marker>
+  </defs>
+  <rect width="900" height="340" fill="transparent"/>
+  <text x="30" y="28" font-size="14" font-weight="700" fill="#a78bfa">Reranking — two-stage retrieval</text>
+
+  <!-- STAGE 1: retrieve wide -->
+  <text x="40" y="62" font-size="12" font-weight="700" fill="#818cf8">STAGE 1 · retrieve wide &amp; fast</text>
+  <text x="40" y="80" font-size="10.5" fill="#a1a1aa">bi-encoder — query &amp; docs embedded separately</text>
+
+  <g font-size="11" fill="#e4e4e7">
+    <rect x="40" y="92" width="230" height="26" rx="6" fill="#1e1b2e" stroke="#6366f1"/><text x="52" y="109">doc A · roughly relevant</text>
+    <rect x="40" y="124" width="230" height="26" rx="6" fill="#1e1b2e" stroke="#6366f1"/><text x="52" y="141">doc B · the real answer</text>
+    <rect x="40" y="156" width="230" height="26" rx="6" fill="#1e1b2e" stroke="#6366f1"/><text x="52" y="173">doc C · off-topic</text>
+    <rect x="40" y="188" width="230" height="26" rx="6" fill="#1e1b2e" stroke="#6366f1"/><text x="52" y="205">doc D · partial match</text>
+    <text x="40" y="236" font-size="10.5" fill="#a1a1aa">…top-k = 8 (fast, approximate order)</text>
+  </g>
+
+  <!-- arrow to reranker -->
+  <line x1="270" y1="150" x2="360" y2="150" stroke="#8b5cf6" stroke-width="1.8" marker-end="url(#rr-arr)"/>
+
+  <!-- STAGE 2: cross-encoder -->
+  <rect x="362" y="120" width="160" height="60" rx="10" fill="#1e1b2e" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="442" y="146" font-size="12.5" fill="#fbbf24" text-anchor="middle" font-weight="700">Cross-encoder</text>
+  <text x="442" y="164" font-size="10" fill="#a1a1aa" text-anchor="middle">reads query + doc together</text>
+  <text x="442" y="200" font-size="10.5" fill="#a1a1aa" text-anchor="middle">scores each (query, doc) pair</text>
+
+  <line x1="522" y1="150" x2="612" y2="150" stroke="#8b5cf6" stroke-width="1.8" marker-end="url(#rr-arr)"/>
+
+  <!-- STAGE 3: reordered, keep top 3 -->
+  <text x="630" y="62" font-size="12" font-weight="700" fill="#86efac">STAGE 2 · reorder, keep top 3</text>
+  <text x="630" y="80" font-size="10.5" fill="#a1a1aa">true relevance — the best rises</text>
+
+  <g font-size="11" fill="#e4e4e7">
+    <rect x="630" y="92" width="240" height="26" rx="6" fill="rgba(34,197,94,0.14)" stroke="#16a34a"/><text x="642" y="109">doc B · score 0.94 ★ (was #2)</text>
+    <rect x="630" y="124" width="240" height="26" rx="6" fill="rgba(34,197,94,0.14)" stroke="#16a34a"/><text x="642" y="141">doc A · score 0.71</text>
+    <rect x="630" y="156" width="240" height="26" rx="6" fill="rgba(34,197,94,0.14)" stroke="#16a34a"/><text x="642" y="173">doc D · score 0.55</text>
+    <rect x="630" y="188" width="240" height="26" rx="6" fill="#15131f" stroke="#3f3f46" stroke-dasharray="4 3"/><text x="642" y="205" fill="#71717a">doc C · 0.08 — dropped</text>
+  </g>
+
+  <!-- to LLM -->
+  <line x1="750" y1="214" x2="750" y2="248" stroke="#8b5cf6" stroke-width="1.6" marker-end="url(#rr-arr)"/>
+  <rect x="690" y="250" width="120" height="44" rx="10" fill="#1e1b2e" stroke="#6366f1" stroke-width="1.5"/>
+  <text x="750" y="277" font-size="12.5" fill="#e4e4e7" text-anchor="middle">LLM → answer</text>
+
+  <text x="40" y="320" font-size="11" fill="#a1a1aa">Why two stages: the bi-encoder is fast but rough; the cross-encoder is accurate but slow, so it only judges the shortlist.</text>
+</svg>

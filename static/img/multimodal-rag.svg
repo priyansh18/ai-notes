@@ -1,0 +1,53 @@
+<svg viewBox="0 0 900 400" xmlns="http://www.w3.org/2000/svg" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif">
+  <defs>
+    <marker id="mm-arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#8b5cf6"/>
+    </marker>
+  </defs>
+  <rect width="900" height="400" fill="transparent"/>
+  <text x="30" y="28" font-size="14" font-weight="700" fill="#a78bfa">Multimodal RAG — make images searchable as text</text>
+
+  <!-- source PDF -->
+  <rect x="30" y="60" width="160" height="120" rx="10" fill="#1e1b2e" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="110" y="84" font-size="11.5" fill="#fbbf24" text-anchor="middle" font-weight="700">PDF page</text>
+  <text x="110" y="104" font-size="9.5" fill="#a1a1aa" text-anchor="middle">text paragraphs</text>
+  <rect x="55" y="118" width="110" height="48" rx="5" fill="#2a2640" stroke="#52525b"/>
+  <text x="110" y="146" font-size="9.5" fill="#a1a1aa" text-anchor="middle">📊 a chart image</text>
+
+  <!-- split: text path / image path -->
+  <line x1="190" y1="100" x2="270" y2="100" stroke="#8b5cf6" stroke-width="1.6" marker-end="url(#mm-arr)"/>
+  <line x1="190" y1="142" x2="270" y2="200" stroke="#8b5cf6" stroke-width="1.6" marker-end="url(#mm-arr)"/>
+
+  <!-- text path -->
+  <rect x="272" y="78" width="220" height="44" rx="9" fill="#15131f" stroke="#6366f1"/>
+  <text x="382" y="100" font-size="11" fill="#818cf8" text-anchor="middle" font-weight="700">Extract text</text>
+  <text x="382" y="115" font-size="9" fill="#a1a1aa" text-anchor="middle">straight from the document</text>
+
+  <!-- image path -->
+  <rect x="272" y="178" width="220" height="64" rx="9" fill="#15131f" stroke="#8b5cf6"/>
+  <text x="382" y="200" font-size="11" fill="#c4b5fd" text-anchor="middle" font-weight="700">Vision LLM describes image</text>
+  <text x="382" y="217" font-size="9" fill="#a1a1aa" text-anchor="middle">"Bar chart: revenue rises Q1→Q3,</text>
+  <text x="382" y="229" font-size="9" fill="#a1a1aa" text-anchor="middle">highest growth in Q3" → text caption</text>
+
+  <!-- merge to embeddings -->
+  <line x1="492" y1="100" x2="560" y2="150" stroke="#8b5cf6" stroke-width="1.6" marker-end="url(#mm-arr)"/>
+  <line x1="492" y1="210" x2="560" y2="160" stroke="#8b5cf6" stroke-width="1.6" marker-end="url(#mm-arr)"/>
+
+  <rect x="562" y="132" width="150" height="52" rx="10" fill="#1e1b2e" stroke="#6366f1" stroke-width="1.5"/>
+  <text x="637" y="154" font-size="11" fill="#e4e4e7" text-anchor="middle" font-weight="700">Embed both as text</text>
+  <text x="637" y="171" font-size="9" fill="#a1a1aa" text-anchor="middle">one shared vector space</text>
+
+  <line x1="712" y1="158" x2="780" y2="158" stroke="#8b5cf6" stroke-width="1.6" marker-end="url(#mm-arr)"/>
+  <rect x="782" y="132" width="90" height="52" rx="10" fill="#1e1b2e" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="827" y="162" font-size="11" fill="#86efac" text-anchor="middle" font-weight="700">Vector store</text>
+
+  <!-- query path -->
+  <rect x="200" y="300" width="500" height="64" rx="10" fill="#15131f" stroke="#3f3f46"/>
+  <text x="220" y="324" font-size="11.5" font-weight="700" fill="#a78bfa">At query time</text>
+  <text x="220" y="346" font-size="10.5" fill="#e4e4e7">"What drove Q3 growth?" → retrieves the chart's caption + nearby text → LLM answers from both.</text>
+
+  <line x1="827" y1="184" x2="827" y2="332" stroke="#52525b" stroke-width="1.4" stroke-dasharray="4 3"/>
+  <line x1="827" y1="332" x2="704" y2="332" stroke="#52525b" stroke-width="1.4" stroke-dasharray="4 3" marker-end="url(#mm-arr)"/>
+
+  <text x="30" y="390" font-size="11" fill="#a1a1aa">Key idea: convert every modality into text the retriever already understands — images become captions, then everything embeds the same way.</text>
+</svg>

@@ -1,0 +1,39 @@
+<svg viewBox="0 0 880 320" xmlns="http://www.w3.org/2000/svg" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif">
+  <rect width="880" height="320" fill="transparent"/>
+  <text x="30" y="30" font-size="14" font-weight="700" fill="#a78bfa">Text → vector → meaning as position in space</text>
+
+  <!-- pipeline left -->
+  <g font-size="12" fill="#e4e4e7" text-anchor="middle">
+    <rect x="30" y="120" width="120" height="40" rx="9" fill="#1e1b2e" stroke="#6366f1"/><text x="90" y="144">"I forgot login"</text>
+    <rect x="186" y="120" width="130" height="40" rx="9" fill="#1e1b2e" stroke="#8b5cf6"/><text x="251" y="139">Embedding</text><text x="251" y="154" font-size="9" fill="#a1a1aa">model</text>
+    <rect x="352" y="120" width="120" height="40" rx="9" fill="#1e1b2e" stroke="#6366f1"/><text x="412" y="139">[0.02, -0.3, …]</text><text x="412" y="154" font-size="9" fill="#a1a1aa">384 numbers</text>
+  </g>
+  <g stroke="#8b5cf6" stroke-width="1.6">
+    <line x1="150" y1="140" x2="184" y2="140" marker-end="url(#es-arr)"/>
+    <line x1="316" y1="140" x2="350" y2="140" marker-end="url(#es-arr)"/>
+  </g>
+  <defs>
+    <marker id="es-arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#8b5cf6"/>
+    </marker>
+  </defs>
+
+  <!-- space on the right -->
+  <rect x="540" y="40" width="310" height="250" rx="12" fill="#15131f" stroke="#6366f1" stroke-opacity="0.4"/>
+  <text x="555" y="62" font-size="11" fill="#a1a1aa">vector space (2-D view)</text>
+  <line x1="560" y1="270" x2="830" y2="270" stroke="#3f3f46"/>
+  <line x1="575" y1="60" x2="575" y2="270" stroke="#3f3f46"/>
+
+  <!-- cluster A: account words -->
+  <circle cx="640" cy="110" r="7" fill="#8b5cf6"/><text x="652" y="114" font-size="11" fill="#e4e4e7">login</text>
+  <circle cx="665" cy="128" r="7" fill="#8b5cf6"/><text x="677" y="132" font-size="11" fill="#e4e4e7">password</text>
+  <circle cx="630" cy="140" r="7" fill="#8b5cf6"/><text x="500" y="144" font-size="11" fill="#a78bfa" text-anchor="end" opacity="0"> </text>
+  <text x="600" y="98" font-size="10" fill="#a78bfa">account / access</text>
+
+  <!-- cluster B: vehicle words -->
+  <circle cx="775" cy="225" r="7" fill="#22c55e"/><text x="715" y="229" font-size="11" fill="#e4e4e7" text-anchor="end">car</text>
+  <circle cx="800" cy="240" r="7" fill="#22c55e"/><text x="745" y="252" font-size="11" fill="#e4e4e7" text-anchor="end">truck</text>
+  <text x="760" y="210" font-size="10" fill="#4ade80">vehicles</text>
+
+  <text x="555" y="288" font-size="10" fill="#a1a1aa">close = similar meaning · far = unrelated</text>
+</svg>

@@ -1,0 +1,65 @@
+<svg viewBox="0 0 900 430" xmlns="http://www.w3.org/2000/svg" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif">
+  <defs>
+    <marker id="le-arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#8b5cf6"/>
+    </marker>
+  </defs>
+  <rect width="900" height="430" fill="transparent"/>
+  <text x="30" y="28" font-size="14" font-weight="700" fill="#a78bfa">The Lang* stack — they don't compete, they layer</text>
+
+  <!-- Langflow (prototype) -->
+  <rect x="40" y="70" width="180" height="150" rx="12" fill="#15131f" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="130" y="96" font-size="13" font-weight="700" fill="#fbbf24" text-anchor="middle">Langflow</text>
+  <text x="130" y="115" font-size="9.5" fill="#a1a1aa" text-anchor="middle">visual / no-code</text>
+  <text x="130" y="127" font-size="9.5" fill="#a1a1aa" text-anchor="middle">drag-and-drop builder</text>
+  <line x1="60" y1="140" x2="200" y2="140" stroke="#3f3f46"/>
+  <text x="130" y="160" font-size="10" fill="#e4e4e7" text-anchor="middle">prototype a flow fast,</text>
+  <text x="130" y="174" font-size="10" fill="#e4e4e7" text-anchor="middle">demo without code</text>
+  <text x="130" y="200" font-size="9" fill="#71717a" text-anchor="middle">(3rd-party, built on</text>
+  <text x="130" y="212" font-size="9" fill="#71717a" text-anchor="middle">LangChain)</text>
+
+  <line x1="220" y1="145" x2="272" y2="145" stroke="#8b5cf6" stroke-width="1.6" marker-end="url(#le-arr)"/>
+
+  <!-- LangChain (build) -->
+  <rect x="274" y="70" width="180" height="150" rx="12" fill="#15131f" stroke="#6366f1" stroke-width="1.5"/>
+  <text x="364" y="96" font-size="13" font-weight="700" fill="#818cf8" text-anchor="middle">LangChain</text>
+  <text x="364" y="115" font-size="9.5" fill="#a1a1aa" text-anchor="middle">the framework</text>
+  <text x="364" y="127" font-size="9.5" fill="#a1a1aa" text-anchor="middle">components + integrations</text>
+  <line x1="294" y1="140" x2="434" y2="140" stroke="#3f3f46"/>
+  <text x="364" y="160" font-size="10" fill="#e4e4e7" text-anchor="middle">models, prompts, loaders,</text>
+  <text x="364" y="174" font-size="10" fill="#e4e4e7" text-anchor="middle">retrievers, tools, chains</text>
+  <text x="364" y="200" font-size="9" fill="#71717a" text-anchor="middle">the building blocks you</text>
+  <text x="364" y="212" font-size="9" fill="#71717a" text-anchor="middle">write in code</text>
+
+  <line x1="454" y1="145" x2="506" y2="145" stroke="#8b5cf6" stroke-width="1.6" marker-end="url(#le-arr)"/>
+
+  <!-- LangGraph (orchestrate) -->
+  <rect x="508" y="70" width="180" height="150" rx="12" fill="#15131f" stroke="#8b5cf6" stroke-width="1.5"/>
+  <text x="598" y="96" font-size="13" font-weight="700" fill="#c4b5fd" text-anchor="middle">LangGraph</text>
+  <text x="598" y="115" font-size="9.5" fill="#a1a1aa" text-anchor="middle">orchestration</text>
+  <text x="598" y="127" font-size="9.5" fill="#a1a1aa" text-anchor="middle">stateful graphs</text>
+  <line x1="528" y1="140" x2="668" y2="140" stroke="#3f3f46"/>
+  <text x="598" y="160" font-size="10" fill="#e4e4e7" text-anchor="middle">nodes + edges, loops,</text>
+  <text x="598" y="174" font-size="10" fill="#e4e4e7" text-anchor="middle">branching, memory</text>
+  <text x="598" y="200" font-size="9" fill="#71717a" text-anchor="middle">multi-step agents that</text>
+  <text x="598" y="212" font-size="9" fill="#71717a" text-anchor="middle">need control flow</text>
+
+  <!-- LangSmith band underneath all -->
+  <rect x="40" y="248" width="648" height="90" rx="12" fill="rgba(34,197,94,0.08)" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="364" y="274" font-size="13" font-weight="700" fill="#86efac" text-anchor="middle">LangSmith — observability across everything (build + production)</text>
+  <text x="364" y="298" font-size="10" fill="#e4e4e7" text-anchor="middle">tracing every step · debugging · evaluation on datasets · monitoring cost &amp; latency in prod</text>
+  <text x="364" y="320" font-size="9.5" fill="#a1a1aa" text-anchor="middle">framework-agnostic — wraps LangChain, LangGraph, or even plain API calls</text>
+
+  <!-- connectors from the three top boxes down to LangSmith -->
+  <line x1="130" y1="220" x2="130" y2="248" stroke="#16a34a" stroke-width="1.2" stroke-dasharray="4 3"/>
+  <line x1="364" y1="220" x2="364" y2="248" stroke="#16a34a" stroke-width="1.2" stroke-dasharray="4 3"/>
+  <line x1="598" y1="220" x2="598" y2="248" stroke="#16a34a" stroke-width="1.2" stroke-dasharray="4 3"/>
+
+  <!-- flow label -->
+  <text x="130" y="60" font-size="9.5" fill="#71717a" text-anchor="middle">prototype</text>
+  <text x="364" y="60" font-size="9.5" fill="#71717a" text-anchor="middle">build in code</text>
+  <text x="598" y="60" font-size="9.5" fill="#71717a" text-anchor="middle">orchestrate</text>
+
+  <text x="30" y="372" font-size="11" fill="#a1a1aa">One-liner: LangChain builds it, LangGraph orchestrates it, LangSmith watches it, Langflow lets you draw it.</text>
+  <text x="30" y="396" font-size="10.5" fill="#71717a">LangChain, LangGraph &amp; LangSmith are made by LangChain Inc. Langflow is a separate open-source project built on LangChain.</text>
+</svg>

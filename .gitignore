@@ -1,0 +1,11 @@
+# Docusaurus
+/.docusaurus
+/build
+node_modules
+
+# Generated RAG index (rebuilt by scripts/build-notes-index.mjs on build)
+/static/notes-index.json
+
+.DS_Store
+*.log
+.vercel

@@ -1,0 +1,6 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#0a0a0f"/>
+  <text x="80" y="300" font-family="system-ui, sans-serif" font-size="72" font-weight="800" fill="#ffffff">Priyansh's AI Notes</text>
+  <text x="80" y="370" font-family="system-ui, sans-serif" font-size="34" fill="#a78bfa">RAG · LLMs · Agents — learning in the open</text>
+  <text x="80" y="560" font-family="system-ui, sans-serif" font-size="28" fill="#71717a">notes.priyanshsinghal.com</text>
+</svg>

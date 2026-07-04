@@ -1,0 +1,38 @@
+<svg viewBox="0 0 900 340" xmlns="http://www.w3.org/2000/svg" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif">
+  <rect width="900" height="340" fill="transparent"/>
+  <text x="30" y="28" font-size="14" font-weight="700" fill="#a78bfa">MMR — relevance AND diversity</text>
+
+  <!-- ===== LEFT: plain top-k ===== -->
+  <text x="60" y="60" font-size="12" font-weight="700" fill="#f87171">Plain top-k</text>
+  <text x="60" y="78" font-size="10.5" fill="#a1a1aa">picks the 4 closest → near-duplicates</text>
+
+  <rect x="40" y="90" width="360" height="210" rx="12" fill="#15131f" stroke="#3f3f46"/>
+  <!-- query point -->
+  <circle cx="150" cy="170" r="7" fill="#f59e0b"/><text x="150" y="155" font-size="10" fill="#fbbf24" text-anchor="middle">query</text>
+  <!-- a tight cluster of near-dupes (all chosen) -->
+  <circle cx="200" cy="160" r="9" fill="#ef4444"/><text x="216" y="164" font-size="9" fill="#fca5a5">A</text>
+  <circle cx="215" cy="178" r="9" fill="#ef4444"/><text x="231" y="182" font-size="9" fill="#fca5a5">A'</text>
+  <circle cx="198" cy="195" r="9" fill="#ef4444"/><text x="214" y="199" font-size="9" fill="#fca5a5">A''</text>
+  <circle cx="232" cy="160" r="9" fill="#ef4444"/><text x="248" y="164" font-size="9" fill="#fca5a5">A'''</text>
+  <!-- ignored useful but farther docs (greyed) -->
+  <circle cx="320" cy="120" r="8" fill="#3f3f46"/><text x="336" y="124" font-size="9" fill="#71717a">B</text>
+  <circle cx="340" cy="240" r="8" fill="#3f3f46"/><text x="356" y="244" font-size="9" fill="#71717a">C</text>
+  <text x="60" y="288" font-size="10.5" fill="#f87171">→ 4 copies of the same fact</text>
+
+  <!-- ===== RIGHT: MMR ===== -->
+  <text x="500" y="60" font-size="12" font-weight="700" fill="#4ade80">MMR</text>
+  <text x="500" y="78" font-size="10.5" fill="#a1a1aa">relevant AND spread out → broad coverage</text>
+
+  <rect x="480" y="90" width="360" height="210" rx="12" fill="#15131f" stroke="#3f3f46"/>
+  <circle cx="590" cy="170" r="7" fill="#f59e0b"/><text x="590" y="155" font-size="10" fill="#fbbf24" text-anchor="middle">query</text>
+  <!-- one from the cluster + spread picks -->
+  <circle cx="640" cy="165" r="9" fill="#22c55e"/><text x="656" y="169" font-size="9" fill="#86efac">A</text>
+  <circle cx="760" cy="120" r="9" fill="#22c55e"/><text x="776" y="124" font-size="9" fill="#86efac">B</text>
+  <circle cx="780" cy="240" r="9" fill="#22c55e"/><text x="796" y="244" font-size="9" fill="#86efac">C</text>
+  <circle cx="680" cy="250" r="9" fill="#22c55e"/><text x="696" y="254" font-size="9" fill="#86efac">D</text>
+  <!-- skipped near-dupes -->
+  <circle cx="655" cy="180" r="8" fill="#3f3f46"/><text x="668" y="184" font-size="8" fill="#71717a">A'</text>
+  <text x="500" y="288" font-size="10.5" fill="#4ade80">→ A + 3 different angles</text>
+
+  <text x="30" y="326" font-size="11" fill="#a1a1aa">MMR scores each candidate by relevance to the query MINUS similarity to already-picked docs — so it avoids repeats.</text>
+</svg>

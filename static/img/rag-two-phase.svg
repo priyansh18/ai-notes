@@ -1,0 +1,33 @@
+<svg viewBox="0 0 880 250" xmlns="http://www.w3.org/2000/svg" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif">
+  <defs>
+    <marker id="tp-arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#8b5cf6"/>
+    </marker>
+  </defs>
+  <rect width="880" height="250" fill="transparent"/>
+
+  <text x="30" y="34" font-size="14" font-weight="700" fill="#a78bfa">INDEXING · done once, offline</text>
+  <g font-size="13" fill="#e4e4e7" text-anchor="middle">
+    <rect x="30" y="48" width="120" height="42" rx="9" fill="#1e1b2e" stroke="#6366f1"/><text x="90" y="74">Documents</text>
+    <rect x="196" y="48" width="100" height="42" rx="9" fill="#1e1b2e" stroke="#6366f1"/><text x="246" y="74">Chunk</text>
+    <rect x="342" y="48" width="100" height="42" rx="9" fill="#1e1b2e" stroke="#6366f1"/><text x="392" y="74">Embed</text>
+    <rect x="488" y="48" width="150" height="42" rx="9" fill="#1e1b2e" stroke="#8b5cf6" stroke-width="1.5"/><text x="563" y="74">Vector index</text>
+  </g>
+  <g stroke="#8b5cf6" stroke-width="1.6" marker-end="url(#tp-arr)">
+    <line x1="150" y1="69" x2="192" y2="69"/><line x1="296" y1="69" x2="338" y2="69"/><line x1="442" y1="69" x2="484" y2="69"/>
+  </g>
+
+  <line x1="563" y1="90" x2="563" y2="150" stroke="#8b5cf6" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#tp-arr)"/>
+
+  <text x="30" y="140" font-size="14" font-weight="700" fill="#a78bfa">QUERYING · per question</text>
+  <g font-size="13" fill="#e4e4e7" text-anchor="middle">
+    <rect x="30" y="156" width="110" height="42" rx="9" fill="#1e1b2e" stroke="#8b5cf6"/><text x="85" y="182">Question</text>
+    <rect x="186" y="156" width="100" height="42" rx="9" fill="#1e1b2e" stroke="#8b5cf6"/><text x="236" y="182">Embed</text>
+    <rect x="332" y="156" width="120" height="42" rx="9" fill="#1e1b2e" stroke="#8b5cf6"/><text x="392" y="182">Retrieve</text>
+    <rect x="498" y="156" width="130" height="42" rx="9" fill="#1e1b2e" stroke="#8b5cf6"/><text x="563" y="182">Prompt + LLM</text>
+    <rect x="674" y="156" width="150" height="42" rx="9" fill="#1e1b2e" stroke="#16a34a" stroke-width="1.5"/><text x="749" y="182" fill="#86efac">Grounded answer</text>
+  </g>
+  <g stroke="#8b5cf6" stroke-width="1.6" marker-end="url(#tp-arr)">
+    <line x1="140" y1="177" x2="182" y2="177"/><line x1="286" y1="177" x2="328" y2="177"/><line x1="452" y1="177" x2="494" y2="177"/><line x1="628" y1="177" x2="670" y2="177"/>
+  </g>
+</svg>

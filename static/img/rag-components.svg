@@ -1,0 +1,40 @@
+<svg viewBox="0 0 880 320" xmlns="http://www.w3.org/2000/svg" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif">
+  <defs>
+    <marker id="cm-arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#8b5cf6"/>
+    </marker>
+  </defs>
+  <rect width="880" height="320" fill="transparent"/>
+
+  <text x="30" y="32" font-size="14" font-weight="700" fill="#a78bfa">The six components</text>
+
+  <g font-size="13" fill="#e4e4e7" text-anchor="middle">
+    <rect x="30" y="52" width="130" height="50" rx="10" fill="#1e1b2e" stroke="#6366f1"/><text x="95" y="74">Loader</text><text x="95" y="91" font-size="10" fill="#a1a1aa">files → Documents</text>
+    <rect x="210" y="52" width="130" height="50" rx="10" fill="#1e1b2e" stroke="#6366f1"/><text x="275" y="74">Splitter</text><text x="275" y="91" font-size="10" fill="#a1a1aa">Documents → chunks</text>
+    <rect x="390" y="52" width="140" height="50" rx="10" fill="#1e1b2e" stroke="#6366f1"/><text x="460" y="74">Embedding model</text><text x="460" y="91" font-size="10" fill="#a1a1aa">text → vectors</text>
+    <rect x="580" y="52" width="150" height="50" rx="10" fill="#1e1b2e" stroke="#8b5cf6" stroke-width="1.5"/><text x="655" y="74">Vector store</text><text x="655" y="91" font-size="10" fill="#a1a1aa">holds + searches</text>
+  </g>
+  <g stroke="#8b5cf6" stroke-width="1.6" marker-end="url(#cm-arr)">
+    <line x1="160" y1="77" x2="206" y2="77"/><line x1="340" y1="77" x2="386" y2="77"/><line x1="530" y1="77" x2="576" y2="77"/>
+  </g>
+
+  <!-- shared embedding model note -->
+  <rect x="390" y="138" width="140" height="40" rx="9" fill="#2a1e3a" stroke="#f59e0b" stroke-dasharray="4 3"/>
+  <text x="460" y="162" font-size="11" fill="#fbbf24" text-anchor="middle">⚠ same model both sides</text>
+  <line x1="460" y1="102" x2="460" y2="136" stroke="#f59e0b" stroke-width="1.4" stroke-dasharray="4 3"/>
+
+  <text x="30" y="220" font-size="14" font-weight="700" fill="#a78bfa">Query time</text>
+  <g font-size="13" fill="#e4e4e7" text-anchor="middle">
+    <rect x="30" y="236" width="130" height="50" rx="10" fill="#1e1b2e" stroke="#8b5cf6"/><text x="95" y="258">Retriever</text><text x="95" y="275" font-size="10" fill="#a1a1aa">query → chunks</text>
+    <rect x="210" y="236" width="130" height="50" rx="10" fill="#1e1b2e" stroke="#6366f1" stroke-width="1.5"/><text x="275" y="258">LLM</text><text x="275" y="275" font-size="10" fill="#a1a1aa">chunks → answer</text>
+    <rect x="390" y="236" width="150" height="50" rx="10" fill="#1e1b2e" stroke="#16a34a" stroke-width="1.5"/><text x="465" y="258" fill="#86efac">Grounded answer</text><text x="465" y="275" font-size="10" fill="#a1a1aa">+ citations</text>
+  </g>
+  <g stroke="#8b5cf6" stroke-width="1.6" marker-end="url(#cm-arr)">
+    <line x1="160" y1="261" x2="206" y2="261"/><line x1="340" y1="261" x2="386" y2="261"/>
+  </g>
+  <!-- store -> retriever -->
+  <line x1="655" y1="102" x2="655" y2="200" stroke="#8b5cf6" stroke-width="1.4" stroke-dasharray="5 4"/>
+  <line x1="655" y1="200" x2="100" y2="200" stroke="#8b5cf6" stroke-width="1.4" stroke-dasharray="5 4"/>
+  <line x1="100" y1="200" x2="100" y2="232" stroke="#8b5cf6" stroke-width="1.4" stroke-dasharray="5 4" marker-end="url(#cm-arr)"/>
+  <text x="380" y="194" font-size="10" fill="#a1a1aa">retriever searches the store</text>
+</svg>

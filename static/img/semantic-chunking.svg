@@ -1,0 +1,27 @@
+<svg viewBox="0 0 860 240" xmlns="http://www.w3.org/2000/svg" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif">
+  <rect width="860" height="240" fill="transparent"/>
+  <text x="30" y="30" font-size="14" font-weight="700" fill="#a78bfa">Semantic chunking — split where meaning shifts</text>
+
+  <!-- sentences row with similarity between them -->
+  <g font-size="11.5" fill="#e4e4e7" text-anchor="middle">
+    <rect x="30" y="70" width="150" height="46" rx="9" fill="#1e1b2e" stroke="#6366f1"/><text x="105" y="92">LangChain is a</text><text x="105" y="107">framework…</text>
+    <rect x="210" y="70" width="150" height="46" rx="9" fill="#1e1b2e" stroke="#6366f1"/><text x="285" y="92">…combines LLMs</text><text x="285" y="107">with tools…</text>
+    <rect x="470" y="70" width="150" height="46" rx="9" fill="#1e1b2e" stroke="#6366f1"/><text x="545" y="92">Eiffel Tower is</text><text x="545" y="107">in Paris.</text>
+    <rect x="650" y="70" width="150" height="46" rx="9" fill="#1e1b2e" stroke="#6366f1"/><text x="725" y="92">France is a</text><text x="725" y="107">destination.</text>
+  </g>
+
+  <!-- similarity links -->
+  <text x="195" y="60" font-size="11" fill="#4ade80" text-anchor="middle">sim 0.82 ✓</text>
+  <line x1="180" y1="93" x2="210" y2="93" stroke="#16a34a" stroke-width="2"/>
+  <text x="415" y="60" font-size="11" fill="#f87171" text-anchor="middle">sim 0.11 ✂ split</text>
+  <line x1="360" y1="93" x2="470" y2="93" stroke="#ef4444" stroke-width="2" stroke-dasharray="5 4"/>
+  <text x="635" y="60" font-size="11" fill="#4ade80" text-anchor="middle">sim 0.79 ✓</text>
+  <line x1="620" y1="93" x2="650" y2="93" stroke="#16a34a" stroke-width="2"/>
+
+  <!-- resulting chunks -->
+  <text x="30" y="160" font-size="12" font-weight="600" fill="#a78bfa">→ two coherent chunks</text>
+  <rect x="30" y="172" width="330" height="40" rx="9" fill="rgba(34,197,94,0.12)" stroke="#16a34a"/>
+  <text x="195" y="197" font-size="11.5" fill="#86efac" text-anchor="middle">Chunk 1 · LangChain / LLM tools</text>
+  <rect x="470" y="172" width="330" height="40" rx="9" fill="rgba(34,197,94,0.12)" stroke="#16a34a"/>
+  <text x="635" y="197" font-size="11.5" fill="#86efac" text-anchor="middle">Chunk 2 · Paris / France</text>
+</svg>

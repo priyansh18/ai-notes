@@ -1,0 +1,267 @@
+/* ═══════════════════════════════════════════════════════
+   Custom Footer
+   ═══════════════════════════════════════════════════════ */
+
+.footer {
+  background: #050507;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 56px 24px 0;
+}
+
+/* ─── Top Section ─── */
+.top {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.4fr repeat(3, 1fr);
+  gap: 48px;
+  padding-bottom: 40px;
+}
+
+/* ─── Brand Column ─── */
+.brandLogo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid rgba(99, 102, 241, 0.4);
+}
+
+.brandName {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.01em;
+}
+
+.brandDesc {
+  font-size: 0.85rem;
+  line-height: 1.65;
+  color: #a1a1aa;
+  margin: 0 0 18px;
+  max-width: 280px;
+}
+
+/* ─── Social Icons Row ─── */
+.socialRow {
+  display: flex;
+  gap: 6px;
+}
+
+.socialIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  color: #a1a1aa;
+  transition: all 0.2s ease;
+}
+
+.socialIcon:hover {
+  color: #fff;
+  border-color: rgba(99, 102, 241, 0.4);
+  background: rgba(99, 102, 241, 0.1);
+  transform: translateY(-2px);
+}
+
+/* ─── Link Columns ─── */
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.colTitle {
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #fff;
+  margin: 0 0 16px;
+}
+
+.colList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.colLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.86rem;
+  color: #a1a1aa;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.colLink:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+.colIcon {
+  display: inline-flex;
+  align-items: center;
+  opacity: 0.6;
+  flex-shrink: 0;
+}
+
+.colLink:hover .colIcon {
+  opacity: 1;
+}
+
+/* ─── Divider ─── */
+.divider {
+  max-width: 1100px;
+  margin: 0 auto;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(99, 102, 241, 0.2) 20%,
+    rgba(139, 92, 246, 0.15) 50%,
+    rgba(99, 102, 241, 0.2) 80%,
+    transparent
+  );
+}
+
+/* ─── Bottom Bar ─── */
+.bottom {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0 24px;
+  font-size: 0.8rem;
+  color: #71717a;
+}
+
+.copyright {
+  font-weight: 500;
+}
+
+.builtWith a {
+  color: #a1a1aa;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.builtWith a:hover {
+  color: #fff;
+}
+
+.portfolioLink {
+  color: var(--ifm-color-primary, #a78bfa);
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.portfolioLink:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+/* ─── Light mode ─── */
+[data-theme="light"] .footer {
+  background: #fafafa;
+  border-top-color: rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .brandName {
+  color: #18181b;
+}
+
+[data-theme="light"] .brandDesc {
+  color: #71717a;
+}
+
+[data-theme="light"] .colTitle {
+  color: #18181b;
+}
+
+[data-theme="light"] .colLink {
+  color: #71717a;
+}
+
+[data-theme="light"] .colLink:hover {
+  color: #18181b;
+}
+
+[data-theme="light"] .socialIcon {
+  border-color: rgba(0, 0, 0, 0.08);
+  background: rgba(0, 0, 0, 0.02);
+  color: #71717a;
+}
+
+[data-theme="light"] .socialIcon:hover {
+  color: #18181b;
+  border-color: rgba(99, 102, 241, 0.3);
+  background: rgba(99, 102, 241, 0.06);
+}
+
+[data-theme="light"] .divider {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 0, 0, 0.08) 20%,
+    rgba(99, 102, 241, 0.1) 50%,
+    rgba(0, 0, 0, 0.08) 80%,
+    transparent
+  );
+}
+
+[data-theme="light"] .bottom {
+  color: #a1a1aa;
+}
+
+[data-theme="light"] .builtWith a {
+  color: #71717a;
+}
+
+[data-theme="light"] .builtWith a:hover {
+  color: #18181b;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 768px) {
+  .top {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+
+  .brand {
+    grid-column: 1 / -1;
+  }
+
+  .bottom {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .top {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .footer {
+    padding: 40px 20px 0;
+  }
+}

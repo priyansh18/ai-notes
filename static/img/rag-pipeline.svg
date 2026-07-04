@@ -1,0 +1,73 @@
+<svg viewBox="0 0 1180 360" xmlns="http://www.w3.org/2000/svg" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif">
+  <defs>
+    <marker id="rp-arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#8b5cf6"/>
+    </marker>
+    <linearGradient id="rp-band" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#6366f1" stop-opacity="0.12"/>
+      <stop offset="1" stop-color="#8b5cf6" stop-opacity="0.12"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1180" height="360" fill="transparent"/>
+
+  <!-- phase bands -->
+  <rect x="20" y="58" width="700" height="104" rx="14" fill="url(#rp-band)" stroke="#6366f1" stroke-opacity="0.35"/>
+  <rect x="20" y="214" width="1140" height="104" rx="14" fill="url(#rp-band)" stroke="#8b5cf6" stroke-opacity="0.35"/>
+
+  <text x="34" y="46" font-size="14" font-weight="700" fill="#a78bfa" letter-spacing="0.5">INDEXING · offline, once</text>
+  <text x="34" y="202" font-size="14" font-weight="700" fill="#a78bfa" letter-spacing="0.5">QUERYING · per question</text>
+
+  <!-- helper: node = rounded rect + label -->
+  <!-- INDEXING ROW -->
+  <g font-size="13" fill="#e4e4e7" text-anchor="middle">
+    <rect x="40" y="92" width="120" height="44" rx="9" fill="#1e1b2e" stroke="#6366f1"/>
+    <text x="100" y="112">Documents</text><text x="100" y="128" font-size="10" fill="#a1a1aa">PDF · txt · CSV · DB</text>
+
+    <rect x="208" y="92" width="110" height="44" rx="9" fill="#1e1b2e" stroke="#6366f1"/>
+    <text x="263" y="112">Split</text><text x="263" y="128" font-size="10" fill="#a1a1aa">chunks + overlap</text>
+
+    <rect x="366" y="92" width="110" height="44" rx="9" fill="#1e1b2e" stroke="#6366f1"/>
+    <text x="421" y="112">Embed</text><text x="421" y="128" font-size="10" fill="#a1a1aa">chunk → vector</text>
+
+    <rect x="524" y="92" width="176" height="44" rx="9" fill="#1e1b2e" stroke="#8b5cf6" stroke-width="1.5"/>
+    <text x="612" y="112">Vector store</text><text x="612" y="128" font-size="10" fill="#a1a1aa">ChromaDB / Pinecone</text>
+  </g>
+  <g stroke="#8b5cf6" stroke-width="1.6" marker-end="url(#rp-arr)">
+    <line x1="160" y1="114" x2="204" y2="114"/>
+    <line x1="318" y1="114" x2="362" y2="114"/>
+    <line x1="476" y1="114" x2="520" y2="114"/>
+  </g>
+
+  <!-- store feeds querying -->
+  <line x1="612" y1="136" x2="612" y2="236" stroke="#8b5cf6" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#rp-arr)"/>
+  <text x="622" y="190" font-size="10" fill="#a1a1aa">search</text>
+
+  <!-- QUERYING ROW -->
+  <g font-size="13" fill="#e4e4e7" text-anchor="middle">
+    <rect x="40" y="248" width="110" height="44" rx="9" fill="#1e1b2e" stroke="#8b5cf6"/>
+    <text x="95" y="268">Question</text><text x="95" y="284" font-size="10" fill="#a1a1aa">user query</text>
+
+    <rect x="198" y="248" width="110" height="44" rx="9" fill="#1e1b2e" stroke="#8b5cf6"/>
+    <text x="253" y="268">Embed</text><text x="253" y="284" font-size="10" fill="#a1a1aa">same model</text>
+
+    <rect x="356" y="248" width="130" height="44" rx="9" fill="#1e1b2e" stroke="#8b5cf6"/>
+    <text x="421" y="268">Retrieve</text><text x="421" y="284" font-size="10" fill="#a1a1aa">top-k chunks</text>
+
+    <rect x="534" y="248" width="150" height="44" rx="9" fill="#1e1b2e" stroke="#8b5cf6"/>
+    <text x="609" y="268">Augment prompt</text><text x="609" y="284" font-size="10" fill="#a1a1aa">question + chunks</text>
+
+    <rect x="732" y="248" width="110" height="44" rx="9" fill="#1e1b2e" stroke="#6366f1" stroke-width="1.5"/>
+    <text x="787" y="268">LLM</text><text x="787" y="284" font-size="10" fill="#a1a1aa">generate</text>
+
+    <rect x="890" y="248" width="150" height="44" rx="9" fill="#1e1b2e" stroke="#16a34a" stroke-width="1.5"/>
+    <text x="965" y="268" fill="#86efac">Grounded answer</text><text x="965" y="284" font-size="10" fill="#a1a1aa">+ citations</text>
+  </g>
+  <g stroke="#8b5cf6" stroke-width="1.6" marker-end="url(#rp-arr)">
+    <line x1="150" y1="270" x2="194" y2="270"/>
+    <line x1="308" y1="270" x2="352" y2="270"/>
+    <line x1="486" y1="270" x2="530" y2="270"/>
+    <line x1="684" y1="270" x2="728" y2="270"/>
+    <line x1="842" y1="270" x2="886" y2="270"/>
+  </g>
+</svg>

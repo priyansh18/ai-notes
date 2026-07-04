@@ -1,0 +1,58 @@
+<svg viewBox="0 0 900 470" xmlns="http://www.w3.org/2000/svg" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif">
+  <defs>
+    <marker id="qe-arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#8b5cf6"/>
+    </marker>
+  </defs>
+  <rect width="900" height="470" fill="transparent"/>
+  <text x="30" y="28" font-size="14" font-weight="700" fill="#a78bfa">Query Enhancement — rewrite the question before retrieving</text>
+
+  <!-- raw query -->
+  <rect x="40" y="55" width="180" height="48" rx="10" fill="#1e1b2e" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="130" y="78" font-size="11.5" fill="#fbbf24" text-anchor="middle" font-weight="700">User query</text>
+  <text x="130" y="94" font-size="10" fill="#a1a1aa" text-anchor="middle">short · vague · one phrasing</text>
+
+  <!-- fan out to three techniques -->
+  <line x1="220" y1="79" x2="300" y2="120" stroke="#8b5cf6" stroke-width="1.6" marker-end="url(#qe-arr)"/>
+  <line x1="220" y1="79" x2="300" y2="235" stroke="#8b5cf6" stroke-width="1.6" marker-end="url(#qe-arr)"/>
+  <line x1="220" y1="79" x2="300" y2="350" stroke="#8b5cf6" stroke-width="1.6" marker-end="url(#qe-arr)"/>
+
+  <!-- 1. Expansion -->
+  <rect x="302" y="112" width="320" height="92" rx="10" fill="#15131f" stroke="#6366f1"/>
+  <text x="318" y="134" font-size="12" font-weight="700" fill="#818cf8">1 · Query Expansion</text>
+  <text x="318" y="153" font-size="10" fill="#a1a1aa">add synonyms / related terms / context</text>
+  <text x="318" y="173" font-size="10" fill="#c4b5fd">"Langchain memory"</text>
+  <text x="318" y="189" font-size="10" fill="#86efac">→ "LangChain memory, conversation buffer,</text>
+  <text x="318" y="201" font-size="10" fill="#86efac">   chat history, ConversationBufferMemory…"</text>
+
+  <!-- 2. Decomposition -->
+  <rect x="302" y="227" width="320" height="92" rx="10" fill="#15131f" stroke="#6366f1"/>
+  <text x="318" y="249" font-size="12" font-weight="700" fill="#818cf8">2 · Query Decomposition</text>
+  <text x="318" y="268" font-size="10" fill="#a1a1aa">split a complex question into sub-questions</text>
+  <text x="318" y="288" font-size="10" fill="#c4b5fd">"Compare LangChain vs CrewAI memory"</text>
+  <text x="318" y="304" font-size="10" fill="#86efac">→ q1: LangChain memory?  q2: CrewAI memory?</text>
+
+  <!-- 3. HyDE -->
+  <rect x="302" y="342" width="320" height="100" rx="10" fill="#15131f" stroke="#6366f1"/>
+  <text x="318" y="364" font-size="12" font-weight="700" fill="#818cf8">3 · HyDE (Hypothetical Doc)</text>
+  <text x="318" y="383" font-size="10" fill="#a1a1aa">LLM drafts a fake answer, embed THAT</text>
+  <text x="318" y="403" font-size="10" fill="#c4b5fd">question → hypothetical paragraph</text>
+  <text x="318" y="419" font-size="10" fill="#86efac">→ embed the paragraph (answer-like text</text>
+  <text x="318" y="431" font-size="10" fill="#86efac">   matches real docs better than a question)</text>
+
+  <!-- converge to retriever -->
+  <line x1="622" y1="158" x2="702" y2="240" stroke="#8b5cf6" stroke-width="1.6" marker-end="url(#qe-arr)"/>
+  <line x1="622" y1="273" x2="702" y2="255" stroke="#8b5cf6" stroke-width="1.6" marker-end="url(#qe-arr)"/>
+  <line x1="622" y1="392" x2="702" y2="270" stroke="#8b5cf6" stroke-width="1.6" marker-end="url(#qe-arr)"/>
+
+  <rect x="704" y="226" width="160" height="60" rx="10" fill="#1e1b2e" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="784" y="250" font-size="12" fill="#86efac" text-anchor="middle" font-weight="700">Retriever</text>
+  <text x="784" y="268" font-size="10" fill="#a1a1aa" text-anchor="middle">better query →</text>
+  <text x="784" y="280" font-size="10" fill="#a1a1aa" text-anchor="middle">better context</text>
+
+  <line x1="784" y1="286" x2="784" y2="330" stroke="#8b5cf6" stroke-width="1.6" marker-end="url(#qe-arr)"/>
+  <rect x="724" y="332" width="120" height="44" rx="10" fill="#1e1b2e" stroke="#6366f1" stroke-width="1.5"/>
+  <text x="784" y="359" font-size="12" fill="#e4e4e7" text-anchor="middle">LLM → answer</text>
+
+  <text x="30" y="460" font-size="11" fill="#a1a1aa">All three reshape the query so retrieval finds the right chunks — the LLM only ever sees better context, not your raw phrasing.</text>
+</svg>

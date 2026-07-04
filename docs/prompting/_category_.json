@@ -1,0 +1,10 @@
+{
+  "collapsed": true,
+  "label": "3 · Prompting",
+  "link": {
+    "type": "generated-index",
+    "title": "3 · Prompting",
+    "description": "Getting reliable behaviour out of a model with words — the instruction hierarchy, few-shot learning, chain-of-thought, prompt templates, and context engineering, with examples and a system-design view."
+  },
+  "position": 3
+}

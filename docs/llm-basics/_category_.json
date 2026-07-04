@@ -1,0 +1,10 @@
+{
+  "collapsed": false,
+  "label": "1 · LLM Basics",
+  "link": {
+    "type": "generated-index",
+    "title": "1 · LLM Basics",
+    "description": "How to actually think about an LLM — tokens, next-token prediction, sampling controls, context windows, reasoning models, and the 2026 model landscape, each with examples and a system-design view."
+  },
+  "position": 1
+}
