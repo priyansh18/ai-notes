@@ -113,7 +113,7 @@ const config = {
           // "Edit this page" → your GitHub repo (update the path if needed).
           editUrl:
             "https://github.com/priyansh18/PortfolioNew/tree/main/notes/",
-          showLastUpdateTime: true,
+          showLastUpdateTime: false,
           // Hide sections that are written but not yet "studied/published".
           // These pages still live in the repo, but are NOT built into public
           // routes — so visitors can't reach them by guessing the URL. To
