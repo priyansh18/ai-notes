@@ -1,0 +1,59 @@
+<svg viewBox="0 0 900 400" xmlns="http://www.w3.org/2000/svg" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif">
+  <defs>
+    <marker id="aa-arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#8b5cf6"/>
+    </marker>
+  </defs>
+  <rect width="900" height="400" fill="transparent"/>
+  <text x="30" y="28" font-size="14" font-weight="700" fill="#a78bfa">Anatomy of an agent — perceive, reason, act, in a loop</text>
+
+  <!-- the loop ring -->
+  <text x="235" y="70" font-size="11.5" fill="#818cf8" text-anchor="middle" font-weight="700">1 · Perceive</text>
+  <rect x="150" y="80" width="170" height="52" rx="10" fill="#1e1b2e" stroke="#6366f1"/>
+  <text x="235" y="102" font-size="10" fill="#e4e4e7" text-anchor="middle">read input / goal</text>
+  <text x="235" y="118" font-size="9" fill="#a1a1aa" text-anchor="middle">+ observations from tools</text>
+
+  <line x1="320" y1="106" x2="392" y2="106" stroke="#8b5cf6" stroke-width="1.6" marker-end="url(#aa-arr)"/>
+
+  <text x="480" y="70" font-size="11.5" fill="#818cf8" text-anchor="middle" font-weight="700">2 · Reason (the LLM)</text>
+  <rect x="394" y="80" width="200" height="52" rx="10" fill="#1e1b2e" stroke="#6366f1"/>
+  <text x="494" y="102" font-size="10" fill="#e4e4e7" text-anchor="middle">plan · decide next step</text>
+  <text x="494" y="118" font-size="9" fill="#a1a1aa" text-anchor="middle">"which tool? or answer?"</text>
+
+  <line x1="594" y1="106" x2="666" y2="106" stroke="#8b5cf6" stroke-width="1.6" marker-end="url(#aa-arr)"/>
+
+  <text x="755" y="70" font-size="11.5" fill="#818cf8" text-anchor="middle" font-weight="700">3 · Act</text>
+  <rect x="668" y="80" width="170" height="52" rx="10" fill="#1e1b2e" stroke="#8b5cf6"/>
+  <text x="753" y="102" font-size="10" fill="#c4b5fd" text-anchor="middle">call a tool</text>
+  <text x="753" y="118" font-size="9" fill="#a1a1aa" text-anchor="middle">search · API · code · RAG</text>
+
+  <!-- observe loop back -->
+  <path d="M753 132 q0 60 -259 60 q-259 0 -259 -54" fill="none" stroke="#8b5cf6" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#aa-arr)"/>
+  <text x="494" y="210" font-size="10" fill="#86efac" text-anchor="middle">observe the result → loop until the goal is met, then answer</text>
+
+  <!-- components band -->
+  <rect x="40" y="240" width="820" height="120" rx="12" fill="#15131f" stroke="#3f3f46"/>
+  <text x="56" y="264" font-size="12" font-weight="700" fill="#a78bfa">The four components every agent needs</text>
+
+  <rect x="60" y="280" width="185" height="62" rx="9" fill="#1e1b2e" stroke="#52525b"/>
+  <text x="152" y="302" font-size="10.5" fill="#e4e4e7" text-anchor="middle" font-weight="700">🧠 Model (brain)</text>
+  <text x="152" y="320" font-size="9" fill="#a1a1aa" text-anchor="middle">the LLM that reasons</text>
+  <text x="152" y="333" font-size="9" fill="#a1a1aa" text-anchor="middle">and plans</text>
+
+  <rect x="255" y="280" width="185" height="62" rx="9" fill="#1e1b2e" stroke="#52525b"/>
+  <text x="347" y="302" font-size="10.5" fill="#e4e4e7" text-anchor="middle" font-weight="700">🛠 Tools (hands)</text>
+  <text x="347" y="320" font-size="9" fill="#a1a1aa" text-anchor="middle">functions it can call to</text>
+  <text x="347" y="333" font-size="9" fill="#a1a1aa" text-anchor="middle">act on the world</text>
+
+  <rect x="450" y="280" width="185" height="62" rx="9" fill="#1e1b2e" stroke="#52525b"/>
+  <text x="542" y="302" font-size="10.5" fill="#e4e4e7" text-anchor="middle" font-weight="700">📝 Memory</text>
+  <text x="542" y="320" font-size="9" fill="#a1a1aa" text-anchor="middle">short-term (this run) +</text>
+  <text x="542" y="333" font-size="9" fill="#a1a1aa" text-anchor="middle">long-term (across runs)</text>
+
+  <rect x="645" y="280" width="195" height="62" rx="9" fill="#1e1b2e" stroke="#52525b"/>
+  <text x="742" y="302" font-size="10.5" fill="#e4e4e7" text-anchor="middle" font-weight="700">🎯 Planning / goal</text>
+  <text x="742" y="320" font-size="9" fill="#a1a1aa" text-anchor="middle">breaks a goal into steps,</text>
+  <text x="742" y="333" font-size="9" fill="#a1a1aa" text-anchor="middle">decides when it's done</text>
+
+  <text x="30" y="388" font-size="11" fill="#a1a1aa">An agent = an LLM given tools, memory, and a goal, running the perceive→reason→act loop autonomously until the task is complete.</text>
+</svg>

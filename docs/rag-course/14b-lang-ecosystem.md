@@ -99,3 +99,5 @@ built on LangChain (not made by LangChain Inc).
 </div>
 
 **Related:** [Updated LangChain (v1)](/docs/rag-course/13-langchain-v1) · [LangGraph Basics](/docs/rag-course/14-langgraph-basics) · [Glossary](/docs/glossary)
+
+Next: [Agents Architecture →](/docs/rag-course/15-agents-architecture)

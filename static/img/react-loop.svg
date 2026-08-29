@@ -1,0 +1,56 @@
+<svg viewBox="0 0 900 420" xmlns="http://www.w3.org/2000/svg" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif">
+  <defs>
+    <marker id="rc-arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#8b5cf6"/>
+    </marker>
+  </defs>
+  <rect width="900" height="420" fill="transparent"/>
+  <text x="30" y="28" font-size="14" font-weight="700" fill="#a78bfa">ReAct agent — Reason → Act → Observe, looping until done</text>
+
+  <!-- user -->
+  <rect x="40" y="180" width="130" height="54" rx="10" fill="#1e1b2e" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="105" y="203" font-size="11.5" fill="#fbbf24" text-anchor="middle" font-weight="700">Question</text>
+  <text x="105" y="221" font-size="9" fill="#a1a1aa" text-anchor="middle">"recent AI news + 12×4?"</text>
+  <line x1="170" y1="207" x2="228" y2="207" stroke="#8b5cf6" stroke-width="1.6" marker-end="url(#rc-arr)"/>
+
+  <!-- REASON (LLM) -->
+  <circle cx="330" cy="207" r="72" fill="#15131f" stroke="#6366f1" stroke-width="1.6"/>
+  <text x="330" y="192" font-size="13" fill="#818cf8" text-anchor="middle" font-weight="700">Reason</text>
+  <text x="330" y="211" font-size="9.5" fill="#e4e4e7" text-anchor="middle">LLM thinks:</text>
+  <text x="330" y="225" font-size="9" fill="#a1a1aa" text-anchor="middle">"which tool do I</text>
+  <text x="330" y="237" font-size="9" fill="#a1a1aa" text-anchor="middle">need next?"</text>
+
+  <!-- ACT arrow to tools -->
+  <path d="M400 190 q60 -30 120 -14" fill="none" stroke="#8b5cf6" stroke-width="1.6" marker-end="url(#rc-arr)"/>
+  <text x="470" y="158" font-size="10.5" fill="#c4b5fd" font-weight="700">Act (call a tool)</text>
+
+  <!-- tools box -->
+  <rect x="524" y="120" width="330" height="80" rx="10" fill="#15131f" stroke="#8b5cf6"/>
+  <text x="689" y="142" font-size="11.5" fill="#c4b5fd" text-anchor="middle" font-weight="700">Tools</text>
+  <text x="689" y="162" font-size="9.5" fill="#a1a1aa" text-anchor="middle">🔎 Tavily · 📚 Wikipedia · 📄 arxiv</text>
+  <text x="689" y="177" font-size="9.5" fill="#a1a1aa" text-anchor="middle">🧮 add / multiply / divide · RAG retriever</text>
+  <text x="689" y="193" font-size="9" fill="#71717a" text-anchor="middle">create_react_agent(llm, tools)</text>
+
+  <!-- OBSERVE arrow back -->
+  <path d="M524 210 q-70 40 -120 30" fill="none" stroke="#8b5cf6" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#rc-arr)"/>
+  <text x="452" y="272" font-size="10.5" fill="#86efac" font-weight="700">Observe (tool result)</text>
+
+  <!-- loop label -->
+  <text x="330" y="300" font-size="10" fill="#71717a" text-anchor="middle">…repeat: reason on the result, call another tool if needed…</text>
+
+  <!-- FINAL answer -->
+  <path d="M330 279 q0 40 0 60" fill="none" stroke="#8b5cf6" stroke-width="1.6" marker-end="url(#rc-arr)"/>
+  <text x="360" y="330" font-size="10" fill="#a1a1aa">no more tools needed</text>
+  <rect x="250" y="348" width="160" height="48" rx="10" fill="#1e1b2e" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="330" y="370" font-size="11.5" fill="#86efac" text-anchor="middle" font-weight="700">Final answer</text>
+  <text x="330" y="386" font-size="9" fill="#a1a1aa" text-anchor="middle">grounded in tool results</text>
+
+  <!-- memory note -->
+  <rect x="600" y="248" width="260" height="86" rx="10" fill="#15131f" stroke="#3f3f46"/>
+  <text x="616" y="270" font-size="11" font-weight="700" fill="#a78bfa">Memory (checkpointer)</text>
+  <text x="616" y="291" font-size="9.5" fill="#e4e4e7">MemorySaver + thread_id keeps</text>
+  <text x="616" y="305" font-size="9.5" fill="#e4e4e7">state across turns, so the agent</text>
+  <text x="616" y="319" font-size="9.5" fill="#e4e4e7">remembers earlier messages.</text>
+
+  <text x="30" y="410" font-size="11" fill="#a1a1aa">The loop is the whole idea: the model alternates thinking and tool-use until it has enough to answer — not a single shot.</text>
+</svg>

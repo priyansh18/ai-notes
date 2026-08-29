@@ -68,7 +68,8 @@ this short — a few weeks — and come back to fill gaps as needed.
 
 **What to learn:** Python core (variables, lists, dicts, loops, functions, classes) ·
 working with APIs (HTTP calls, JSON, `.env` for keys) · environments & packages
-(venv, pip, requirements) · async basics & error handling · Git & GitHub · a fast UI
+(venv, pip, requirements) · async basics & error handling · data validation with
+Pydantic (typed models → structured, validated outputs) · Git & GitHub · a fast UI
 with Streamlit (and a little FastAPI).
 
 **Build-along projects:** a Personal AI Voice Assistant (a JARVIS-style Streamlit app
@@ -129,13 +130,17 @@ one Hugging Face / fine-tuning project.
 
 This is the destination — the focus of 2026 AI engineering: autonomous systems that
 use LLMs to **plan, reason, and act** to achieve goals. An agent goes beyond a single
-answer: it decides what to do, calls tools, remembers, and can work with other agents.
+answer: it decides what to do, calls tools, remembers, and can work with other agents. The full breakdown below follows a complete 23-module Agentic AI specialisation — foundations, every major framework, the MCP/A2A protocol layer, security, AgentOps, and multi-cloud deployment.
 
 **What to learn:** agent fundamentals (the ReAct reasoning/acting loop, planning,
-goals) · tool / function calling to give agents abilities · agent memory (short-term
-vs persistent — Mem0, LangMem) · frameworks: LangGraph (stateful graphs), CrewAI
-(role-based crews), Microsoft AutoGen, OpenAI Agents SDK, Google ADK · multi-agent
-orchestration · agentic RAG · human-in-the-loop approval and safe autonomy.
+goals) · Pydantic for structured agent I/O · async programming for agents · tool /
+function calling to give agents abilities · agent memory (short-term vs persistent —
+Mem0, LangMem) · frameworks: LangGraph (stateful graphs, workflows — sequential,
+parallel, conditional, iterative — and subgraphs), CrewAI (role-based crews), Microsoft
+AutoGen, OpenAI Agents SDK, Google ADK · agent persistence (DB-backed memory, streaming,
+chat threading) · multi-agent orchestration · agentic RAG · human-in-the-loop approval
+and safe autonomy · harness engineering (scaffolding around an agent) · loop engineering
+(think → check → retry cycles).
 
 **Build-along projects:** a Stateful Agent in LangGraph + Llama 3
 <span style={{color: "#16a34a"}}>· beginner</span>; a Notion ReAct Planner Agent
@@ -143,11 +148,84 @@ orchestration · agentic RAG · human-in-the-loop approval and safe autonomy.
 <span style={{color: "#16a34a"}}>· beginner</span>; an AI Customer-Support Agent
 (RAG + Mem0 memory + tools, FastAPI, Docker, CI/CD)
 <span style={{color: "#d97706"}}>· intermediate</span>; an Autonomous Blog-Generation
-Agent (LangGraph + FastAPI) <span style={{color: "#d97706"}}>· intermediate</span>.
+Agent (LangGraph + FastAPI) <span style={{color: "#d97706"}}>· intermediate</span>;
+an Agentic Chatbot (LangGraph + persistence + LangSmith + tools + RAG + HITL + CI/CD
+on AWS) <span style={{color: "#d97706"}}>· intermediate</span>; TripMate AI —
+Multi-Agent Travel Planner (Groq + LangGraph + PostgreSQL + FastAPI)
+<span style={{color: "#d97706"}}>· intermediate</span>.
 
 **Move on when:** you can build an agent with tool calling and persistent memory,
 you've built at least one multi-agent system (CrewAI / AutoGen / LangGraph), and you
 understand human-in-the-loop and when to add approval gates.
+
+### The Agentic AI specialisation (full 23-module curriculum)
+
+Stages 7–8 mirror a complete, production-focused **Agentic AI** curriculum. If you
+want one ordered path through the agentic era — foundations, every major framework,
+the 2026 protocol layer (MCP + A2A), security, AgentOps, and multi-cloud deployment —
+follow these 23 modules in order. Each phase builds on the last.
+
+**Phase A · Foundations & structured outputs**
+
+| # | Module | What you learn |
+| --- | --- | --- |
+| 1 | Introduction to Agentic AI | What actually makes something an agent; Agentic AI vs Generative AI vs AI agents; multi-agent systems; the core design patterns (ReAct, Supervisor, Swarm, Pipeline, Mesh); the agentic protocol layer; the framework landscape; and how reasoning models change agent behaviour. |
+| 2 | Pydantic — Data Validation & Structured Outputs | Typed, validated tool inputs and model outputs — the backbone of reliable tool calling and structured agent responses. |
+
+**Phase B · Core frameworks**
+
+| # | Module | What you learn |
+| --- | --- | --- |
+| 3 | LangChain & LCEL | The framework and its expression language for composing model + tool pipelines. |
+| 4 | LangGraph — Stateful Agent Workflows | Modelling agents as stateful graphs — nodes, edges, branching, loops, and memory. |
+
+**Phase C · The protocol layer (2026)**
+
+| # | Module | What you learn |
+| --- | --- | --- |
+| 5 | MCP — Model Context Protocol | The open standard for connecting agents to tools and data; building your own MCP servers. |
+| 6 | A2A — Agent-to-Agent Protocol | Wrapping agents as services that talk to each other across frameworks and vendors. |
+
+**Phase D · Retrieval & context**
+
+| # | Module | What you learn |
+| --- | --- | --- |
+| 7 | RAG & Agentic RAG | From basic retrieval to agents that decide when and what to retrieve, and can retry. |
+| 8 | Context Engineering | Deciding what goes in the window — token budgeting, dynamic assembly, and the memory stack (short-term, long-term, episodic, semantic, procedural). |
+
+**Phase E · The framework landscape (learn to pick the right tool)**
+
+| # | Module | What you learn |
+| --- | --- | --- |
+| 9 | OpenAI Agents SDK | OpenAI's native agent framework — handoffs, tools, and guardrails. |
+| 10 | CrewAI — Multi-Agent Collaboration | Role-based crews of agents that divide and coordinate work. |
+| 11 | Google ADK — Agent Development Kit | Google's agent kit and deployment to Vertex AI. |
+| 12 | AWS Strands Agents SDK | Building and deploying agents (and swarms) on AWS. |
+| 13 | Azure AI Foundry & Semantic Kernel | Microsoft's agent stack on Azure. |
+| 14 | LlamaIndex — Data-Centric Agents | Data-first agents and workflows over your own sources. |
+| 15 | Claude Code — Agentic Coding | Agentic coding workflows with Claude Code. |
+| 16 | n8n — AI Workflow Automation | Wiring agents into automated workflows, low-code. |
+| 17 | LangFlow — Low-Code Agent Builder | Prototyping agent flows visually on a canvas. |
+| 18 | AutoGen — Conversational Multi-Agent | Microsoft AutoGen's conversational multi-agent framework. |
+
+**Phase F · Security, ops & deployment**
+
+| # | Module | What you learn |
+| --- | --- | --- |
+| 19 | Agent Security, Guardrails & Evaluation | The agentic attack surface (prompt injection, tool misuse, data exfiltration); defences (NeMo Guardrails, Guardrails AI, tripwires, sandboxing); trajectory-based eval and LLM-as-judge. |
+| 20 | AgentOps — The Full Observability Lifecycle | Session replay, tool-call tracing, cost tracking, and evaluation with AgentOps SDK, LangSmith, Opik, and Langfuse. |
+| 21 | CI/CD, Deployment & Production Serving | Dockerised services, GitHub Actions pipelines, and serving with FastAPI / BentoML across ECS, Cloud Run, Vertex AI, Azure Container Apps, and Lambda. |
+
+**Phase G · Production & capstone**
+
+| # | Module | What you learn |
+| --- | --- | --- |
+| 22 | Designing Multi-Agent Systems in Production | Supervisor, Swarm, Pipeline, and Hierarchical patterns; handoffs, shared state, parallel execution, checkpointing, and human-in-the-loop gates. |
+| 23 | Enterprise Capstone — Multi-Cloud & Local Agentic Architectures | End-to-end portfolio builds across AWS, GCP, Azure, and a fully local (Ollama + Chroma) stack. |
+
+> **How this maps to the roadmap:** Phases A–E deepen **Stage 7 (Agentic AI)**;
+> Phases F–G are **Stage 8 (AgentOps, MCP & Production)**. Modules 5–6 (MCP / A2A) are
+> the protocol layer that ties every framework together.
 
 ## Stage 8 · AgentOps, MCP & Production
 
@@ -165,8 +243,12 @@ deployment (Docker, CI/CD, cloud) · production monitoring (Prometheus, Grafana,
 <span style={{color: "#16a34a"}}>· beginner</span>; Build & deploy agents to the cloud
 with Google ADK <span style={{color: "#16a34a"}}>· beginner</span>; an Advanced AI
 GitHub PR Reviewer (event-driven LangGraph + FastAPI + Prometheus/Grafana + Langfuse)
-<span style={{color: "#dc2626"}}>· advanced</span>; a Real-Time Voice AI Agent with RAG
-<span style={{color: "#d97706"}}>· intermediate</span>.
+<span style={{color: "#dc2626"}}>· advanced</span>; a Multi-Agent AI system with MCP +
+Supervisor + Guardrails + HITL
+<span style={{color: "#dc2626"}}>· advanced</span>; a Self-Correcting Multi-Agent App
+deployed on DigitalOcean Serverless
+<span style={{color: "#d97706"}}>· intermediate</span>; a Real-Time Voice AI Agent with
+RAG <span style={{color: "#d97706"}}>· intermediate</span>.
 
 **Move on when:** you've connected an agent to a tool using MCP, deployed an agentic
 app to the cloud with observability wired in, and you can talk through security and
@@ -239,6 +321,8 @@ the end.
 | SwarmAI — Multi-Agent Assistant | intermediate | Coordinate a swarm of agents into one assistant. |
 | AI Customer-Support Agent (Memory + Tools) | intermediate | RAG + Mem0 + tools, FastAPI, Docker, CI/CD — a production agentic capstone. |
 | Autonomous Blog-Generation Agent | intermediate | A production content agent — LangGraph + FastAPI. |
+| Agentic Chatbot (LangGraph + LangSmith + RAG + HITL) | intermediate | 10-part build: persistence, streaming, threading, tools, RAG, HITL, CI/CD on AWS & Render. |
+| TripMate AI — Multi-Agent Travel Planner | intermediate | Multi-agent travel planner with Groq, LangGraph, PostgreSQL & FastAPI. |
 
 ### Stage 8 · AgentOps, MCP & Production
 
@@ -248,6 +332,8 @@ the end.
 | Google ADK: Build & Deploy Agents to the Cloud | beginner | Build agents, expose via REST, deploy to Cloud Run. |
 | Advanced AI GitHub PR Reviewer | advanced | Event-driven LangGraph + FastAPI, Celery/Redis, Prometheus/Grafana + Langfuse. |
 | Azure Multi-Modal Compliance Engine | advanced | Production agentic orchestration with LangSmith observability on Azure. |
+| Multi-Agent AI with MCP + Supervisor + Guardrails | advanced | End-to-end multi-agent with MCP, supervisor pattern, guardrails safety & HITL. |
+| Self-Correcting Multi-Agent App (DigitalOcean) | intermediate | Self-correcting multi-agent system deployed on DigitalOcean Serverless. |
 | Real-Time Voice AI Agent with RAG | intermediate | A low-latency voice agent + RAG — a production, real-time agentic system. |
 
 ## Free resources

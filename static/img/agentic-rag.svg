@@ -1,0 +1,80 @@
+<svg viewBox="0 0 900 430" xmlns="http://www.w3.org/2000/svg" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif">
+  <defs>
+    <marker id="ar-arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#8b5cf6"/>
+    </marker>
+  </defs>
+  <rect width="900" height="430" fill="transparent"/>
+  <text x="30" y="28" font-size="14" font-weight="700" fill="#a78bfa">Traditional RAG vs Agentic RAG</text>
+
+  <!-- ===== TOP: traditional ===== -->
+  <text x="40" y="58" font-size="12" font-weight="700" fill="#f59e0b">Traditional RAG — one fixed shot</text>
+
+  <rect x="40" y="72" width="90" height="42" rx="8" fill="#1e1b2e" stroke="#52525b"/>
+  <text x="85" y="97" font-size="10" fill="#e4e4e7" text-anchor="middle">query</text>
+  <line x1="130" y1="93" x2="168" y2="93" stroke="#8b5cf6" stroke-width="1.5" marker-end="url(#ar-arr)"/>
+  <rect x="170" y="72" width="100" height="42" rx="8" fill="#1e1b2e" stroke="#6366f1"/>
+  <text x="220" y="97" font-size="10" fill="#e4e4e7" text-anchor="middle">retrieve</text>
+  <line x1="270" y1="93" x2="308" y2="93" stroke="#8b5cf6" stroke-width="1.5" marker-end="url(#ar-arr)"/>
+  <rect x="310" y="72" width="100" height="42" rx="8" fill="#1e1b2e" stroke="#6366f1"/>
+  <text x="360" y="97" font-size="10" fill="#e4e4e7" text-anchor="middle">generate</text>
+  <line x1="410" y1="93" x2="448" y2="93" stroke="#8b5cf6" stroke-width="1.5" marker-end="url(#ar-arr)"/>
+  <rect x="450" y="72" width="90" height="42" rx="8" fill="#1e1b2e" stroke="#16a34a"/>
+  <text x="495" y="97" font-size="10" fill="#86efac" text-anchor="middle">answer</text>
+
+  <text x="580" y="82" font-size="9.5" fill="#a1a1aa">Always retrieves once, never</text>
+  <text x="580" y="96" font-size="9.5" fill="#a1a1aa">checks quality, no second try.</text>
+  <text x="580" y="110" font-size="9.5" fill="#f87171">Bad retrieval → bad answer.</text>
+
+  <line x1="40" y1="140" x2="860" y2="140" stroke="#3f3f46"/>
+
+  <!-- ===== BOTTOM: agentic ===== -->
+  <text x="40" y="168" font-size="12" font-weight="700" fill="#4ade80">Agentic RAG — an agent decides</text>
+
+  <rect x="40" y="200" width="90" height="46" rx="8" fill="#1e1b2e" stroke="#f59e0b"/>
+  <text x="85" y="227" font-size="10" fill="#fbbf24" text-anchor="middle">question</text>
+  <line x1="130" y1="223" x2="176" y2="223" stroke="#8b5cf6" stroke-width="1.6" marker-end="url(#ar-arr)"/>
+
+  <!-- agent core -->
+  <circle cx="250" cy="223" r="60" fill="#15131f" stroke="#6366f1" stroke-width="1.6"/>
+  <text x="250" y="212" font-size="12" fill="#818cf8" text-anchor="middle" font-weight="700">Agent</text>
+  <text x="250" y="229" font-size="9" fill="#a1a1aa" text-anchor="middle">reason · plan ·</text>
+  <text x="250" y="241" font-size="9" fill="#a1a1aa" text-anchor="middle">reflect · retry</text>
+
+  <!-- decision: retrieve? which store? -->
+  <path d="M308 205 q54 -20 96 -6" fill="none" stroke="#8b5cf6" stroke-width="1.5" marker-end="url(#ar-arr)"/>
+  <text x="330" y="180" font-size="9" fill="#c4b5fd">pick a tool</text>
+
+  <!-- retriever tools -->
+  <rect x="406" y="168" width="200" height="40" rx="8" fill="#1e1b2e" stroke="#8b5cf6"/>
+  <text x="506" y="185" font-size="9.5" fill="#c4b5fd" text-anchor="middle" font-weight="700">Retriever tool A (LangGraph docs)</text>
+  <text x="506" y="199" font-size="8.5" fill="#71717a" text-anchor="middle">create_retriever_tool(...)</text>
+
+  <rect x="406" y="216" width="200" height="40" rx="8" fill="#1e1b2e" stroke="#8b5cf6"/>
+  <text x="506" y="233" font-size="9.5" fill="#c4b5fd" text-anchor="middle" font-weight="700">Retriever tool B (LangChain docs)</text>
+  <text x="506" y="247" font-size="8.5" fill="#71717a" text-anchor="middle">+ web search / other tools</text>
+
+  <!-- observe loop back -->
+  <path d="M406 250 q-90 46 -156 34" fill="none" stroke="#8b5cf6" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#ar-arr)"/>
+  <text x="250" y="312" font-size="9" fill="#86efac" text-anchor="middle">observe → good enough? if not, retrieve again</text>
+
+  <!-- grade / decision diamond -->
+  <polygon points="646,188 706,214 646,240 586,214" fill="#1e1b2e" stroke="#f59e0b"/>
+  <text x="646" y="211" font-size="8.5" fill="#fbbf24" text-anchor="middle">docs</text>
+  <text x="646" y="222" font-size="8.5" fill="#fbbf24" text-anchor="middle">relevant?</text>
+  <line x1="606" y1="200" x2="620" y2="207" stroke="#8b5cf6" stroke-width="1.3" marker-end="url(#ar-arr)"/>
+
+  <!-- yes -> answer -->
+  <line x1="706" y1="214" x2="756" y2="214" stroke="#8b5cf6" stroke-width="1.6" marker-end="url(#ar-arr)"/>
+  <text x="726" y="205" font-size="8.5" fill="#86efac">yes</text>
+  <rect x="758" y="192" width="100" height="44" rx="9" fill="#1e1b2e" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="808" y="214" font-size="10.5" fill="#86efac" text-anchor="middle" font-weight="700">answer</text>
+  <text x="808" y="228" font-size="8" fill="#a1a1aa" text-anchor="middle">grounded</text>
+
+  <!-- no -> back to agent -->
+  <path d="M646 240 q0 40 -300 20 q-96 -6 -96 -37" fill="none" stroke="#f87171" stroke-width="1.3" stroke-dasharray="4 3" marker-end="url(#ar-arr)"/>
+  <text x="470" y="300" font-size="8.5" fill="#f87171">no → rewrite query &amp; retry</text>
+
+  <text x="30" y="360" font-size="11" fill="#a1a1aa">Difference: traditional RAG retrieves once, blindly. An agentic RAG reasons about whether to retrieve, which source to use,</text>
+  <text x="30" y="378" font-size="11" fill="#a1a1aa">and whether the results are good enough — looping and retrying until the answer is grounded.</text>
+</svg>
