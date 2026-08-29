@@ -311,7 +311,7 @@ result = await agent.ainvoke({"messages": [("user", "Plan a trip to Japan")]}, c
 | Custom progress | `dispatch_custom_event("name", data)` |
 | SSE response | `StreamingResponse(generator, media_type="text/event-stream")` |
 | Thread isolation | `{"configurable": {"thread_id": "unique-per-conversation"}}` |
-| Multi-user pattern | `thread_id = f"{user_id}-{session_id}"` |
+| Multi-user pattern | `thread_id = f"&#123;user_id&#125;-&#123;session_id&#125;"` |
 
 <div class="gotcha">
 <strong>⚠ Common mistakes</strong>
@@ -333,7 +333,7 @@ result = await agent.ainvoke({"messages": [("user", "Plan a trip to Japan")]}, c
 
 <details>
 <summary>How do you isolate conversations between users?</summary>
-<p>Give each conversation a unique <code>thread_id</code> that includes the user ID — e.g., <code>f"{user_id}-{session_id}"</code>. Different thread IDs = completely separate state.</p>
+<p>Give each conversation a unique <code>thread_id</code> that includes the user ID — e.g., <code>f"&#123;user_id&#125;-&#123;session_id&#125;"</code>. Different thread IDs = completely separate state.</p>
 </details>
 
 <details>

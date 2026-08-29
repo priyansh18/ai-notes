@@ -479,7 +479,7 @@ recursion limit is the hard crash barrier.
 
 <details>
 <summary>Why feed validation errors back to the model?</summary>
-<p>The error tells the model exactly what's wrong — "field X must be one of {A, B, C}, got 'D'" — so it can fix the specific issue instead of regenerating blindly.</p>
+<p>The error tells the model exactly what's wrong — "field X must be one of A, B, C, got D" — so it can fix the specific issue instead of regenerating blindly.</p>
 </details>
 
 <details>
