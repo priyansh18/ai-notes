@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /docs/tags/
+
+Sitemap: https://notes.priyanshsinghal.com/sitemap.xml

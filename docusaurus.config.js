@@ -76,6 +76,27 @@ const config = {
   // Match the portfolio's typography: Inter (body) + JetBrains Mono (code).
   headTags: [
     {
+      tagName: "script",
+      attributes: { type: "application/ld+json" },
+      innerHTML: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        name: "Priyansh's AI Notes",
+        url: "https://notes.priyanshsinghal.com",
+        description: "Open AI engineering notes -- RAG, agents, LLMs, prompting, and production.",
+        author: {
+          "@type": "Person",
+          name: "Priyansh Singhal",
+          url: "https://priyanshsinghal.com",
+          sameAs: [
+            "https://github.com/priyansh18",
+            "https://www.linkedin.com/in/priyanshsinghal/",
+            "https://x.com/priyansh_s18",
+          ],
+        },
+      }),
+    },
+    {
       tagName: "link",
       attributes: { rel: "preconnect", href: "https://fonts.googleapis.com" },
     },
@@ -126,7 +147,8 @@ const config = {
         },
         sitemap: {
           changefreq: "weekly",
-          priority: 0.7,
+          priority: 0.5,
+          ignorePatterns: ["/docs/tags/**"],
         },
       }),
     ],
@@ -135,7 +157,13 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      image: "img/social-card.svg",
+      image: "img/social-card.png",
+      metadata: [
+        { name: "twitter:title", content: "Priyansh's AI Notes" },
+        { name: "twitter:description", content: "Open AI engineering notes -- RAG, agents, LLMs, prompting, and production. Free for everyone." },
+        { name: "twitter:site", content: "@priyansh_s18" },
+        { name: "twitter:creator", content: "@priyansh_s18" },
+      ],
       colorMode: {
         defaultMode: "dark",
         respectPrefersColorScheme: true,
@@ -147,7 +175,7 @@ const config = {
         title: "Priyansh's Notes",
         logo: {
           alt: "AI Notes",
-          src: "https://github.com/priyansh18.png",
+          src: "img/avatar.png",
           style: { borderRadius: "50%" },
         },
         items: [
