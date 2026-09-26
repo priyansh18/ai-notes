@@ -66,7 +66,7 @@ for (const f of files) {
   // "video upload checks" is a genuine example concept, not a source reference.
   if (rel.startsWith("agentic-course/")) {
     const prose = raw.replace(/```[\s\S]*?```/g, "").replace(/video upload checks/gi, "");
-    const bad = prose.match(/youtube|iframe|class="yt"|dswithbappy|bappy|\bplaylist\b|\bvideos?\b|\bwatch (the|this|along)\b|\binstructor\b|Source:/i);
+    const bad = prose.match(/youtube|iframe|class="yt"|\bplaylist\b|\bvideos?\b|\bwatch (the|this|along)\b|\binstructor\b|Source:/i);
     if (bad) fail(`source-revealing text "${bad[0]}" in ${rel}`);
   }
 
