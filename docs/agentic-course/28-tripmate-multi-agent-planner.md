@@ -11,7 +11,7 @@ tags: [Agentic AI, LangGraph, Multi-Agent]
 <div class="tldr">
 <strong>TL;DR</strong>
 
-- The video builds a travel planner as **four LangGraph nodes in a fixed order**: flight, hotel, itinerary, final response. Each node reads and writes one shared `TypedDict` state.
+- The lesson builds a travel planner as **four LangGraph nodes in a fixed order**: flight, hotel, itinerary, final response. Each node reads and writes one shared `TypedDict` state.
 - Only two of the four nodes call an LLM. The flight and hotel nodes call **plain Python functions directly** (AviationStack, Tavily) instead of exposing them as LLM tools, which keeps the pipeline deterministic and cheap.
 - State is persisted with a **Postgres checkpointer** keyed by `thread_id`, the graph is wrapped in a FastAPI route, and the whole thing is containerised and deployed.
 </div>
@@ -45,7 +45,7 @@ Because the edges are unconditional, the run is fully predictable: same input sh
 
 ## Tools as functions, not as LLM tools
 
-The instructor deliberately does not use the `@tool` decorator. `search_flights(query)` and `tavily_search(query)` are ordinary functions imported into `backend.py` and called inside the node body. The reasoning: when a step *always* needs the flight data, letting the LLM decide whether to call the tool adds latency, tokens and a failure mode for nothing. Tool-calling is for optional, model-chosen actions; direct calls are for mandatory pipeline steps.
+The lesson deliberately does not use the `@tool` decorator. `search_flights(query)` and `tavily_search(query)` are ordinary functions imported into `backend.py` and called inside the node body. The reasoning: when a step *always* needs the flight data, letting the LLM decide whether to call the tool adds latency, tokens and a failure mode for nothing. Tool-calling is for optional, model-chosen actions; direct calls are for mandatory pipeline steps.
 
 The Tavily helper trims each snippet to about 300 characters before returning it. That is a token-budget decision, not a quality one: the LLM provider's free tier has tight input limits, so the node feeds it short evidence.
 
@@ -55,7 +55,7 @@ The Tavily helper trims each snippet to about 300 characters before returning it
 
 ## Persistence and the API layer
 
-The graph is compiled with `PostgresSaver`, connected to a hosted Postgres instance. Two details from the video are worth keeping:
+The graph is compiled with `PostgresSaver`, connected to a hosted Postgres instance. Two details from the lesson are worth keeping:
 
 - The connection string must end in `sslmode=require` for a remote Postgres, so a small `get_database_url()` helper appends it if missing.
 - `checkpointer.setup()` must run once to create the checkpoint tables before the first invoke.
@@ -64,7 +64,7 @@ The graph is compiled with `PostgresSaver`, connected to a hosted Postgres insta
 
 ## Code that matters
 
-Reconstructed from what the video shows. The state and graph wiring are close to verbatim; the node bodies are a sketch.
+Reconstructed from what the lesson shows. The state and graph wiring are close to verbatim; the node bodies are a sketch.
 
 ```python
 import operator
@@ -72,7 +72,6 @@ from typing import Annotated, TypedDict
 from langchain_core.messages import AnyMessage, AIMessage, HumanMessage, SystemMessage
 from langgraph.graph import StateGraph, START, END
 from langgraph.checkpoint.postgres import PostgresSaver
-
 
 class TravelState(TypedDict):
     messages: Annotated[list[AnyMessage], operator.add]
@@ -83,7 +82,6 @@ class TravelState(TypedDict):
     final_response: str
     llm_calls: int
 
-
 def flight_agent(state: TravelState) -> dict:
     # direct function call, no LLM, no @tool
     flights = search_flights(state["user_query"])          # sketch
@@ -92,7 +90,6 @@ def flight_agent(state: TravelState) -> dict:
         "messages": [AIMessage(content="Flight results fetched.")],
         "llm_calls": state.get("llm_calls", 0),
     }
-
 
 def itinerary_agent(state: TravelState) -> dict:
     prompt = (
@@ -105,7 +102,6 @@ def itinerary_agent(state: TravelState) -> dict:
     return {"itinerary_result": resp.content,
             "messages": [resp],
             "llm_calls": state.get("llm_calls", 0) + 1}
-
 
 graph = StateGraph(TravelState)
 graph.add_node("flight_agent", flight_agent)
@@ -121,7 +117,6 @@ graph.add_edge("final_agent", END)
 checkpointer = PostgresSaver(conn)   # conn: psycopg connection, autocommit=True
 checkpointer.setup()
 travel_graph = graph.compile(checkpointer=checkpointer)
-
 
 def run_travel_agent(user_input: str, thread_id: str | None = None) -> dict:
     import uuid
@@ -139,8 +134,8 @@ def run_travel_agent(user_input: str, thread_id: str | None = None) -> dict:
 
 ## Failure modes and gotchas
 
-- **Third-party API drift.** Both tools hit versioned REST endpoints from inside the code. When the provider changes the URL or schema, the node silently returns nothing and the final plan just has an empty flights section. The instructor uses exactly this weakness to motivate MCP in the next lesson.
-- **Unpinned dependencies.** The video insists on pinning every version in `requirements.txt`; agent libraries move fast and an unpinned install months later will break.
+- **Third-party API drift.** Both tools hit versioned REST endpoints from inside the code. When the provider changes the URL or schema, the node silently returns nothing and the final plan just has an empty flights section. The lesson uses exactly this weakness to motivate MCP in the next lesson.
+- **Unpinned dependencies.** The lesson insists on pinning every version in `requirements.txt`; agent libraries move fast and an unpinned install months later will break.
 - **Internal vs external database URL.** Hosted Postgres gives two URLs. Use the external one from a laptop and the internal one when the app and the database run on the same platform, or the connection fails.
 - **Free-tier token limits.** Llama on the free provider tier rejects long inputs; that is why evidence is truncated and why the final prompt is lean.
 - **Default origin.** If the user does not state where they are travelling from, the flight function falls back to a `DEFAULT_ORIGIN` env var. Forgetting to set it produces confidently wrong flights.
@@ -170,17 +165,6 @@ def run_travel_agent(user_input: str, thread_id: str | None = None) -> dict:
 <summary>What three things are required for the Postgres checkpointer to actually persist a run?</summary>
 <p>Compile the graph with <code>checkpointer=PostgresSaver(conn)</code>, call <code>checkpointer.setup()</code> once to create tables, and pass a <code>thread_id</code> under <code>configurable</code> in the invoke config.</p>
 </details>
-
-<div class="yt">
-  <iframe
-    src="https://www.youtube-nocookie.com/embed/rygTO5F_KWE"
-    title="Build TripMate AI End-to-End: Multi-Agent Travel Planner with Groq, LangGraph, PostgreSQL & FastAPI"
-    loading="lazy"
-    allowfullscreen
-  ></iframe>
-</div>
-
-Source: DSwithBappy, [Build TripMate AI End-to-End: Multi-Agent Travel Planner with Groq, LangGraph, PostgreSQL & FastAPI](https://www.youtube.com/watch?v=rygTO5F_KWE).
 
 **Related:** [LangGraph Workflows](/docs/agentic-ai/langgraph-workflows) · [Agent Persistence](/docs/agentic-ai/agent-persistence) · [Glossary](/docs/glossary)
 

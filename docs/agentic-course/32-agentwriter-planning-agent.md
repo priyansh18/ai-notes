@@ -16,11 +16,11 @@ tags: [Agentic AI, LangGraph, Multi-Agent]
 - A **router** decides whether web research is needed before planning, and the final merge step is a **subgraph** that combines sections and places images.
 </div>
 
-The earlier capstones ran a fixed number of agents in a fixed order. AgentWriter AI is the first build in the course where the number of agents is decided by the model at runtime and they run concurrently. The lesson is the orchestrator-worker pattern in LangGraph plus two refinements the instructor adds step by step: an evidence-gathering router in front, and a subgraph at the back. It also contains the clearest demonstration in the course of how much output quality depends on the metadata you ask the planner for.
+The earlier capstones ran a fixed number of agents in a fixed order. AgentWriter AI is the first build in the course where the number of agents is decided by the model at runtime and they run concurrently. The lesson is the orchestrator-worker pattern in LangGraph plus two refinements the lesson adds step by step: an evidence-gathering router in front, and a subgraph at the back. It also contains the clearest demonstration in the course of how much output quality depends on the metadata you ask the planner for.
 
 ## The workflow, built in four notebooks
 
-The instructor grows the graph incrementally, and the order is instructive:
+The lesson grows the graph incrementally, and the order is instructive:
 
 1. **Orchestrator, workers, reducer.** Topic in, plan out, one worker per section, merge to markdown.
 2. **Same graph, richer schema and prompts.** The plan now carries audience, tone, per-section goals, bullet points and target word counts. Same topic, visibly better blog.
@@ -61,7 +61,7 @@ The router prompt is a classifier: return `need_research`, `mode` (closed_book, 
 
 ## Code that matters
 
-Schemas and graph wiring are close to what the video shows; node bodies are sketches.
+Schemas and graph wiring are close to what the lesson shows; node bodies are sketches.
 
 ```python
 import operator
@@ -70,7 +70,6 @@ from pydantic import BaseModel, Field
 from langgraph.graph import StateGraph, START, END
 from langgraph.types import Send
 
-
 class Task(BaseModel):
     id: int
     title: str
@@ -78,18 +77,15 @@ class Task(BaseModel):
     bullets: list[str] = Field(description="3-5 concrete non-overlapping sub-points")
     target_words: int
 
-
 class Plan(BaseModel):
     blog_title: str
     audience: str
     tone: str
     tasks: list[Task]
 
-
 class RouterDecision(BaseModel):
     need_research: bool
     queries: list[str]
-
 
 class State(TypedDict):
     topic: str
@@ -100,20 +96,16 @@ class State(TypedDict):
     sections: Annotated[list[str], operator.add]
     final: str
 
-
 def router(state: State) -> dict:
     d = llm.with_structured_output(RouterDecision).invoke(ROUTER_PROMPT + state["topic"])
     return {"need_research": d.need_research, "queries": d.queries}
 
-
 def router_next(state: State) -> str:
     return "research" if state["need_research"] else "orchestrator"
-
 
 def orchestrator(state: State) -> dict:
     plan = llm.with_structured_output(Plan).invoke(PLANNER_PROMPT + state["topic"])
     return {"plan": plan}
-
 
 def fan_out(state: State) -> list[Send]:
     # one worker per planned section, decided at runtime
@@ -121,11 +113,9 @@ def fan_out(state: State) -> list[Send]:
                             "plan": state["plan"], "evidence": state.get("evidence")})
             for t in state["plan"].tasks]
 
-
 def worker(payload: dict) -> dict:
     md = llm.invoke(WORKER_PROMPT.format(**payload)).content     # sketch
     return {"sections": [md]}
-
 
 def build_reducer_subgraph():
     sg = StateGraph(State)
@@ -137,7 +127,6 @@ def build_reducer_subgraph():
     sg.add_edge("decide_images", "place_images")
     sg.add_edge("place_images", END)
     return sg.compile()
-
 
 g = StateGraph(State)
 g.add_node("router", router)
@@ -157,7 +146,7 @@ app = g.compile(checkpointer=checkpointer)
 
 ## Failure modes and gotchas
 
-- **Token limits on free LLM tiers.** Adding the evidence pack to prompts made inputs large enough that the free hosted model started rejecting calls. The instructor swapped to a local Llama 3.1 8B via Ollama to finish the demo, and was explicit that the local model writes noticeably weaker sections. Budget for a paid model if the output matters.
+- **Token limits on free LLM tiers.** Adding the evidence pack to prompts made inputs large enough that the free hosted model started rejecting calls. The lesson swapped to a local Llama 3.1 8B via Ollama to finish the demo, and was explicit that the local model writes noticeably weaker sections. Budget for a paid model if the output matters.
 - **Free image-generation quotas.** The image step is wired to Gemini's image model, which stopped after a handful of images on the free tier. The subgraph is written so that a failed image call does not fail the post; the placeholder is simply left out.
 - **Local models cannot be deployed as-is.** Ollama runs on the developer's machine; before deploying, swap the model binding back to a hosted provider. The FastAPI layer, which streams progress over server-sent events, also needed an Ollama restart and a certificate bundle fix on Windows before it ran.
 
@@ -184,16 +173,5 @@ app = g.compile(checkpointer=checkpointer)
 <summary>What is the reducer subgraph and why is it a subgraph?</summary>
 <p>It is a small compiled graph with three nodes: merge sections, decide which images are needed, generate and place them. It is mounted on the main graph as the <code>reducer</code> node so the main graph stays readable and the image pipeline can be developed and tested on its own.</p>
 </details>
-
-<div class="yt">
-  <iframe
-    src="https://www.youtube-nocookie.com/embed/izqlwiGMys4"
-    title="Build AgentWriter AI: Real-Time Multi-Agent Blog Writing Platform with LangGraph, SubGraph & FastAPI"
-    loading="lazy"
-    allowfullscreen
-  ></iframe>
-</div>
-
-Source: DSwithBappy, [Build AgentWriter AI: Real-Time Multi-Agent Blog Writing Platform with LangGraph, SubGraph & FastAPI](https://www.youtube.com/watch?v=izqlwiGMys4).
 
 **Related:** [LangGraph Subgraphs](/docs/agentic-ai/langgraph-subgraphs) · [Pydantic for Agents](/docs/agentic-ai/pydantic-for-agents) · [Glossary](/docs/glossary)

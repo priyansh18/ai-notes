@@ -22,7 +22,7 @@ components that implement them. LangGraph, CrewAI and AutoGen are different ways
 
 ## One worked example: a recruiting agent, end to end
 
-The video's example is an agent connected to a company's internal documents and given a single prompt:
+The lesson's example is an agent connected to a company's internal documents and given a single prompt:
 hire a remote backend engineer with two to four years of experience. What happens next is the whole
 mechanism in miniature.
 
@@ -31,7 +31,7 @@ mechanism in miniature.
    adjust strategy if needed, shortlist, schedule interviews, send an offer, onboard. It asks for approval
    before starting.
 3. **Act through tools.** Drafting uses the company documents. Posting calls each job platform's API, which
-   the video names explicitly as a tool the agent chose to invoke. Scheduling later uses calendar access.
+   the lesson names explicitly as a tool the agent chose to invoke. Scheduling later uses calendar access.
 4. **Monitor.** After posting, the agent keeps watching the pipeline rather than declaring the step done.
 5. **Adapt.** Two applications arrive against an expectation of twenty. The agent proposes widening the
    role to full stack and promoting the post, asks for confirmation, then re-posts and monitors again.
@@ -55,7 +55,7 @@ A chatbot has no tools, no reasoning about when to use them, and no memory of th
 
 ## Autonomy needs brakes
 
-The video is direct that full autonomy is dangerous: left alone, the recruiting agent could send offers
+The lesson is direct that full autonomy is dangerous: left alone, the recruiting agent could send offers
 with wrong terms, shortlist by age or nationality in breach of anti-discrimination law, or keep promoting
 the post beyond what is needed. Four controls bound it:
 
@@ -118,11 +118,11 @@ a task after a break or explain its own progress.
 
 ## Code that matters
 
-The video shows the agent's core memory as JSON. Reconstructed here as a Python dict (shape from the
-video, values illustrative), followed by a sketch of a permission-scoped action:
+The lesson shows the agent's core memory as JSON. Reconstructed here as a Python dict (shape from the
+lesson, values illustrative), followed by a sketch of a permission-scoped action:
 
 ```python
-# core memory: the goal and progress the agent must never lose (shape from the video)
+# core memory: the goal and progress the agent must never lose (shape from the lesson)
 agent_state = {
     "goal": "hire a backend engineer",
     "constraints": {
@@ -144,7 +144,6 @@ agent_state = {
 TOOLS: dict = {}
 NEEDS_APPROVAL = {"post_job", "send_offer", "reject_candidate"}
 
-
 def run_action(name: str, args: dict, ask_human) -> dict:
     if name in NEEDS_APPROVAL and not ask_human(f"Allow {name} with {args}?"):
         return {"status": "skipped", "reason": "human declined"}
@@ -154,7 +153,7 @@ def run_action(name: str, args: dict, ask_human) -> dict:
 ## Failure modes and gotchas
 
 - **Unbounded autonomy.** Wrong offer terms, discriminatory shortlisting and runaway promotion are the
-  video's own examples; scopes and HITL exist to prevent them.
+  lesson's own examples; scopes and HITL exist to prevent them.
 - **Goal not persisted.** If the goal lives only in the prompt, the agent cannot pick the task up again
   after a break or report progress.
 - **No error path for tools.** APIs go down; reasoning at execution time has to include a fallback.
@@ -176,7 +175,7 @@ def run_action(name: str, args: dict, ask_human) -> dict:
 </details>
 
 <details>
-<summary>Name the four ways the video bounds an agent's autonomy.</summary>
+<summary>Name the four ways the lesson bounds an agent's autonomy.</summary>
 <p>Permission scopes (which actions run without asking), human-in-the-loop checkpoints (wait for approval), override controls (stop, pause, continue at any time), and guardrails and policies (hard rules such as no weekend interviews, refusal of harmful content).</p>
 </details>
 
@@ -184,16 +183,5 @@ def run_action(name: str, args: dict, ask_human) -> dict:
 <summary>What does the supervisor component do, and how is it different from the orchestrator?</summary>
 <p>The supervisor is the human channel: it raises approval requests, enforces guardrails, and escalates edge cases to a person. The orchestrator is the framework that sequences tasks, routes conditionally, retries and loops; it wires the supervisor in but does not make the human decisions.</p>
 </details>
-
-<div class="yt">
-  <iframe
-    src="https://www.youtube-nocookie.com/embed/Gv5HxK92vTE"
-    title="2. Agentic AI Explained: Core Characteristics & Components"
-    loading="lazy"
-    allowfullscreen
-  ></iframe>
-</div>
-
-Source: DSwithBappy, [2. Agentic AI Explained: Core Characteristics & Components](https://www.youtube.com/watch?v=Gv5HxK92vTE).
 
 **Related:** [Agents Architecture](/docs/rag-course/15-agents-architecture) · [Loop Engineering](/docs/agentic-ai/loop-engineering) · [Guardrails](/docs/rag-course/24-guardrails)

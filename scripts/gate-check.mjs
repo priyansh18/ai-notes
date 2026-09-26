@@ -61,6 +61,15 @@ for (const f of files) {
   // build-notes-index.mjs only indexes .md, so .mdx pages are never searchable.
   if (f.endsWith(".md") && !slugs.has(slug)) fail(`not in search index: ${slug} (${rel})`);
 
+  // No source shown: course pages must read as standalone lessons (no embeds, credits, channel or
+  // playlist names, "video"/"instructor" wording). Fenced code is ignored; the phrase
+  // "video upload checks" is a genuine example concept, not a source reference.
+  if (rel.startsWith("agentic-course/")) {
+    const prose = raw.replace(/```[\s\S]*?```/g, "").replace(/video upload checks/gi, "");
+    const bad = prose.match(/youtube|iframe|class="yt"|dswithbappy|bappy|\bplaylist\b|\bvideos?\b|\bwatch (the|this|along)\b|\binstructor\b|Source:/i);
+    if (bad) fail(`source-revealing text "${bad[0]}" in ${rel}`);
+  }
+
   const blocks = [...raw.matchAll(/```python\n([\s\S]*?)```/g)].map((m) => m[1]);
   blocks.forEach((code, i) => {
     const dir = mkdtempSync(join(tmpdir(), "gate-"));

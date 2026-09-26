@@ -29,7 +29,7 @@ the app builds a prompt, calls the LLM, maybe calls a tool or a database, reads 
 checkpointer, and returns a response. If you only have the code, this middle part is invisible.
 
 LangSmith records the complete execution as a trace. For each step it stores the inputs, outputs,
-errors, execution time, token usage, tool calls and model behaviour. The video lists what that
+errors, execution time, token usage, tool calls and model behaviour. The lesson lists what that
 buys you for a LangGraph agent:
 
 - find out **why an agent picked the wrong tool** (you can see the prompt and the decision);
@@ -60,7 +60,7 @@ created seconds ago, containing one trace.
 
 Open the trace and you first see the conversation view: the input message and the AI output. Click
 **Details** and the run tree appears. For this chatbot it shows the LangGraph run, inside it the
-`chat_node`, and inside that the model call (the video's default model showed up as GPT-3.5 Turbo,
+`chat_node`, and inside that the model call (the lesson's default model showed up as GPT-3.5 Turbo,
 which is how the author discovered which model the default `ChatOpenAI()` was using). Each level
 exposes inputs, outputs, attributes and metadata. Hovering a step shows input, output and total
 tokens with an estimated cost. Zooming out lists start time, latency, tokens, cost and the endpoint
@@ -87,9 +87,9 @@ your threads because you have not told it which thread each run belongs to.
 
 The fix is one change to the config dictionary you already pass on every invoke. Alongside
 `configurable.thread_id`, add a `metadata` entry carrying the same thread ID and a `run_name` (the
-video uses `chat_trace`). Now the dashboard's **Threads** view groups runs by thread: thread one
+lesson uses `chat_trace`). Now the dashboard's **Threads** view groups runs by thread: thread one
 holds its two runs, the "Alex" thread holds its own, and each additional message inside a thread
-appears as a new run under it. The video notes a lag of roughly 10 to 20 seconds before the threads
+appears as a new run under it. The lesson notes a lag of roughly 10 to 20 seconds before the threads
 view updates, so an empty thread right after sending is normal.
 
 ## Code that matters
@@ -159,17 +159,6 @@ are grouped identically.
 <summary>Name three things you can read off a single trace that the running app does not show you.</summary>
 <p>The exact prompt sent to the model, the input and output token counts with estimated cost, and the per-node latency and any node error. The trace also reveals which model was actually called.</p>
 </details>
-
-<div class="yt">
-  <iframe
-    src="https://www.youtube-nocookie.com/embed/-ua10fOAdFQ"
-    title="18. Monitor Your Agentic Chatbot with LangSmith & LangGraph / Part 6"
-    loading="lazy"
-    allowfullscreen
-  ></iframe>
-</div>
-
-Source: DSwithBappy, [18. Monitor Your Agentic Chatbot with LangSmith & LangGraph / Part 6](https://www.youtube.com/watch?v=-ua10fOAdFQ).
 
 **Related:** [Evaluation](/docs/rag-course/26-evaluation) · [Agent Persistence](/docs/agentic-ai/agent-persistence) · [Glossary](/docs/glossary)
 

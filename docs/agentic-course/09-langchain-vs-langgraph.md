@@ -37,7 +37,7 @@ these has in common: execution goes left to right, once, with no decisions about
 
 ## Workflow vs agent
 
-The video borrows Anthropic's distinction. A **workflow** is a predefined code path where LLM
+The lesson borrows Anthropic's distinction. A **workflow** is a predefined code path where LLM
 calls and tools are orchestrated in a fixed order. An **agent** is a system where the LLM
 dynamically decides its own path and tool use. The recruitment example is drawn as a workflow so
 the mechanics are visible:
@@ -114,7 +114,7 @@ loaders, tools. You install and use both.
 
 ## Code that matters
 
-Both snippets are sketches of the video's slides for the first four boxes of the workflow.
+Both snippets are sketches of the lesson's slides for the first four boxes of the workflow.
 
 ```python
 # LangChain: the loop and the branch are glue code around a chain
@@ -180,17 +180,6 @@ app = graph.compile()
 <summary>Why is LangChain still required once you adopt LangGraph?</summary>
 <p>LangGraph is built on LangChain and only handles orchestration. Models, prompt templates, retrievers, loaders and tools inside each node are still LangChain components.</p>
 </details>
-
-<div class="yt">
-  <iframe
-    src="https://www.youtube-nocookie.com/embed/8YDJmN1WHWo"
-    title="7. What is LangGraph &amp; Why It's Required? / LangChain vs LangGraph"
-    loading="lazy"
-    allowfullscreen
-  ></iframe>
-</div>
-
-Source: DSwithBappy, [7. What is LangGraph & Why It’s Required? / LangChain vs LangGraph](https://www.youtube.com/watch?v=8YDJmN1WHWo).
 
 **Related:** [LangGraph Basics](/docs/rag-course/14-langgraph-basics) · [Loop Engineering](/docs/agentic-ai/loop-engineering) · [Agent Persistence](/docs/agentic-ai/agent-persistence)
 

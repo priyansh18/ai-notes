@@ -11,7 +11,7 @@ tags: [Agentic AI, MCP, Tools]
 <div class="tldr">
 <strong>TL;DR</strong>
 
-- **Model Context Protocol (MCP)** is a standard way for an agent to discover and call tools that live in a separate process or service. The video's analogy: a USB-C port for AI apps.
+- **Model Context Protocol (MCP)** is a standard way for an agent to discover and call tools that live in a separate process or service. The lesson's analogy: a USB-C port for AI apps.
 - Without it, every third-party API becomes a custom function inside your code that breaks when the API version changes, and has to be rewritten for every agent framework.
 - Two components: an **MCP client** inside the agent app and one or more **MCP servers** that expose tools. They exchange **JSON-RPC 2.0** messages over **stdio** (local) or **streamable HTTP** (remote).
 </div>
@@ -20,7 +20,7 @@ This lesson is the "why" before the "how". It takes the TripMate AI planner from
 
 ## The problem MCP solves
 
-The video names two concrete pains with the "custom function" approach.
+The lesson names two concrete pains with the "custom function" approach.
 
 **API drift.** The flight tool hardcodes a `v1` endpoint. When the provider moves to `v2`, the function still runs, returns nothing, and the user sees a plan with an empty flights section. Nobody is alerted. With a thousand tools you cannot re-read a thousand changelogs every week. The app has no way to heal itself.
 
@@ -40,7 +40,7 @@ A single client can be connected to many servers at once (weather, Google Drive,
 
 ## The message loop, step by step
 
-The part of the video worth internalising is the order of operations for a query such as "What is the weather in Delhi today?":
+The part of the lesson worth internalising is the order of operations for a query such as "What is the weather in Delhi today?":
 
 ```
 LLM ──▶ client: which servers do you have?
@@ -64,17 +64,17 @@ Two LLM decisions happen here: which server, then which tool. Everything between
 | `stdio` | Local servers on the same machine | JSON-RPC lines over the server process's standard input and output |
 | `streamable_http` | Remote servers on the internet | JSON-RPC over HTTP requests to a URL, usually with an API key |
 
-The transport is chosen per server in the client config. The video's rule of thumb: prefer remote servers when they exist (the vendor maintains them), use a local server when only a community one exists, and write a custom server only when nothing exists (a private folder, an internal database).
+The transport is chosen per server in the client config. The lesson's rule of thumb: prefer remote servers when they exist (the vendor maintains them), use a local server when only a community one exists, and write a custom server only when nothing exists (a private folder, an internal database).
 
 ## Three kinds of servers
 
 - **Remote**: runs on someone else's infrastructure; Tavily, GitHub, Google Drive and many vendors publish one. You connect with a URL.
 - **Local**: runs on your machine, typically launched from a command; a Git or filesystem server, or a community server for an API that has no official one.
-- **Custom**: you write it. A Python function becomes a tool with one decorator; the video previews this and builds it in the next capstone. When you author the server you also own the upgrade burden, so host it and keep it current.
+- **Custom**: you write it. A Python function becomes a tool with one decorator; the lesson previews this and builds it in the next capstone. When you author the server you also own the upgrade burden, so host it and keep it current.
 
 ## Code that matters
 
-The video is conceptual and shows configuration rather than a full program. This sketch reflects the client shape it describes (LangChain's multi-server client) and the config keys it names: server name, transport, and either a URL or a command.
+The lesson is conceptual and shows configuration rather than a full program. This sketch reflects the client shape it describes (LangChain's multi-server client) and the config keys it names: server name, transport, and either a URL or a command.
 
 ```python
 # sketch: an MCP client connected to a remote and a local server
@@ -91,7 +91,6 @@ client = MultiServerMCPClient({
         "args": ["custom_weather_mcp_server.py"],
     },
 })
-
 
 async def list_tools():
     tools = await client.get_tools()          # every tool from every server
@@ -132,16 +131,5 @@ The agent code never imports the weather API. It only knows a server called `wea
 <summary>Where does the LLM sit in the MCP message loop?</summary>
 <p>At the decision points only: it picks which server to use from the client's list, then which tool from that server's list. The client sends the JSON-RPC calls and hands results back; the LLM never talks to a server directly.</p>
 </details>
-
-<div class="yt">
-  <iframe
-    src="https://www.youtube-nocookie.com/embed/Vuixmnhc1v4"
-    title="What is MCP? Why AI Agents Need It / Model Context Protocol Explained"
-    loading="lazy"
-    allowfullscreen
-  ></iframe>
-</div>
-
-Source: DSwithBappy, [What is MCP? Why AI Agents Need It / Model Context Protocol Explained](https://www.youtube.com/watch?v=Vuixmnhc1v4).
 
 **Related:** Tool Calling · [Agents Architecture](/docs/rag-course/15-agents-architecture) · [Glossary](/docs/glossary)

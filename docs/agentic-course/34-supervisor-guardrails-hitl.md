@@ -16,7 +16,7 @@ tags: [Agentic AI, MCP, Guardrails]
 - Routing becomes dynamic: the graph walks the supervisor's `selected_agents` list in a canonical order, always ending with the itinerary agent, then pauses for approval.
 </div>
 
-This is the course's closing build and it deliberately reuses the TripMate problem so every new idea shows up as a diff against a system you already know. The video is long because it does three things in sequence: the plain pipeline, the same pipeline with tools moved behind MCP, and the same pipeline with a control layer on top. The control layer is the part most people ask for and rarely see wired end to end: safety check, agent selection, and a pause for a human, all inside one LangGraph.
+This is the course's closing build and it deliberately reuses the TripMate problem so every new idea shows up as a diff against a system you already know. The lesson is long because it does three things in sequence: the plain pipeline, the same pipeline with tools moved behind MCP, and the same pipeline with a control layer on top. The control layer is the part most people ask for and rarely see wired end to end: safety check, agent selection, and a pause for a human, all inside one LangGraph.
 
 ## Part 2: three flavours of MCP server in one client
 
@@ -30,7 +30,7 @@ One `MultiServerMCPClient` is configured with three servers, each chosen for a d
 
 `client.get_tools()` returns every tool from every server in one list. Helper functions then filter by name: the hotel agent wants only `tavily_search`; the flight agent wants only `list_airports` and `list_airlines` out of a dozen aviation tools; the weather agent wants `get_current_weather` and `get_forecast`. Each agent calls `tool.ainvoke(...)` on the filtered tool.
 
-The custom server is the smallest piece of the video and the most reusable: a plain function that calls the weather API, decorated with `@mcp.tool()`, and `mcp.run()` at the bottom. That is a complete MCP server. One supporting detail: a small LLM call extracts the destination city from the free-text query before the weather tools are invoked, because a tool needs a clean argument, not a paragraph.
+The custom server is the smallest piece of the lesson and the most reusable: a plain function that calls the weather API, decorated with `@mcp.tool()`, and `mcp.run()` at the bottom. That is a complete MCP server. One supporting detail: a small LLM call extracts the destination city from the free-text query before the weather tools are invoked, because a tool needs a clean argument, not a paragraph.
 
 ## Part 3: the supervisor node does two jobs
 
@@ -63,7 +63,7 @@ The itinerary agent writes a draft and an `approval_request` string into state. 
 
 ## Code that matters
 
-Reconstructed from what the video shows. Prompts are shortened; the control flow is the point.
+Reconstructed from what the lesson shows. Prompts are shortened; the control flow is the point.
 
 ```python
 import json
@@ -74,22 +74,18 @@ from mcp.server.fastmcp import FastMCP
 # --- custom MCP server (its own file) ---
 mcp = FastMCP("weather-mcp-server")
 
-
 @mcp.tool()
 def get_current_weather(city: str) -> dict:
     """Current weather for a city."""
     return fetch_weather(city)            # sketch: HTTP call to the weather API
 
-
 # --- supervisor node: guard, then select ---
 AGENT_ORDER = ["flight_agent", "hotel_agent", "weather_agent",
                "budget_agent", "itinerary_agent"]
 
-
 def json_from_llm(text: str) -> dict:
     start, end = text.find("{"), text.rfind("}")
     return json.loads(text[start:end + 1])
-
 
 def supervisor_agent(state: dict) -> dict:
     guard = json_from_llm(llm_text(GUARD_SYSTEM, GUARD_PROMPT + state["user_query"]))
@@ -106,12 +102,10 @@ def supervisor_agent(state: dict) -> dict:
             "trip_constraints": sup.get("trip_constraints", {}),
             "supervisor_reasoning": sup.get("reasoning", "")}
 
-
 def route_from_supervisor(state: dict) -> str:
     if not state["guardrail_allowed"]:
         return "guardrails_blocked"
     return state["selected_agents"][0]
-
 
 def route_after_agent(current: str):
     def _route(state: dict) -> str:
@@ -119,7 +113,6 @@ def route_after_agent(current: str):
         i = chain.index(current)
         return chain[i + 1] if i + 1 < len(chain) else "human_approval"
     return _route
-
 
 # --- human in the loop ---
 def human_approval(state: dict) -> dict:
@@ -132,12 +125,10 @@ def human_approval(state: dict) -> dict:
     return {"approved": bool(answer.get("approved")),
             "human_feedback": answer.get("feedback", "")}
 
-
 def resume_travel_agent(thread_id: str, approved: bool, feedback: str) -> dict:
     config = {"configurable": {"thread_id": thread_id}}
     return travel_graph.invoke(Command(resume={"approved": approved,
                                                "feedback": feedback}), config)
-
 
 # --- wiring (sketch; nodes added with add_node as usual) ---
 g.add_edge(START, "supervisor_agent")
@@ -153,7 +144,7 @@ travel_graph = g.compile(checkpointer=checkpointer)   # persistence is required 
 
 ## Failure modes and gotchas
 
-- **`asyncio.run() cannot be called from a running event loop`.** Seen live in the video the first time an MCP tool was called from a FastAPI route. Fix: `nest_asyncio.apply()` once at startup, or make the nodes async end to end.
+- **`asyncio.run() cannot be called from a running event loop`.** Seen live in the lesson the first time an MCP tool was called from a FastAPI route. Fix: `nest_asyncio.apply()` once at startup, or make the nodes async end to end.
 - **Local stdio servers are path-bound.** The custom weather server config holds the Python interpreter path and the absolute file path. Moving the project to a new folder broke it until the path was updated; every machine needs its own values.
 - **Model-based guards can be over- or under-strict.** The prompt explicitly says not to block valid requests with missing details. Without that line, "plan a trip to Nepal" (no dates, no budget) gets refused.
 - **LLM JSON is a string, not JSON.** Models wrap JSON in prose. Always extract and parse in a try/except, and fall back to a safe default (here: run the full workflow).
@@ -183,16 +174,5 @@ travel_graph = g.compile(checkpointer=checkpointer)   # persistence is required 
 <summary>How does the graph continue after the human approves or gives feedback?</summary>
 <p>The <code>human_approval</code> node paused on <code>interrupt(...)</code>. A resume route invokes the graph on the same <code>thread_id</code> with <code>Command(resume=...)</code> carrying <code>approved</code> and <code>feedback</code>. The node returns those into state and <code>final_agent</code> either polishes the draft or revises it using the feedback.</p>
 </details>
-
-<div class="yt">
-  <iframe
-    src="https://www.youtube-nocookie.com/embed/BM39OouLNsM"
-    title="Build an End-to-End Multi-Agent AI System with LangGraph, MCP, Supervisor, Guardrails Safety & HITL"
-    loading="lazy"
-    allowfullscreen
-  ></iframe>
-</div>
-
-Source: DSwithBappy, [Build an End-to-End Multi-Agent AI System with LangGraph, MCP, Supervisor, Guardrails Safety & HITL](https://www.youtube.com/watch?v=BM39OouLNsM).
 
 **Related:** [Guardrails](/docs/rag-course/24-guardrails) · [Loop Engineering](/docs/agentic-ai/loop-engineering) · [Glossary](/docs/glossary)

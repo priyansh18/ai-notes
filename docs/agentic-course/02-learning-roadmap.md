@@ -17,14 +17,14 @@ tags: [Agentic AI, Roadmap, Foundations]
 </div>
 
 This lesson answers the most common question about the course: in what order should the material be
-watched, given that learners arrive with very different backgrounds? The answer is a three-layer model
+studied, given that learners arrive with very different backgrounds? The answer is a three-layer model
 that explains why Python and generative AI come first, then maps three entry points onto it. It matters
 because the biggest failure mode in learning agents is not difficulty, it is arriving at LangGraph with
 too many unfamiliar concepts at once.
 
 ## The three layers and what each one contributes
 
-The video's framing is anatomical: Python is the hands and legs, generative AI is the brain, agentic AI is
+The lesson's framing is anatomical: Python is the hands and legs, generative AI is the brain, agentic AI is
 the nervous system that makes them act together.
 
 | Layer | What you learn | What it gives an agent |
@@ -56,7 +56,7 @@ workflow for a product, understanding why an agent misbehaves, and fixing it. Ag
 the extended version of generative AI, not a separate technology. The LLM, the prompting, the memory ideas
 are all inherited, so a gap there becomes a gap in every agent you build.
 
-Skipping the foundations, according to the video, leads to:
+Skipping the foundations, according to the lesson, leads to:
 
 - **Concept overload**: LangGraph, memory and tools all appear at once with nothing to attach them to.
 - **Weak prompting** and **poor RAG quality**, because the mechanics were never studied in isolation.
@@ -75,23 +75,22 @@ faster debugging, and a production mindset.
 | Advanced | Python and generative AI | Agentic AI only |
 
 One more expectation is stated plainly: machine learning and deep learning are assumed background for the
-generative AI layer. They are the "hello world" of AI and the video does not offer a shortcut around them.
+generative AI layer. They are the "hello world" of AI and the lesson does not offer a shortcut around them.
 
 ## Inside the agentic layer: the phase sequence as published
 
-The roadmap video lists the agentic phases in the order they were actually released, which differs slightly
-from the original plan: introduction; async and Pydantic; LangChain agent fundamentals (single and multi
+The roadmap lists the agentic phases in their final order, which differs slightly from the original plan: introduction; async and Pydantic; LangChain agent fundamentals (single and multi
 agent); LangGraph (state, nodes, edges, conditional edges, checkpointer); memory, planning and monitoring
 (persistence, short-term memory, chat history, streaming, human-in-the-loop, RAG and tool integration,
 LangSmith); deployment (CI/CD, Docker, cloud); end-to-end projects; MCP; safety and evaluation (guardrails,
 prompt injection, harmful input); then CrewAI, AutoGen and n8n. The point made about the last three:
 the concepts do not change between frameworks, only the framework does.
 
-## Which playlist to follow
+## Which track to follow
 
-The course has one main playlist that carries every concept, and companion playlists for specific uses:
-a LangGraph-only series for revision if you already know the other frameworks, and a projects-only series.
-For learning end to end, the main playlist is the one to follow; the others are supplements.
+The course has one main track that carries every concept, and companion tracks for specific uses:
+a LangGraph-only track for revision if you already know the other frameworks, and a projects-only track.
+For learning end to end, the main track is the one to follow; the others are supplements.
 
 ## Code that matters
 
@@ -103,11 +102,9 @@ with the layer each line belongs to (sketch):
 import asyncio                          # Python: async execution
 from pydantic import BaseModel          # Python: validation
 
-
 class Action(BaseModel):                # the shape the LLM must fill in
     tool: str
     args: dict
-
 
 async def agent_step(goal: str, llm, tools: dict) -> str:
     prompt = f"Goal: {goal}. Choose one tool and its arguments as JSON."  # GenAI: prompting
@@ -126,7 +123,7 @@ loop, memory and control logic that decides what happens after `return`.
   generative AI; a weak foundation there shows up as an unreliable agent.
 - **Learning a framework instead of the concepts.** Tools, memory, planning and guardrails are the same in
   LangGraph, CrewAI and AutoGen; if only one framework's API was learned, switching is a restart.
-- **Picking the wrong playlist.** A LangGraph-only series is a revision aid, not a substitute for the full
+- **Picking the wrong track.** A LangGraph-only track is a revision aid, not a substitute for the full
   course.
 - **Skipping ML and DL entirely.** They are assumed background for the generative AI layer.
 
@@ -153,17 +150,6 @@ loop, memory and control logic that decides what happens after `return`.
 <summary>Which path should someone take who already knows Python but has never called an LLM?</summary>
 <p>The intermediate path: complete the generative AI layer (LLM basics, prompting, function calling, RAG, limitations) first, then start the agentic AI course.</p>
 </details>
-
-<div class="yt">
-  <iframe
-    src="https://www.youtube-nocookie.com/embed/sZLZsW74uQ0"
-    title="Complete Agentic AI Learning Roadmap: From Beginner to Pro Level"
-    loading="lazy"
-    allowfullscreen
-  ></iframe>
-</div>
-
-Source: DSwithBappy, [Complete Agentic AI Learning Roadmap: From Beginner to Pro Level](https://www.youtube.com/watch?v=sZLZsW74uQ0).
 
 **Related:** What is an LLM · Tool Calling · [Glossary](/docs/glossary)
 

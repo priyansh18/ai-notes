@@ -16,14 +16,14 @@ tags: [Agentic AI, Course Plan, Prerequisites]
 - Expected setup: Anaconda, VS Code, Git and GitHub, Docker Desktop, Postman, free-tier model provider accounts, **8 GB RAM minimum** (16 GB recommended), a Core i5 class CPU and about 20 GB of free disk.
 </div>
 
-This lesson is a live session recorded after the first four videos were out, answering the questions
-learners kept asking: what will the course cover, in what order, and what do you need before starting?
+This lesson answers the questions learners keep asking: what will the course cover, in what order, and
+what do you need before starting?
 It matters because the phase order encodes dependencies. Each phase assumes the ones before it, so
 knowing the map tells you what you cannot skip and where a gap in your background will bite.
 
 ## Why the phases sit in this order
 
-The plan is not a list of frameworks. It is a dependency chain, and the video explains each link.
+The plan is not a list of frameworks. It is a dependency chain, and the lesson explains each link.
 
 1. **Introduction** (phases 1) establishes what an agent is: goal in, plan, actions, minimal human guidance.
 2. **Async programming and Pydantic** (phase 2) come before any framework because every orchestrator
@@ -42,7 +42,7 @@ The plan is not a list of frameworks. It is a dependency chain, and the video ex
    through the protocol instead of custom integration code.
 8. **Memory** (phase 9) gets its own phase even though every project uses memory, so short-term and
    long-term memory get a detailed treatment rather than incidental mentions.
-9. **Safety and evaluation** (phase 10) covers guardrails, prompt injection and evaluation. The instructor's
+9. **Safety and evaluation** (phase 10) covers guardrails, prompt injection and evaluation. The lesson's
    position: do not ship an agent without this.
 10. **Deployment** (phase 11) is CI/CD plus MLOps-style practices for a scalable agent service.
 11. **Projects** (phase 12) closes with portfolio-grade end-to-end builds.
@@ -68,7 +68,7 @@ Python (OOP)  +  Generative AI (LLMs, prompting, RAG)
 | Generative AI | LLM calls, prompting, simple chatbots, RAG | Agentic AI is presented as the next step after RAG-style apps |
 | Tooling habits | Virtual environments, Git, Docker, testing APIs | Installation is not taught; it is assumed done |
 
-The instructor is explicit that traditional generative AI work (a chatbot, a RAG system) is the floor.
+The lesson is explicit that traditional generative AI work (a chatbot, a RAG system) is the floor.
 If that is unfamiliar, the advice is to finish a generative AI course first and come back.
 
 ## Setup: software, accounts, hardware
@@ -82,7 +82,7 @@ If that is unfamiliar, the advice is to finish a generative AI course first and 
 - **Hardware**: 8 GB RAM minimum, 16 GB recommended because agents juggle a lot of data; Core i5 or Ryzen 5
   class CPU (an i3 will struggle); roughly 20 GB free disk on SSD.
 
-## How the instructor expects you to learn
+## How the lesson expects you to learn
 
 Two pieces of advice run through the Q and A. First, do every exercise and reimplement each project on a
 different problem statement instead of copying it; the concept transfers, the exact project does not.
@@ -91,7 +91,7 @@ Second, explain what you learn to someone else. Teaching exposes the gaps you ca
 ## Code that matters
 
 No code is written in this session. The one technical point worth pinning down is the "provider does not
-matter" claim, which in practice looks like this (sketch, not from the video):
+matter" claim, which in practice looks like this (sketch, not from the lesson):
 
 ```python
 # sketch: keep the provider-specific part of an agent in one place
@@ -141,17 +141,6 @@ llm = init_chat_model(f"{PROVIDER}:{MODEL}", temperature=0)
 <summary>Does it matter which model provider you use to follow along?</summary>
 <p>No. Any provider (OpenAI, OpenRouter, Groq, Google AI Studio, a local Ollama model) works because the only provider-specific step is collecting a key and writing the model configuration; the agent code stays the same.</p>
 </details>
-
-<div class="yt">
-  <iframe
-    src="https://www.youtube-nocookie.com/embed/8pE1krNmqCo"
-    title="Complete Agentic AI Course Plan / Complete Learning Path"
-    loading="lazy"
-    allowfullscreen
-  ></iframe>
-</div>
-
-Source: DSwithBappy, [Complete Agentic AI Course Plan / Complete Learning Path](https://www.youtube.com/watch?v=8pE1krNmqCo).
 
 **Related:** [Async Programming](/docs/agentic-ai/async-programming) · [Pydantic for Agents](/docs/agentic-ai/pydantic-for-agents) · [Glossary](/docs/glossary)
 

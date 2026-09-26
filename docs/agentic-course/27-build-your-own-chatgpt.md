@@ -16,7 +16,7 @@ tags: [Agentic AI, FastAPI, LangGraph]
 - Streaming is an async generator behind FastAPI's `StreamingResponse`: it forwards the model's text chunks as server-sent events and drops the tool chatter.
 </div>
 
-The video calls it "BappyGPT": a recreation of the ChatGPT interface with threads in a sidebar, a model
+The lesson calls it "MyGPT": a recreation of the ChatGPT interface with threads in a sidebar, a model
 selector, document upload, a voice button and quick prompts, built on the same LangGraph concepts as the
 earlier series but with a real HTTP back end instead of Streamlit. What is new is the plumbing between a
 browser and an agent: routes, streaming, and where each kind of state lives.
@@ -34,7 +34,7 @@ The stores are split by purpose. `data/langgraph_checkpoints.sqlite` holds the g
 to continue a thread. `data/chatbot_memory.db` (SQLAlchemy) holds what the UI needs: a `conversations`
 table with a title made from the first 40 characters of the first message, a `chat_messages` table, and a
 `long_term_memory` table. `chroma_db/` holds embeddings of uploaded files. Gemini serves both chat and
-embeddings because the video wants every service on a free tier.
+embeddings because the lesson wants every service on a free tier.
 
 ## The agent: allowlist, cache, graph
 
@@ -107,7 +107,6 @@ AGENT_CACHE: dict = {}
 ALLOWED_MODELS = {"gemini-2.5-flash", "gemini-2.5-pro"}
 DEFAULT_MODEL = os.environ.get("GOOGLE_MODEL", "gemini-2.5-flash")
 
-
 def get_agent(model_name: str | None):
     """Never trust the front end; build once per model id, reuse afterwards (sketch)."""
     selected = (model_name or "").strip()
@@ -124,7 +123,6 @@ from fastapi.responses import StreamingResponse
 from langchain_core.messages import AIMessageChunk, HumanMessage
 
 app = FastAPI()
-
 
 @app.post("/chat/stream")
 async def chat_stream(request: Request):
@@ -155,7 +153,7 @@ async def chat_stream(request: Request):
 - **SQLite and many threads.** The checkpoint connection needs `check_same_thread=False`.
 - **Committed data files.** The `data/` databases were pushed with the code, so the live server started
   with the developer's old threads. Generated state belongs in `.gitignore` and `.dockerignore`.
-- **No accounts.** The video skips login on purpose; anyone with the URL sees every thread. Fine for
+- **No accounts.** The lesson skips login on purpose; anyone with the URL sees every thread. Fine for
   learning, not for a public deployment. Free-tier quotas on Gemini and Tavily also end a demo quickly.
 
 ## Takeaways
@@ -185,16 +183,5 @@ async def chat_stream(request: Request):
 <summary>How does the "remember that" feature work?</summary>
 <p>The model calls a <code>remember_this</code> tool that writes to a long-term memory table for the thread; a later question triggers <code>recall_memory</code>, which searches that table and returns the stored text for the model to answer with.</p>
 </details>
-
-<div class="yt">
-  <iframe
-    src="https://www.youtube-nocookie.com/embed/g-RJq2KzsAo"
-    title="Build Your Own ChatGPT Agent with LLMs, LangGraph, FastAPI, LangSmith, ChromaDB, SQLAlchemy & AWS"
-    loading="lazy"
-    allowfullscreen
-  ></iframe>
-</div>
-
-Source: DSwithBappy, [Build Your Own ChatGPT Agent with LLMs, LangGraph, FastAPI, LangSmith, ChromaDB, SQLAlchemy & AWS](https://www.youtube.com/watch?v=g-RJq2KzsAo).
 
 **Related:** [Streaming and Threading](/docs/agentic-ai/streaming-threading) · [Async Programming](/docs/agentic-ai/async-programming) · Tool Calling

@@ -17,7 +17,7 @@ tags: [Agentic AI, Deployment, Docker]
 </div>
 
 The AWS pipeline in the previous lesson works, but it took an hour of setup and needs a paid account.
-This short follow-up answers the question the video's viewers asked: can the same project go live in a few
+This short follow-up answers the question the lesson's viewers asked: can the same project go live in a few
 minutes, for free, and still redeploy on every commit? It can, because the hard part was already done.
 The Dockerfile from the AWS lesson is the whole contract, and a container does not care who runs it.
 
@@ -37,7 +37,7 @@ you get a working service fast and accept whatever the free instance can do.
 
 ## The deployment, step by step
 
-The video reuses the `agentic-chatbot-using-langgraph` repo pushed in the AWS lesson, which already holds
+The lesson reuses the `agentic-chatbot-using-langgraph` repo pushed in the AWS lesson, which already holds
 the Dockerfile, `.dockerignore` and `requirements.txt`.
 
 1. Sign in to Render (Google login works) and click **New**, then **Web Service**.
@@ -72,7 +72,7 @@ Render sees the new commit
 old instance keeps answering requests during the build
 ```
 
-The video demonstrates this by deleting the emoji added in the AWS lesson, pushing, clicking **Deploy
+The lesson demonstrates this by deleting the emoji added in the AWS lesson, pushing, clicking **Deploy
 latest commit**, and chatting with the still-running old version while the build runs. A refresh after
 "Live" shows the change. The auto-deploy toggle in the service settings makes the click unnecessary.
 
@@ -83,7 +83,7 @@ Two things show up in the demo. The app is noticeably slower than on the 4 GB EC
 used up across the AWS and Render tests, so a new key was needed. Neither is a bug in the code; both are
 the free tier telling you where its edges are.
 
-For anything with real users the video is explicit: take a paid instance. To shut the demo down, open the
+For anything with real users the lesson is explicit: take a paid instance. To shut the demo down, open the
 service's Settings, scroll to **Delete web service**, type the confirmation phrase, and the URL goes
 offline.
 
@@ -112,14 +112,12 @@ from dotenv import load_dotenv
 
 load_dotenv()  # local dev reads .env; on Render and AWS the variables are already in the environment
 
-
 def env(name: str, default: str | None = None) -> str:
     """Single source of truth for configuration on every host (sketch)."""
     value = os.environ.get(name, default)
     if value is None:
         raise RuntimeError(f"secret is missing: {name}")
     return value
-
 
 TAVILY_API_KEY = env("TAVILY_API_KEY")
 LANGSMITH_TRACING = env("LANGSMITH_TRACING", "false")
@@ -167,17 +165,6 @@ LANGSMITH_TRACING = env("LANGSMITH_TRACING", "false")
 <summary>Why did the stock-price tool fail on Render when the code was unchanged?</summary>
 <p>The free API key behind that tool had hit its rate limit after being used in local and AWS tests. It was a quota problem on the third-party service, solved by issuing a new key, not a deployment bug.</p>
 </details>
-
-<div class="yt">
-  <iframe
-    src="https://www.youtube-nocookie.com/embed/zB2dA_BtprU"
-    title="23. Deploy Agentic AI Chatbot on Render for FREE with Docker / Fastest Deployment"
-    loading="lazy"
-    allowfullscreen
-  ></iframe>
-</div>
-
-Source: DSwithBappy, [23. Deploy Agentic AI Chatbot on Render for FREE with Docker / Fastest Deployment](https://www.youtube.com/watch?v=zB2dA_BtprU).
 
 **Related:** [CI/CD to AWS with Docker and GitHub Actions](./24-cicd-aws-github-actions.md) · [Harness Engineering](/docs/agentic-ai/harness-engineering) · [Glossary](/docs/glossary)
 

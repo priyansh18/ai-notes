@@ -20,7 +20,7 @@ This lesson builds the course's first working agent: a search-and-weather assist
 questions a plain GPT-3.5 model cannot, because the model's knowledge stops in 2022. It uses the
 older LangChain agent API (`create_react_agent` and `AgentExecutor`), which is worth understanding
 because every newer framework, including LangGraph, is a cleaner version of the same loop. The
-video finishes by wrapping the agent in a Streamlit page and deploying it, but the mechanism is
+lesson finishes by wrapping the agent in a Streamlit page and deploying it, but the mechanism is
 the part that transfers.
 
 ## What the agent adds to a bare LLM
@@ -64,7 +64,7 @@ final output
 
 ## The prompt is the loop
 
-The loop is not hard-coded in Python. It lives in the prompt. The video pulls the standard ReAct
+The loop is not hard-coded in Python. It lives in the prompt. The lesson pulls the standard ReAct
 prompt from LangChain Hub, and it reads roughly: "Answer the following questions as best you can.
 You have access to the following tools: ... Use the following format: Question, Thought, Action,
 Action Input, Observation ... (this Thought/Action/Action Input/Observation can repeat N times)
@@ -93,7 +93,7 @@ fastest way to see what the agent is actually doing.
 
 ## Custom tools with the tool decorator
 
-Tavily is a prebuilt tool. The video also adds a home-made one: a function that hits the
+Tavily is a prebuilt tool. The lesson also adds a home-made one: a function that hits the
 Weatherstack API for a city and returns temperature, description and humidity. The only change
 needed to make a function usable by the agent is the `@tool` decorator. The function name and
 docstring become the tool description the LLM reads when deciding what to call. With two tools in
@@ -102,8 +102,8 @@ two-step run: Tavily for "New Delhi", then the weather tool for New Delhi.
 
 ## Code that matters
 
-Reconstructed from the notebook the video builds. The weather function body is a sketch of what
-the video shows; field names may differ.
+Reconstructed from the notebook the lesson builds. The weather function body is a sketch of what
+the lesson shows; field names may differ.
 
 ```python
 import os
@@ -120,7 +120,6 @@ load_dotenv()  # OPENAI_API_KEY, TAVILY_API_KEY, WEATHERSTACK_API_KEY
 search_tool = TavilySearchResults(max_results=2)
 llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0)
 
-
 @tool
 def get_weather_data(city: str) -> str:
     """Fetch the current weather for a given city."""
@@ -131,7 +130,6 @@ def get_weather_data(city: str) -> str:
         return "Could not fetch weather data."
     cur = data["current"]
     return f"{city}: {cur['temperature']} C, {cur['weather_descriptions'][0]}, humidity {cur['humidity']}%"
-
 
 prompt = hub.pull("hwchase17/react")  # the standard ReAct prompt (name inferred)
 tools = [search_tool, get_weather_data]
@@ -153,11 +151,11 @@ print(response["output"])
 
 ## Failure modes and gotchas
 
-- **Empty tool list**: the video runs the agent with `tools=[]` and the model keeps trying to act with nothing to call. The run ends with "Agent stopped due to iteration limit or time limit". The loop needs at least one tool that can produce the missing fact.
+- **Empty tool list**: the lesson runs the agent with `tools=[]` and the model keeps trying to act with nothing to call. The run ends with "Agent stopped due to iteration limit or time limit". The loop needs at least one tool that can produce the missing fact.
 - **Hand-written prompts that drop the format**: without the `Action:` / `Observation:` structure and the "I now know the final answer" phrase, the executor cannot parse the agent's output, and the loop either never calls a tool or never stops.
 - **Old model, wrong expectations**: GPT-3.5 confidently says the year is 2022. That is not a bug in the agent; it is why the search tool exists. Temperature is set to 0 so tool selection is deterministic.
-- **Keys in the notebook**: the video keeps every key in a `.env` file loaded with `python-dotenv`, and adds `.env` to `.gitignore` before pushing to GitHub. Copying the `.env` into a subfolder is fine locally, but the deployed app reads the same names from the host's environment settings instead.
-- **Windows SSL path errors**: the video adds a `certifi` line setting `SSL_CERT_FILE` because Windows sometimes points at a stale certificate bundle. Only needed if you see certificate errors.
+- **Keys in the notebook**: the lesson keeps every key in a `.env` file loaded with `python-dotenv`, and adds `.env` to `.gitignore` before pushing to GitHub. Copying the `.env` into a subfolder is fine locally, but the deployed app reads the same names from the host's environment settings instead.
+- **Windows SSL path errors**: the lesson adds a `certifi` line setting `SSL_CERT_FILE` because Windows sometimes points at a stale certificate bundle. Only needed if you see certificate errors.
 
 ## Takeaways
 
@@ -182,17 +180,6 @@ print(response["output"])
 <summary>How does the model know to call the weather tool second, after the search tool?</summary>
 <p>After the first observation ("capital of India is New Delhi") is appended to the scratchpad, the model's next thought is that it now needs weather for New Delhi. It reads the tool descriptions (the docstrings) and picks get_weather_data.</p>
 </details>
-
-<div class="yt">
-  <iframe
-    src="https://www.youtube-nocookie.com/embed/i8zFcHHGXxI"
-    title="5. Building End-to-End Single AI Agent System using LangChain"
-    loading="lazy"
-    allowfullscreen
-  ></iframe>
-</div>
-
-Source: DSwithBappy, [5. Building End-to-End Single AI Agent System using LangChain](https://www.youtube.com/watch?v=i8zFcHHGXxI).
 
 **Related:** [Agents Architecture](/docs/rag-course/15-agents-architecture) · Tool Calling · [Glossary](/docs/glossary)
 

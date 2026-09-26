@@ -16,7 +16,7 @@ tags: [Agentic AI, LangGraph, Capstone]
 - The finished code ships unchanged in a Docker image: GitHub Actions to EC2, or Render's free tier.
 </div>
 
-This video is the full series stitched together, about eight hours from an empty notebook to a live URL.
+This lesson is the full series stitched together, about eight hours from an empty notebook to a live URL.
 Every part starts by breaking the previous version: the bot forgets your name, a refresh wipes the threads,
 the model cannot see today's news, an agent buys stock without asking. This page maps those fixes.
 
@@ -27,7 +27,7 @@ The state is not a string. It is `Annotated[list[BaseMessage], add_messages]`, a
 first design decision. Without it each node return would *replace* the list; with it, user turns and AI
 turns are appended, so the node always sees the whole conversation.
 
-Then the catch: wrap the graph in a `while` loop, say "my name is Bappy", ask "what is my name?", and the
+Then the catch: wrap the graph in a `while` loop, say "my name is Sam", ask "what is my name?", and the
 bot does not know. Each `invoke` is a fresh run whose state ends at `END`. Memory is a persistence feature.
 
 ## Persistence: checkpointer, threads, resume
@@ -35,7 +35,7 @@ bot does not know. Each `invoke` is a fresh run whose state ends at `END`. Memor
 A **checkpointer** saves a snapshot of the state after every super-step (each edge traversal), keyed by a
 `thread_id` passed in `config={"configurable": {"thread_id": ...}}`. Two threads are two separate
 histories, like two chats in a sidebar. `InMemorySaver` keeps snapshots in RAM and dies with the process;
-the video moves to `SqliteSaver` over a `chatbot.db` file so threads outlive restarts, with
+the lesson moves to `SqliteSaver` over a `chatbot.db` file so threads outlive restarts, with
 `check_same_thread=False` because one process serves many threads. Four things then come for free:
 
 - `get_state(config)` returns the latest snapshot, `get_state_history(config)` every intermediate one.
@@ -56,7 +56,7 @@ its own `session_state` list for rendering and generates a `uuid` per new thread
 ## Tools, RAG and the conditional edge
 
 A tool is any function the model may decide to call. `TavilySearch` is already a tool; a custom one is a
-Python function with the `@tool` decorator and a docstring. The video adds a calculator, a stock-price
+Python function with the `@tool` decorator and a docstring. The lesson adds a calculator, a stock-price
 lookup over an HTTP API, a weather lookup, and later a RAG retriever. Wiring them in takes four lines:
 
 1. `llm_with_tools = llm.bind_tools(tools)`, and the chat node must call **this** object, not `llm`.
@@ -86,11 +86,11 @@ checkpointer = SqliteSaver(chatbot.db): one snapshot per super-step, keyed by th
 
 ## Human-in-the-loop inside a tool
 
-Fetching a stock price is harmless; buying shares is not. The video shows the unguarded agent placing an
+Fetching a stock price is harmless; buying shares is not. The lesson shows the unguarded agent placing an
 order the moment it is asked, then adds `interrupt(...)` **inside the purchase tool**. The graph pauses,
 the question surfaces as `result["__interrupt__"]`, and the run resumes only when the caller sends
 `Command(resume="yes")` (or "no") with the same `thread_id`. It works because the checkpointer saved the
-state at the pause point, so the run continues from the tool, not from `START`. The video's rule: put the
+state at the pause point, so the run continues from the tool, not from `START`. The lesson's rule: put the
 interrupt in the tool that performs the sensitive action, not in the chat node.
 
 ## Observability and shipping
@@ -112,7 +112,6 @@ from langgraph.graph import START, MessagesState, StateGraph
 from langgraph.prebuilt import ToolNode, tools_condition
 from langgraph.types import Command, interrupt
 
-
 @tool
 def purchase_stock(symbol: str, quantity: int) -> str:
     """Buy shares. Pauses for human approval before acting."""
@@ -121,14 +120,11 @@ def purchase_stock(symbol: str, quantity: int) -> str:
         return f"Order placed for {quantity} shares of {symbol}."
     return f"Purchase of {quantity} shares of {symbol} was declined by the human."
 
-
 tools = [purchase_stock]  # plus search, calculator, stock price, weather, rag_tool
 llm_with_tools = llm.bind_tools(tools)  # llm is the chat model created earlier (sketch)
 
-
 def chat_node(state: MessagesState) -> dict:
     return {"messages": [llm_with_tools.invoke(state["messages"])]}
-
 
 graph = StateGraph(MessagesState)
 graph.add_node("chat_node", chat_node)
@@ -149,7 +145,7 @@ if result.get("__interrupt__"):
 ## Failure modes and gotchas
 
 - **Calling `llm` instead of `llm_with_tools` in the node.** The graph compiles and chats, and never uses a
-  tool. The video names this as the most common mistake.
+  tool. The lesson names this as the most common mistake.
 - **No edge from tools back to chat.** The user gets raw tool output with metadata instead of a sentence.
 - **A tool defined but not in the list.** The weather tool did nothing until it was added before `bind_tools`.
 - **`InMemorySaver` in a web app.** Refresh or restart, and every thread is gone; and SQLite without
@@ -183,17 +179,6 @@ if result.get("__interrupt__"):
 <summary>How does the purchase tool wait for a human, and why must there be a checkpointer?</summary>
 <p><code>interrupt()</code> pauses the graph and exposes the question; the caller resumes with <code>Command(resume=...)</code> on the same thread. The pause point is a saved snapshot, so without a checkpointer there is nothing to resume from.</p>
 </details>
-
-<div class="yt">
-  <iframe
-    src="https://www.youtube-nocookie.com/embed/uK-OqJobFZw"
-    title="Build End-to-End Agentic Chatbot with LangGraph, Database, LangSmith, Tools, RAG, HITL, AWS & Render"
-    loading="lazy"
-    allowfullscreen
-  ></iframe>
-</div>
-
-Source: DSwithBappy, [Build End-to-End Agentic Chatbot with LangGraph, Database, LangSmith, Tools, RAG, HITL, AWS & Render](https://www.youtube.com/watch?v=uK-OqJobFZw).
 
 **Related:** [Agent Persistence](/docs/agentic-ai/agent-persistence) · [Loop Engineering](/docs/agentic-ai/loop-engineering) · [Agentic RAG](/docs/rag-course/16-agentic-rag)
 

@@ -25,7 +25,7 @@ exam, from goal, to task list, to graph, to state schema, to the rules that upda
 An **LLM workflow** is a step-by-step process where at least one step calls a model. Steps can be
 prompting, reasoning, tool calls, memory access or decisions, arranged five ways:
 
-| Pattern | Shape | Video's example |
+| Pattern | Shape | Lesson's example |
 | --- | --- | --- |
 | Prompt chaining | input, LLM, check, LLM, LLM, output | topic, draft, reject if over 5,000 words, review, write to file |
 | Routing | one router LLM sends the input to one of several specialist LLMs | edtech support: service questions, technical questions, interview prep |
@@ -68,7 +68,7 @@ the feedback and the evaluation round. Three properties matter:
 
 By default a node's update **replaces** the old value of a key. For a running total that is what
 you want: 5 + 6 gives 11, times 3 gives 33, and the old 11 should be gone. For other keys it is a
-bug. The video's example is a chatbot whose state has one `message` key: "Hi, I am Bappy" is
+bug. The lesson's example is a chatbot whose state has one `message` key: "Hi, I am Sam" is
 replaced by "I like football", and when the user then asks "what is my name?" the name is gone.
 
 A **reducer** is attached per key and says how updates combine: replace, merge, or add. The essay
@@ -88,7 +88,7 @@ LangGraph runs graphs the way Google's **Pregel** system processes large graphs,
 
 ## Code that matters
 
-A sketch of the essay grader as a graph. Grader bodies are stubs; in the video they are LLM
+A sketch of the essay grader as a graph. Grader bodies are stubs; in the lesson they are LLM
 calls that return a score.
 
 ```python
@@ -96,7 +96,6 @@ from operator import add
 from typing import Annotated, TypedDict
 
 from langgraph.graph import END, START, StateGraph
-
 
 class EssayState(TypedDict):
     topic: str
@@ -108,10 +107,8 @@ class EssayState(TypedDict):
     feedback: Annotated[list[str], add]   # reducer: append each round, never replace
     evaluation_round: int
 
-
 def generate_topic(state: EssayState) -> dict:
     return {"topic": "Is technology making us less human?"}   # sketch: LLM call
-
 
 def write_essay(state: EssayState) -> dict:
     return {"essay_text": "..."}                               # sketch: collect from student
@@ -121,19 +118,15 @@ def evaluate_depth(state: EssayState) -> dict: return {"depth_score": 9.5}
 def evaluate_language(state: EssayState) -> dict: return {"language_score": 9.8}
 def evaluate_clarity(state: EssayState) -> dict: return {"clarity_score": 8.5}
 
-
 def aggregate(state: EssayState) -> dict:
     total = (state["depth_score"] + state["language_score"] + state["clarity_score"]) / 3
     return {"total_score": total, "evaluation_round": state["evaluation_round"] + 1}
 
-
 def give_feedback(state: EssayState) -> dict:
     return {"feedback": [f"Round {state['evaluation_round']}: improve clarity of thought."]}
 
-
 def route(state: EssayState) -> str:
     return "success" if state["total_score"] >= 9.5 else "feedback"
-
 
 builder = StateGraph(EssayState)
 for name, fn in [("generate_topic", generate_topic), ("write_essay", write_essay),
@@ -184,16 +177,5 @@ final_state = app.invoke({"feedback": [], "evaluation_round": 0})
 <summary>What is the difference between parallelization and the orchestrator-worker pattern?</summary>
 <p>In parallelization the set of worker tasks is fixed in code and they all run. In orchestrator-worker an LLM decides at runtime which workers get the task, possibly only one, before a synthesizer combines the results.</p>
 </details>
-
-<div class="yt">
-  <iframe
-    src="https://www.youtube-nocookie.com/embed/l3cMKkLxSAU"
-    title="8. Understanding LangGraph Core Components"
-    loading="lazy"
-    allowfullscreen
-  ></iframe>
-</div>
-
-Source: DSwithBappy, [8. Understanding LangGraph Core Components](https://www.youtube.com/watch?v=l3cMKkLxSAU).
 
 **Related:** [LangGraph Workflows](/docs/agentic-ai/langgraph-workflows) · [Pydantic for Agents](/docs/agentic-ai/pydantic-for-agents) · [LangGraph Subgraphs](/docs/agentic-ai/langgraph-subgraphs)

@@ -26,7 +26,7 @@ when RAG is enough, and when you genuinely need an agent.
 The first generative AI applications were a pre-trained model with a prompt in and a response out. That
 covered text generation, translation, summarisation, chat, and NLP tasks such as entity extraction, and
 later images once models went multimodal. The limit is baked into how models are trained: every model has
-a **knowledge cutoff**, the date up to which internet data was included. The video opens a provider's model
+a **knowledge cutoff**, the date up to which internet data was included. The lesson opens a provider's model
 page to show it listed next to the context window and maximum output tokens (one model shows an early 2024
 cutoff). Ask about something older than the cutoff and the answer is fine. Ask about anything after it and
 the honest response is "no context for that".
@@ -34,7 +34,7 @@ the honest response is "no context for that".
 ## Stage 2: why fine-tuning was not the everyday fix
 
 The obvious repair is to fine-tune: take the pre-trained model, add new data, train some parameters. The
-video's objection is practical. Parameters run from millions to billions, so fine-tuning needs serious
+lesson's objection is practical. Parameters run from millions to billions, so fine-tuning needs serious
 compute, budget and time. Labs with those resources can do it. A developer whose data changes every week
 cannot retrain a model each time, and cannot make users wait while it happens.
 
@@ -42,7 +42,7 @@ cannot retrain a model each time, and cannot make users wait while it happens.
 
 Retrieval-augmented generation keeps the model frozen and attaches a **knowledge base** (in practice a
 vector store holding the latest documents) through an orchestration framework such as LangChain or
-LlamaIndex. The flow the video draws:
+LlamaIndex. The flow the lesson draws:
 
 ```
 user question
@@ -72,7 +72,7 @@ noon when the store was filled in the morning, and it has nothing. The store is 
 The researchers' answer was to give the LLM **tools**: a web search, a calendar, storage, anything with an
 API. The important part is not the tools, it is who decides to use them. In a RAG pipeline the developer
 hard-wires retrieval into every request. In an agent, the model reads the prompt and **reasons about
-whether it needs a tool at all**. The video demonstrates this in a chat assistant: "tell me about Python"
+whether it needs a tool at all**. The lesson demonstrates this in a chat assistant: "tell me about Python"
 is answered instantly from training knowledge with no search, while "latest election news" triggers a web
 search, pulls several news sites, and the model summarises them into a refined answer with sources.
 
@@ -88,12 +88,12 @@ Modern coding assistants show the same mechanism scaled up. Given "create a car 
 the agent first produces a **plan** (set up the display and clock, player car, obstacles, collision
 detection, scoring, game-over screen, requirements, a verification step), pauses so the human can edit
 or approve it, then executes step by step, writing code, testing as it goes, and stopping to ask before
-running an install command. The definition the video keeps returning to is now fully visible: take a goal,
+running an install command. The definition the lesson keeps returning to is now fully visible: take a goal,
 plan, take actions, adapt to changes, and seek help only when necessary.
 
 ## Code that matters
 
-The video shows no code; the mechanism it describes is a single decision inside a loop (sketch):
+The lesson shows no code; the mechanism it describes is a single decision inside a loop (sketch):
 
 ```python
 # sketch: the decision that turns an LLM into an agent
@@ -151,17 +151,6 @@ question about Python and fire on a question about today's news.
 <summary>What is the one capability that makes a system "agentic" in this lesson's definition?</summary>
 <p>The model itself decides whether to answer directly or call a tool, rather than the developer hard-wiring retrieval into every request. That same reasoning extends to planning and executing multi-step tasks with minimal human guidance.</p>
 </details>
-
-<div class="yt">
-  <iframe
-    src="https://www.youtube-nocookie.com/embed/swpzuGjAh-4"
-    title="1. Evolution from LLMs to Agentic AI: Complete Agentic AI Course"
-    loading="lazy"
-    allowfullscreen
-  ></iframe>
-</div>
-
-Source: DSwithBappy, [1. Evolution from LLMs to Agentic AI: Complete Agentic AI Course](https://www.youtube.com/watch?v=swpzuGjAh-4).
 
 **Related:** [Introduction to RAG](/docs/rag-course/02-introduction-to-rag) · Context Windows · Tool Calling
 

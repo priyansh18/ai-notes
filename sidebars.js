@@ -198,9 +198,8 @@ const sidebars = {
       label: "7 · Agentic AI",
       collapsed: true,
       items: [
-        // ── The Agentic AI Course (DSwithBappy playlist). Job 29 keeps this in sync
-        // with lib/job-29/PLAYLIST_LEDGER.md. A doc id appears once in this
-        // sidebar; other places link to it with pageLink().
+        // ── The Agentic AI Course. A doc id appears once in this sidebar;
+        // other places link to it with pageLink().
         {
           type: "category",
           label: "The Agentic AI Course",

@@ -24,7 +24,7 @@ tool, first from a CLI loop and then from the Streamlit UI.
 
 ## Why a human gate exists
 
-The video's definition: HITL is a design approach where a human actively participates at critical
+The lesson's definition: HITL is a design approach where a human actively participates at critical
 points of the workflow to supervise, approve, correct or guide the model's output. It is not applied
 everywhere. Fetching the weather needs no approval. Spending money does, because a model can
 hallucinate: asked for 10 shares, it may buy 20, or the wrong company.
@@ -73,7 +73,7 @@ with HITL:
 
 ## Where the interrupt goes
 
-The video first demonstrates the mechanism in the simplest possible place: the chat node itself,
+The lesson first demonstrates the mechanism in the simplest possible place: the chat node itself,
 asking "do you really want to ask this question?" before every answer. That is only to show the
 API. The rule for a real agent with many tools is different: **do not** gate the chat node. Put
 the `interrupt` inside the specific tool that performs the sensitive action. Every other tool keeps
@@ -98,7 +98,6 @@ from langchain_core.messages import HumanMessage
 from langchain_core.tools import tool
 from langgraph.types import interrupt, Command
 
-
 @tool
 def purchase_stock(symbol: str, quantity: int) -> str:
     """Place a buy order for a stock. Sensitive: requires human approval before executing."""
@@ -110,9 +109,8 @@ def purchase_stock(symbol: str, quantity: int) -> str:
         return f"Purchase order placed for {quantity} shares of {symbol}."
     return f"Purchase of {quantity} shares of {symbol} was declined by the human."
 
-
 # purchase_stock is appended to the tools list and bound like every other tool;
-# the graph is compiled with a checkpointer (the video uses a SQLite one).
+# the graph is compiled with a checkpointer (the lesson uses a SQLite one).
 
 config = {"configurable": {"thread_id": "demo"}}
 
@@ -168,16 +166,5 @@ shape works; the resume value is whatever you pass, and your code decides how to
 <summary>In an agent with many tools, where should the approval interrupt live and why?</summary>
 <p>Inside the tool that performs the sensitive action (for example <code>purchase_stock</code>), not in the chat node. That way only that action prompts for approval, the prompt can show the exact generated arguments, and all other tools run without interruption.</p>
 </details>
-
-<div class="yt">
-  <iframe
-    src="https://www.youtube-nocookie.com/embed/9ZYxMs2pAIA"
-    title="21. Implement Human-in-the-Loop (HITL) in Agentic Chatbot using LangGraph / Part 9"
-    loading="lazy"
-    allowfullscreen
-  ></iframe>
-</div>
-
-Source: DSwithBappy, [21. Implement Human-in-the-Loop (HITL) in Agentic Chatbot using LangGraph / Part 9](https://www.youtube.com/watch?v=9ZYxMs2pAIA).
 
 **Related:** [Loop Engineering](/docs/agentic-ai/loop-engineering) · [Agent Persistence](/docs/agentic-ai/agent-persistence) · [Glossary](/docs/glossary)

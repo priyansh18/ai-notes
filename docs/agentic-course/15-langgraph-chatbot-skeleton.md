@@ -16,7 +16,7 @@ tags: [Agentic AI, LangGraph, Chatbots]
 - The same compiled graph object is imported into a **Streamlit** app; `st.session_state` keeps the visible history across reruns and `chatbot.stream(..., stream_mode="messages")` gives token-by-token output.
 </div>
 
-This lesson starts a multi-part build of one agentic chatbot in LangGraph. The video lays out the
+This lesson starts a multi-part build of one agentic chatbot in LangGraph. The lesson lays out the
 full roadmap (persistence, streaming, resumable threads, a database, a UI, tools, LangSmith
 observability, RAG, human-in-the-loop, memory) and then builds only the skeleton: a one-node graph,
 a checkpointer, and a Streamlit front end. Everything later in the series is bolted onto this
@@ -39,7 +39,7 @@ The node reads `state["messages"]`, sends the list to `llm.invoke`, and returns
 
 ## Why the bot forgets, and what a checkpointer fixes
 
-The video wraps `invoke` in a `while` loop so you can type messages until you say `exit`. Tell it
+The lesson wraps `invoke` in a `while` loop so you can type messages until you say `exit`. Tell it
 your name, ask a question, then ask "what is my name?" and it says it has no access to personal
 information. That looks like a bug: the state stores every message, so the node should have seen
 the earlier turn.
@@ -75,7 +75,7 @@ With checkpointer + thread_id:
 
 ## From notebook to backend file to Streamlit
 
-The notebook is for experimenting. The video then moves the graph into `agentic_chatbot_backend.py`
+The notebook is for experimenting. The lesson then moves the graph into `agentic_chatbot_backend.py`
 and exposes one object, `chatbot`; any front end imports it, and the backend never changes when the UI does.
 
 Streamlit gives a chat UI without HTML or CSS: `st.chat_input` for the box and
@@ -108,15 +108,12 @@ from langgraph.checkpoint.memory import MemorySaver
 
 llm = ChatOpenAI()
 
-
 class ChatState(TypedDict):
     messages: Annotated[list[BaseMessage], add_messages]
-
 
 def chat_node(state: ChatState) -> dict:
     response = llm.invoke(state["messages"])
     return {"messages": [response]}
-
 
 graph = StateGraph(ChatState)
 graph.add_node("chat_node", chat_node)
@@ -159,7 +156,7 @@ if user_input:
 
 - **Forgetting `add_messages`.** With a plain `list[BaseMessage]` the node's return replaces the list and you lose the human turn. The reducer is what makes `messages` accumulate.
 - **No checkpointer, no memory.** Storing messages in state is not persistence. State ends with the run. If "what is my name?" fails across turns, look at compile, not at the node.
-- **Checkpointer without `thread_id`.** Once a checkpointer is attached, invoking without `config` errors. The `app.py` test in the video failed for exactly this reason.
+- **Checkpointer without `thread_id`.** Once a checkpointer is attached, invoking without `config` errors. The `app.py` test in the lesson failed for exactly this reason.
 - **`MemorySaver` is RAM.** Restart the kernel or the process and every thread is gone. Fine for learning, wrong for anything users rely on.
 - **Streamlit reruns the script.** Any Python variable not in `st.session_state` resets on each interaction, and an old Streamlit has no `write_stream`; upgrade before debugging your generator.
 
@@ -185,16 +182,5 @@ if user_input:
 <summary>Why does the Streamlit app need <code>st.session_state</code> if the graph already has a checkpointer?</summary>
 <p>They remember different things. The checkpointer holds graph state per thread on the backend. Streamlit re-runs the script on every interaction, so the visible chat history must live in session state or the page shows only the latest exchange.</p>
 </details>
-
-<div class="yt">
-  <iframe
-    src="https://www.youtube-nocookie.com/embed/_BVsXOC46wQ"
-    title="13. Build Your First Agentic Chatbot with LangGraph / Part 1"
-    loading="lazy"
-    allowfullscreen
-  ></iframe>
-</div>
-
-Source: DSwithBappy, [13. Build Your First Agentic Chatbot with LangGraph / Part 1](https://www.youtube.com/watch?v=_BVsXOC46wQ).
 
 **Related:** [LangGraph Workflows](/docs/agentic-ai/langgraph-workflows) · [Agent Persistence](/docs/agentic-ai/agent-persistence) · [Streaming and Threading](/docs/agentic-ai/streaming-threading)

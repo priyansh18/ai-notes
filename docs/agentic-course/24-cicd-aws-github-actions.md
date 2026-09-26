@@ -25,12 +25,12 @@ feature ships by `git push`, and the running app is never stopped by hand.
 
 A manual deploy looks fine the first time: create an EC2 instance, copy the code, start the server, share
 the endpoint. The trouble arrives with the second release. To update a manually deployed app you stop the
-server, upload the new code and restart it, and for however long that takes (the video uses "3 hours" as
+server, upload the new code and restart it, and for however long that takes (the lesson uses "3 hours" as
 the example) users see an error page and go elsewhere.
 
 CI/CD removes the human from that loop. The developer still only pushes code to GitHub. GitHub Actions
 notices the push, builds a fresh image, and a runner on the AWS machine swaps the running container for
-the new one. The endpoint stays the same and stays up. The video picks GitHub Actions over Jenkins and
+the new one. The endpoint stays the same and stays up. The lesson picks GitHub Actions over Jenkins and
 CircleCI for one reason: it is already hosted inside GitHub, so there is no CI server to install.
 
 ## The three-stage workflow
@@ -72,11 +72,11 @@ installed before the source so the dependency layer is cached between builds. Th
 
 A `.dockerignore` file plays the role `.gitignore` plays for the repo: it keeps the virtual environment,
 notebooks, local `.env` and any SQLite or FAISS files generated during development out of the image. The
-video also deletes the locally generated `chatbot.db` before the first push, so the deployed app starts clean.
+lesson also deletes the locally generated `chatbot.db` before the first push, so the deployed app starts clean.
 
 ## Preparing AWS once
 
-| Step | What the video does | Why it matters |
+| Step | What the lesson does | Why it matters |
 | --- | --- | --- |
 | IAM user | New user with only `AmazonEC2FullAccess`, then an access key for CLI use (download the CSV) | Least privilege: the pipeline cannot touch services it does not need, which also caps surprise cost |
 | EC2 instance | Ubuntu, `t2.medium` (2 vCPU, 4 GB RAM), 32 GB disk, allow HTTP and HTTPS | 4 GB is the stated minimum for this app; Ubuntu is what production servers usually run |
@@ -91,7 +91,7 @@ at the instance's public DNS on port 8501 after job 3.
 
 ## Code that matters
 
-The Dockerfile and workflow are reconstructed from what the video shows on screen (sketch).
+The Dockerfile and workflow are reconstructed from what the lesson shows on screen (sketch).
 
 ```dockerfile
 FROM python:3.11-slim
@@ -146,7 +146,7 @@ if missing:  # sketch of the check the deploy step performs before docker run
 - **Port not opened.** The app is running but the public DNS times out: the security group needs an inbound
   rule for 8501, and the URL needs `:8501` appended.
 - **Secrets with quotes.** Typing `"true"` into the `LANGSMITH_TRACING` secret stores the quotes; the
-  video stresses values go in bare.
+  lesson stresses values go in bare.
 - **A tool's key missing from `docker run`.** The chatbot boots and chats fine, then one tool fails only in
   production. Every key the agent uses must be listed both in secrets and in the `-e` flags.
 - **Local state in the repo.** SQLite checkpoints and FAISS folders created while testing should not travel
@@ -181,17 +181,6 @@ if missing:  # sketch of the check the deploy step performs before docker run
 <summary>The pipeline is green but the public URL times out. What is the usual cause?</summary>
 <p>No inbound rule for port 8501 in the instance's security group, or the port was left off the URL. The container is listening on 8501; AWS is blocking it.</p>
 </details>
-
-<div class="yt">
-  <iframe
-    src="https://www.youtube-nocookie.com/embed/foyPwFATIC0"
-    title="22. Agentic Chatbot CI/CD Deployment on AWS with Docker & GitHub Actions / Part 10"
-    loading="lazy"
-    allowfullscreen
-  ></iframe>
-</div>
-
-Source: DSwithBappy, [22. Agentic Chatbot CI/CD Deployment on AWS with Docker & GitHub Actions / Part 10](https://www.youtube.com/watch?v=foyPwFATIC0).
 
 **Related:** [Harness Engineering](/docs/agentic-ai/harness-engineering) · [Agent Persistence](/docs/agentic-ai/agent-persistence) · [Glossary](/docs/glossary)
 

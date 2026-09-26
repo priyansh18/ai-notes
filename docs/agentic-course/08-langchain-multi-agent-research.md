@@ -11,20 +11,20 @@ tags: [Agentic AI, LangChain, Multi-Agent]
 <div class="tldr">
 <strong>TL;DR</strong>
 
-- The video builds a research assistant from four specialists: a **search agent** (Tavily), a **reader agent** (BeautifulSoup scraper), a **writer chain** and a **critic chain**. Each does one job well.
+- The lesson builds a research assistant from four specialists: a **search agent** (Tavily), a **reader agent** (BeautifulSoup scraper), a **writer chain** and a **critic chain**. Each does one job well.
 - Agents hand off through a plain Python dict called the **state**: search results go in, the reader reads them, the writer reads both, the critic reads the report.
 - Not everything needs to be an agent. The writer and critic have no tools, so they are plain LCEL chains: `prompt | llm | StrOutputParser()`.
 </div>
 
 The previous lesson built one agent with two tools. This one builds a team. The task is "give me a
-professional research report on topic X", and the video's argument is that one agent doing
+professional research report on topic X", and the lesson's argument is that one agent doing
 search, extraction, writing and review in a single loop produces average output, while four
 narrow roles produce good output. The lesson also switches to the newer `create_agent` API and
 to LCEL chains, a useful contrast with the legacy `create_react_agent` from lesson 5.
 
 ## Why split the work
 
-The video's analogy is a company. A project needs frontend, AI and backend work. A single
+The lesson's analogy is a company. A project needs frontend, AI and backend work. A single
 full-stack hire can do all three, but with limited depth in each; a team of three specialists
 each goes deep, then the results are combined. Agents behave the same way: a single prompt that
 says "search, scrape, write and critique" gives the model too many competing instructions, and
@@ -51,7 +51,7 @@ have no decision to make and no tool to call, so a loop would only add latency; 
 
 There is no message bus and no orchestrator model. The pipeline is a function that creates an
 empty dict, runs each stage in order, and stores each stage's output under a key. The next stage
-pulls what it needs from that dict and formats it into its own prompt. The video calls this
+pulls what it needs from that dict and formats it into its own prompt. The lesson calls this
 **state memory** and is clear that it is temporary: it lives for one run and is gone after. A
 persistent store can replace it later without changing the stages.
 
@@ -73,12 +73,12 @@ return state
 
 Lesson 5 needed two objects: the agent (decides) and the executor (runs the loop). The newer
 `create_agent(model=..., tools=...)` folds the thought, action, observation loop inside, so one
-call returns a runnable agent and `.invoke()` runs it to completion. The video checks the docs
+call returns a runnable agent and `.invoke()` runs it to completion. The lesson checks the docs
 and notes that `create_react_agent` still works but is the older implementation.
 
 ## Code that matters
 
-A sketch of the modules the video writes (`tools.py`, `agents.py`, `pipeline.py`). Scraper
+A sketch of the modules the lesson writes (`tools.py`, `agents.py`, `pipeline.py`). Scraper
 internals and the critic prompt (same shape as the writer, with a reviewer persona and a
 `{report}` slot) are omitted.
 
@@ -90,7 +90,6 @@ from tavily import TavilyClient
 
 tavily = TavilyClient(api_key=os.getenv("TAVILY_API_KEY"))
 
-
 @tool
 def web_search(query: str) -> str:
     """Search the web; return title, URL and a short snippet for the top results."""
@@ -98,12 +97,10 @@ def web_search(query: str) -> str:
     lines = [f"{r['title']}\n{r['url']}\n{r['content'][:300]}" for r in results["results"]]
     return "\n\n".join(lines)
 
-
 @tool
 def scrape_url(url: str) -> str:
     """Fetch a web page and return its main readable text."""
     ...  # sketch: requests.get, readability, BeautifulSoup text, all inside try/except
-
 
 # agents.py
 from langchain.agents import create_agent
@@ -113,14 +110,11 @@ from langchain_openai import ChatOpenAI
 
 llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
 
-
 def build_search_agent():
     return create_agent(model=llm, tools=[web_search])
 
-
 def build_reader_agent():
     return create_agent(model=llm, tools=[scrape_url])
-
 
 writer_prompt = ChatPromptTemplate.from_messages([
     ("system", "You are an expert research writer. Write clean, structured, insightful reports."),
@@ -129,7 +123,6 @@ writer_prompt = ChatPromptTemplate.from_messages([
 ])
 writer_chain = writer_prompt | llm | StrOutputParser()
 critic_chain = critic_prompt | llm | StrOutputParser()   # critic_prompt: score /10, strengths, improvements, verdict
-
 
 # pipeline.py
 def run_research_pipeline(topic: str) -> dict:
@@ -152,7 +145,7 @@ def run_research_pipeline(topic: str) -> dict:
 
 ## Failure modes and gotchas
 
-- **Scraping is the flaky stage**: pages time out, block bots, or return junk. The video wraps the scraper in `try/except` and says any third-party call deserves the same. Without it one bad URL kills the whole run.
+- **Scraping is the flaky stage**: pages time out, block bots, or return junk. The lesson wraps the scraper in `try/except` and says any third-party call deserves the same. Without it one bad URL kills the whole run.
 - **State is per-run**: the dict is created inside the pipeline function and discarded on return. Nothing is remembered between topics. Fine for a demo; a real assistant needs a persistent memory layer, which later lessons cover.
 - **No feedback loop yet**: the critic scores the report (the demo got 6/10) but nothing sends that feedback back to the writer. The pipeline is strictly one-way. Turning "areas to improve" into a rewrite pass needs a loop, which is exactly what LangGraph adds.
 - **Prompt drift between stages**: the writer is told to list sources, so the pipeline must pass the URLs (search results) *and* the scraped text. Pass only the text and the sources section is hallucinated. Pass only the 300-character snippets and the report is thin.
@@ -180,17 +173,6 @@ def run_research_pipeline(topic: str) -> dict:
 <summary>What does create_agent do that create_react_agent did not?</summary>
 <p>It runs the thought, action, observation loop itself. With create_react_agent you also had to wrap the agent in AgentExecutor to execute tools and iterate; create_agent returns one object whose invoke runs to completion.</p>
 </details>
-
-<div class="yt">
-  <iframe
-    src="https://www.youtube-nocookie.com/embed/9bGYJ68qvAA"
-    title="6. End-to-End Multi-Agent AI System with LangChain"
-    loading="lazy"
-    allowfullscreen
-  ></iframe>
-</div>
-
-Source: DSwithBappy, [6. End-to-End Multi-Agent AI System with LangChain](https://www.youtube.com/watch?v=9bGYJ68qvAA).
 
 **Related:** [LangChain v1](/docs/rag-course/13-langchain-v1) · [Agents Architecture](/docs/rag-course/15-agents-architecture) · [Glossary](/docs/glossary)
 
