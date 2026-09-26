@@ -61,6 +61,10 @@ function Widget() {
     setStatus("thinking");
     try {
       const res = await engineRef.current.ask(q);
+      // Usage count only. Never send the question text.
+      if (typeof window !== "undefined" && typeof window.gtag === "function") {
+        window.gtag("event", "ask_notes_query", { answered: !res.empty });
+      }
       setMessages((m) => [
         ...m,
         res.empty

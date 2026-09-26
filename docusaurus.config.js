@@ -142,6 +142,13 @@ const config = {
           exclude: ["llm-basics/**", "calling-models/**", "prompting/**"],
         },
         blog: false,
+        // Private, free analytics (GA4). Same property as the portfolio; the
+        // hostname dimension separates the two sites. IP anonymised, no ads
+        // features, no user ids.
+        gtag: {
+          trackingID: "G-TXET8B5D8Z",
+          anonymizeIP: true,
+        },
         theme: {
           customCss: "./src/css/custom.css",
         },
