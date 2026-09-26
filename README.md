@@ -1,14 +1,13 @@
 # Priyansh's AI Notes — Docusaurus site
 
 Open AI learning notes, served at **notes.priyanshsinghal.com**. Built with
-[Docusaurus](https://docusaurus.io/). Lives in the `notes/` folder of the
-PortfolioNew monorepo.
+[Docusaurus](https://docusaurus.io/). This is a standalone repo
+(`priyansh18/ai-notes`); Vercel deploys `main` automatically.
 
 ## Run locally
 
 ```bash
-cd notes
-npm install
+npm install --legacy-peer-deps
 npm start          # dev server at http://localhost:3000
 ```
 
@@ -56,16 +55,12 @@ all client-side, no API key. Knowledge = these markdown notes, automatically.
 
 ## Deploying to notes.priyanshsinghal.com (Vercel)
 
-You're hosting two sites from one repo. Create a **second Vercel project** pointed at
-the same GitHub repo, with the `notes/` subdirectory as its root:
+Push to `main`; Vercel builds with `npm install --legacy-peer-deps` and `npm run build`
+(see `vercel.json`) and serves the `build/` folder on `notes.priyanshsinghal.com`.
 
-1. Vercel → **Add New Project** → import the `PortfolioNew` repo again.
-2. In project settings → **Root Directory**, set it to `notes`.
-3. Framework preset: **Docusaurus** (build `npm run build`, output `build`).
-4. After it deploys, go to **Settings → Domains** and add
-   `notes.priyanshsinghal.com`.
-5. In your DNS provider, add the CNAME Vercel shows you (typically
-   `notes` → `cname.vercel-dns.com`).
+## Publish gate
 
-Your existing portfolio project keeps serving `priyanshsinghal.com` from the repo
-root — it ignores the `notes/` folder. The two deploy independently.
+After `npm run build`, run `npm run gate`. It checks that new pages are in the search
+index, that every Python block parses, and that the Ask bot retrieves the right page for
+the questions in `scripts/ask-check.questions.json`. Sections hidden through
+`docs.exclude` in `docusaurus.config.js` are left out of the search index too.

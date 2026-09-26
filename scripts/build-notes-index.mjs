@@ -28,6 +28,17 @@ import { pipeline, env } from "@huggingface/transformers";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DOCS_DIR = join(__dirname, "..", "docs");
+
+// Sections hidden from the public site via docs.exclude in docusaurus.config.js
+// ("written but not yet studied") must NOT be searchable either, otherwise the
+// Ask bot quotes and cites pages visitors cannot open.
+function excludedTopDirs() {
+  const cfg = readFileSync(join(__dirname, "..", "docusaurus.config.js"), "utf8");
+  const m = cfg.match(/exclude:\s*\[([^\]]*)\]/);
+  if (!m) return [];
+  return [...m[1].matchAll(/["']([^"'*/]+)\/\*\*["']/g)].map((x) => x[1]);
+}
+const EXCLUDED = excludedTopDirs();
 const OUT_PATH = join(__dirname, "..", "static", "notes-index.json");
 const MODEL_ID = "Xenova/all-MiniLM-L6-v2";
 
@@ -99,7 +110,9 @@ function round(arr, dp = 6) {
 }
 
 async function main() {
-  const files = collectMarkdown(DOCS_DIR);
+  const files = collectMarkdown(DOCS_DIR).filter(
+    (f) => !EXCLUDED.includes(f.slice(DOCS_DIR.length + 1).split("/")[0])
+  );
   const allChunks = [];
   for (const file of files) {
     const raw = readFileSync(file, "utf-8");

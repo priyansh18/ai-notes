@@ -9,6 +9,7 @@
     "clear": "docusaurus clear",
     "deploy": "docusaurus deploy",
     "docusaurus": "docusaurus",
+    "gate": "node scripts/gate-check.mjs",
     "generate:index": "node scripts/build-notes-index.mjs",
     "serve": "docusaurus serve",
     "start": "docusaurus start"

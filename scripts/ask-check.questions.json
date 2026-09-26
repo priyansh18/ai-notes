@@ -1,0 +1,242 @@
+[
+ {
+  "question": "Why does the course teach async programming and Pydantic before any agent framework?",
+  "expect": "agentic-course/01-course-plan"
+ },
+ {
+  "question": "What role does LangChain play in the plan if LangGraph is the real orchestrator?",
+  "expect": "agentic-course/01-course-plan"
+ },
+ {
+  "question": "Does it matter which model provider you use to follow along?",
+  "expect": "agentic-course/01-course-plan"
+ },
+ {
+  "question": "Why is agentic AI called an integration point rather than a starting point?",
+  "expect": "agentic-course/02-learning-roadmap"
+ },
+ {
+  "question": "What goes wrong if someone learns Python and then jumps straight to agents?",
+  "expect": "agentic-course/02-learning-roadmap"
+ },
+ {
+  "question": "Which path should someone take who already knows Python but has never called an LLM?",
+  "expect": "agentic-course/02-learning-roadmap"
+ },
+ {
+  "question": "Why was RAG introduced instead of fine-tuning models with new data?",
+  "expect": "agentic-course/03-llms-to-agentic-ai"
+ },
+ {
+  "question": "What kind of question defeats a RAG system, and how does an agent handle it?",
+  "expect": "agentic-course/03-llms-to-agentic-ai"
+ },
+ {
+  "question": "What is the one capability that makes a system \"agentic\" in this lesson's definition?",
+  "expect": "agentic-course/03-llms-to-agentic-ai"
+ },
+ {
+  "question": "What separates the recruiting agent from a chatbot fed the same prompt?",
+  "expect": "agentic-course/04-agent-characteristics-components"
+ },
+ {
+  "question": "Name the four ways the video bounds an agent's autonomy.",
+  "expect": "agentic-course/04-agent-characteristics-components"
+ },
+ {
+  "question": "What does the supervisor component do, and how is it different from the orchestrator?",
+  "expect": "agentic-course/04-agent-characteristics-components"
+ },
+ {
+  "question": "Why does the agent stop with \"iteration limit or time limit\" when given no tools?",
+  "expect": "agentic-course/07-langchain-single-agent"
+ },
+ {
+  "question": "What does AgentExecutor do that create_react_agent does not?",
+  "expect": "agentic-course/07-langchain-single-agent"
+ },
+ {
+  "question": "How does the model know to call the weather tool second, after the search tool?",
+  "expect": "agentic-course/07-langchain-single-agent"
+ },
+ {
+  "question": "Why are the writer and critic chains rather than agents?",
+  "expect": "agentic-course/08-langchain-multi-agent-research"
+ },
+ {
+  "question": "How does the reader agent know which URLs to open?",
+  "expect": "agentic-course/08-langchain-multi-agent-research"
+ },
+ {
+  "question": "What does create_agent do that create_react_agent did not?",
+  "expect": "agentic-course/08-langchain-multi-agent-research"
+ },
+ {
+  "question": "What three control-flow shapes in the recruitment workflow cannot be expressed as a chain?",
+  "expect": "agentic-course/09-langchain-vs-langgraph"
+ },
+ {
+  "question": "How does LangGraph resume after a failure instead of restarting?",
+  "expect": "agentic-course/09-langchain-vs-langgraph"
+ },
+ {
+  "question": "Why is LangChain still required once you adopt LangGraph?",
+  "expect": "agentic-course/09-langchain-vs-langgraph"
+ },
+ {
+  "question": "What is a node in LangGraph, concretely?",
+  "expect": "agentic-course/10-langgraph-core-components"
+ },
+ {
+  "question": "Why does the chatbot with a single message key forget the user's name?",
+  "expect": "agentic-course/10-langgraph-core-components"
+ },
+ {
+  "question": "What is the difference between parallelization and the orchestrator-worker pattern?",
+  "expect": "agentic-course/10-langgraph-core-components"
+ },
+ {
+  "question": "The state stores every message, yet the bot cannot recall your name on the next invoke. Why?",
+  "expect": "agentic-course/15-langgraph-chatbot-skeleton"
+ },
+ {
+  "question": "What does add_messages change about how a node's return value is applied?",
+  "expect": "agentic-course/15-langgraph-chatbot-skeleton"
+ },
+ {
+  "question": "Why does the Streamlit app need st.session_state if the graph already has a checkpointer?",
+  "expect": "agentic-course/15-langgraph-chatbot-skeleton"
+ },
+ {
+  "question": "What has to change in the Python code to start sending traces to LangSmith?",
+  "expect": "agentic-course/20-langsmith-observability"
+ },
+ {
+  "question": "Runs from different chat threads all appear in one flat list. What is missing?",
+  "expect": "agentic-course/20-langsmith-observability"
+ },
+ {
+  "question": "Name three things you can read off a single trace that the running app does not show you.",
+  "expect": "agentic-course/20-langsmith-observability"
+ },
+ {
+  "question": "What does tools_condition look at, and where can it send the flow?",
+  "expect": "agentic-course/21-tools-in-agentic-chatbot"
+ },
+ {
+  "question": "The model never calls any tool even though ToolNode is wired in. What is the first thing to check?",
+  "expect": "agentic-course/21-tools-in-agentic-chatbot"
+ },
+ {
+  "question": "Why add an edge from tools back to chat_node instead of to END?",
+  "expect": "agentic-course/21-tools-in-agentic-chatbot"
+ },
+ {
+  "question": "Why does a graph with interrupt() need a checkpointer?",
+  "expect": "agentic-course/23-human-in-the-loop-langgraph"
+ },
+ {
+  "question": "How does the calling code know that an interrupt happened?",
+  "expect": "agentic-course/23-human-in-the-loop-langgraph"
+ },
+ {
+  "question": "In an agent with many tools, where should the approval interrupt live and why?",
+  "expect": "agentic-course/23-human-in-the-loop-langgraph"
+ },
+ {
+  "question": "Why does the deploy job run on a \"self-hosted\" runner instead of ubuntu-latest?",
+  "expect": "agentic-course/24-cicd-aws-github-actions"
+ },
+ {
+  "question": "What keeps the API keys out of the repo and the image?",
+  "expect": "agentic-course/24-cicd-aws-github-actions"
+ },
+ {
+  "question": "The pipeline is green but the public URL times out. What is the usual cause?",
+  "expect": "agentic-course/24-cicd-aws-github-actions"
+ },
+ {
+  "question": "What does Render need from the repo to deploy the chatbot?",
+  "expect": "agentic-course/25-render-free-deploy"
+ },
+ {
+  "question": "How does a new commit reach the live service?",
+  "expect": "agentic-course/25-render-free-deploy"
+ },
+ {
+  "question": "Why did the stock-price tool fail on Render when the code was unchanged?",
+  "expect": "agentic-course/25-render-free-deploy"
+ },
+ {
+  "question": "Why does the bot forget the user's name before persistence is added?",
+  "expect": "agentic-course/26-agentic-chatbot-end-to-end"
+ },
+ {
+  "question": "What do the three edges around the tool node do?",
+  "expect": "agentic-course/26-agentic-chatbot-end-to-end"
+ },
+ {
+  "question": "How does the purchase tool wait for a human, and why must there be a checkpointer?",
+  "expect": "agentic-course/26-agentic-chatbot-end-to-end"
+ },
+ {
+  "question": "Why cache the agent by model name instead of building it in the route?",
+  "expect": "agentic-course/27-build-your-own-chatgpt"
+ },
+ {
+  "question": "What is filtered out of the streamed response, and how?",
+  "expect": "agentic-course/27-build-your-own-chatgpt"
+ },
+ {
+  "question": "How does the \"remember that\" feature work?",
+  "expect": "agentic-course/27-build-your-own-chatgpt"
+ },
+ {
+  "question": "Why are the flight and hotel searches not registered as LLM tools?",
+  "expect": "agentic-course/28-tripmate-multi-agent-planner"
+ },
+ {
+  "question": "What does operator.add on the messages field change?",
+  "expect": "agentic-course/28-tripmate-multi-agent-planner"
+ },
+ {
+  "question": "What three things are required for the Postgres checkpointer to actually persist a run?",
+  "expect": "agentic-course/28-tripmate-multi-agent-planner"
+ },
+ {
+  "question": "What exactly breaks in the \"custom function\" approach when a vendor bumps their API version?",
+  "expect": "agentic-course/29-what-is-mcp"
+ },
+ {
+  "question": "Which transport would you use for a server you run on your laptop, and which for a vendor-hosted one?",
+  "expect": "agentic-course/29-what-is-mcp"
+ },
+ {
+  "question": "Where does the LLM sit in the MCP message loop?",
+  "expect": "agentic-course/29-what-is-mcp"
+ },
+ {
+  "question": "How does the graph know how many worker agents to run?",
+  "expect": "agentic-course/32-agentwriter-planning-agent"
+ },
+ {
+  "question": "What changed between the first and second notebook, and why did the output improve so much?",
+  "expect": "agentic-course/32-agentwriter-planning-agent"
+ },
+ {
+  "question": "What is the reducer subgraph and why is it a subgraph?",
+  "expect": "agentic-course/32-agentwriter-planning-agent"
+ },
+ {
+  "question": "What are the three MCP servers in the build and how does each connect?",
+  "expect": "agentic-course/34-supervisor-guardrails-hitl"
+ },
+ {
+  "question": "Why does the supervisor code append itinerary_agent even when the model did not select it?",
+  "expect": "agentic-course/34-supervisor-guardrails-hitl"
+ },
+ {
+  "question": "How does the graph continue after the human approves or gives feedback?",
+  "expect": "agentic-course/34-supervisor-guardrails-hitl"
+ }
+]
