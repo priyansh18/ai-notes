@@ -30,6 +30,13 @@ const groupLabel = (label) => ({
   defaultStyle: true,
 });
 
+// A link to a page that lives elsewhere in this sidebar (a doc id may appear only once).
+const pageLink = (label, id) => ({
+  type: "link",
+  label,
+  href: `/docs/${id}`,
+});
+
 // A build-along project row, tagged by difficulty (beginner/intermediate/advanced).
 const project = (label, level = "beginner") => ({
   type: "html",
@@ -191,26 +198,124 @@ const sidebars = {
       label: "7 · Agentic AI",
       collapsed: true,
       items: [
-        soon("What Makes Something an 'Agent'"),
+        // ── The Agentic AI Course (DSwithBappy playlist). Job 29 keeps this in sync
+        // with lib/job-29/PLAYLIST_LEDGER.md. A doc id appears once in this
+        // sidebar; other places link to it with pageLink().
+        {
+          type: "category",
+          label: "The Agentic AI Course",
+          collapsed: false,
+          items: [
+            {
+              type: "category",
+              label: "A · Orientation",
+              collapsed: true,
+              items: [
+                "agentic-course/01-course-plan",
+                "agentic-course/02-learning-roadmap",
+              ],
+            },
+            {
+              type: "category",
+              label: "B · Foundations",
+              collapsed: true,
+              items: [
+                "agentic-course/03-llms-to-agentic-ai",
+                "agentic-course/04-agent-characteristics-components",
+              ],
+            },
+            {
+              type: "category",
+              label: "C · Python for agents",
+              collapsed: true,
+              items: [
+                "agentic-ai/async-programming",
+                "agentic-ai/pydantic-for-agents",
+              ],
+            },
+            {
+              type: "category",
+              label: "D · LangChain agents",
+              collapsed: true,
+              items: [
+                "agentic-course/07-langchain-single-agent",
+                "agentic-course/08-langchain-multi-agent-research",
+              ],
+            },
+            {
+              type: "category",
+              label: "E · LangGraph core",
+              collapsed: true,
+              items: [
+                "agentic-course/09-langchain-vs-langgraph",
+                "agentic-course/10-langgraph-core-components",
+                "agentic-ai/langgraph-workflows",
+              ],
+            },
+            {
+              type: "category",
+              label: "F · Build an agentic chatbot",
+              collapsed: true,
+              items: [
+                "agentic-course/15-langgraph-chatbot-skeleton",
+                "agentic-ai/agent-persistence",
+                "agentic-ai/streaming-threading",
+                "agentic-course/20-langsmith-observability",
+                "agentic-course/21-tools-in-agentic-chatbot",
+                pageLink("RAG inside the chatbot (Agentic RAG)", "rag-course/16-agentic-rag"),
+                "agentic-course/23-human-in-the-loop-langgraph",
+                "agentic-course/24-cicd-aws-github-actions",
+                "agentic-course/25-render-free-deploy",
+                "agentic-course/26-agentic-chatbot-end-to-end",
+              ],
+            },
+            {
+              type: "category",
+              label: "G · MCP and subgraphs",
+              collapsed: true,
+              items: [
+                "agentic-course/29-what-is-mcp",
+                "agentic-ai/langgraph-subgraphs",
+              ],
+            },
+            {
+              type: "category",
+              label: "H · Capstone builds",
+              collapsed: true,
+              items: [
+                "agentic-course/27-build-your-own-chatgpt",
+                "agentic-course/28-tripmate-multi-agent-planner",
+                "agentic-course/32-agentwriter-planning-agent",
+                "agentic-course/34-supervisor-guardrails-hitl",
+              ],
+            },
+            {
+              type: "category",
+              label: "I · Safety, quality, ops",
+              collapsed: true,
+              items: [
+                pageLink("Guardrails", "rag-course/24-guardrails"),
+                "agentic-ai/harness-engineering",
+                "agentic-ai/loop-engineering",
+                pageLink("Evaluation", "rag-course/26-evaluation"),
+                pageLink("LLM Gateways", "rag-course/25-llm-gateways"),
+              ],
+            },
+            {
+              type: "category",
+              label: "J · Advanced RAG",
+              collapsed: true,
+              items: [
+                pageLink("Corrective RAG (CRAG)", "rag-course/19-corrective-rag"),
+              ],
+            },
+          ],
+        },
         soon("The ReAct Loop (reason → act → observe)"),
-        soon("Tool / Function Calling for Agents"),
-        soon("Building Your First Tool"),
         soon("Agent Memory (short-term vs Mem0/LangMem)"),
-        soon("LangGraph (stateful agents as graphs)"),
         soon("CrewAI (role-based agent crews)"),
         soon("Microsoft AutoGen (conversational multi-agent)"),
         soon("OpenAI Agents SDK & Google ADK"),
-        soon("Multi-Agent Orchestration"),
-        soon("Agentic RAG (agents that decide when to retrieve)"),
-        soon("Human-in-the-Loop & Approval Gates"),
-        "agentic-ai/pydantic-for-agents",
-        "agentic-ai/async-programming",
-        "agentic-ai/langgraph-workflows",
-        "agentic-ai/langgraph-subgraphs",
-        "agentic-ai/agent-persistence",
-        "agentic-ai/streaming-threading",
-        "agentic-ai/harness-engineering",
-        "agentic-ai/loop-engineering",
 
         groupLabel("Projects"),
         project("Stateful Agent (LangGraph + Llama 3)", "beginner"),
@@ -232,13 +337,15 @@ const sidebars = {
       collapsed: true,
       items: [
         soon("Why AgentOps (agents are non-deterministic)"),
-        soon("MCP — Model Context Protocol"),
+        pageLink("MCP — Model Context Protocol", "agentic-course/29-what-is-mcp"),
         soon("A2A — Agent-to-Agent Communication"),
-        soon("Tracing & Observability (LangSmith, Langfuse, Opik)"),
+        pageLink("Tracing & Observability (LangSmith)", "agentic-course/20-langsmith-observability"),
+        soon("Tracing with Langfuse & Opik"),
         soon("Agent Evaluation (DeepEval, eval sets)"),
         soon("Agent Security (prompt injection, least-privilege)"),
-        soon("Containerize & CI/CD"),
-        soon("Cloud Deployment (AWS / GCP / Azure)"),
+        pageLink("Containerize & CI/CD (Docker + GitHub Actions on AWS)", "agentic-course/24-cicd-aws-github-actions"),
+        pageLink("Free Deployment on Render", "agentic-course/25-render-free-deploy"),
+        soon("Cloud Deployment (GCP / Azure)"),
         soon("Production Monitoring (Prometheus, Grafana, ELK)"),
 
         groupLabel("Projects"),
