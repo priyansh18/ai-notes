@@ -286,6 +286,7 @@ const sidebars = {
                 "agentic-course/28-tripmate-multi-agent-planner",
                 "agentic-course/32-agentwriter-planning-agent",
                 "agentic-course/34-supervisor-guardrails-hitl",
+                "agentic-course/41-self-correcting-multi-agent-digitalocean",
               ],
             },
             {
@@ -306,6 +307,7 @@ const sidebars = {
               collapsed: true,
               items: [
                 pageLink("Corrective RAG (CRAG)", "rag-course/19-corrective-rag"),
+                pageLink("Self-RAG (retrieve only when needed, then self-check)", "rag-course/20-adaptive-rag"),
               ],
             },
           ],

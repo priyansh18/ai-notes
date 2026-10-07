@@ -238,5 +238,17 @@
  {
   "question": "How does the graph continue after the human approves or gives feedback?",
   "expect": "agentic-course/34-supervisor-guardrails-hitl"
+ },
+ {
+  "question": "Why does a self-correcting writer-reviewer-reviser loop need a maximum revision count?",
+  "expect": "agentic-course/41-self-correcting-multi-agent-digitalocean"
+ },
+ {
+  "question": "What is an inference router and how does it differ from calling one model directly?",
+  "expect": "agentic-course/41-self-correcting-multi-agent-digitalocean"
+ },
+ {
+  "question": "What settings does a FastAPI LangGraph app need to auto-deploy on DigitalOcean App Platform?",
+  "expect": "agentic-course/41-self-correcting-multi-agent-digitalocean"
  }
 ]

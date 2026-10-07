@@ -84,3 +84,14 @@ before an interview, or jump here whenever a word is unfamiliar.
   correct, or decide when to retrieve.
 - **Multimodal RAG** — retrieval over text _and_ images.
 - **Guardrails** — input/output filtering and injection defense.
+
+## Agentic AI & deployment
+
+- **Verifier agent** — a node in a self-correcting loop that grades another agent's
+  output against fixed rules and emits a structured pass/revise decision.
+- **Termination guard (max revisions)** — a counter in graph state plus a cap that
+  forces a retry loop to exit with its last output when the verifier never passes it.
+- **Inference router** — a managed routing layer that maps each request to a model
+  based on a configured task and a fallback model, behind one OpenAI-compatible endpoint.
+- **Auto-deploy (source-based CI/CD)** — a platform setting where every push to a
+  connected branch rebuilds and redeploys the app with no pipeline file to write.
