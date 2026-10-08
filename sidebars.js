@@ -310,6 +310,15 @@ const sidebars = {
                 pageLink("Self-RAG (retrieve only when needed, then self-check)", "rag-course/20-adaptive-rag"),
               ],
             },
+            {
+              type: "category",
+              label: "K · FDE track",
+              collapsed: true,
+              items: [
+                "agentic-course/43-fde-roadmap",
+                "agentic-course/44-fde-real-project",
+              ],
+            },
           ],
         },
         soon("The ReAct Loop (reason → act → observe)"),

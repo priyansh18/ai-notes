@@ -95,3 +95,25 @@ before an interview, or jump here whenever a word is unfamiliar.
   based on a configured task and a fallback model, behind one OpenAI-compatible endpoint.
 - **Auto-deploy (source-based CI/CD)** — a platform setting where every push to a
   connected branch rebuilds and redeploys the app with no pipeline file to write.
+
+## Forward Deployed Engineering
+
+- **Forward Deployed Engineer (FDE)** — an engineer who works directly with a customer
+  to turn their business problem into a deployed, measured production system: discover,
+  design, build, deploy, iterate.
+- **Delivery playbook** — the eight-step FDE loop (discover, scope, build, evaluate,
+  integrate, deploy, adopt, improve) used to take one business problem end to end.
+- **Discovery brief** — the set of answers an FDE needs before coding: current workflow,
+  biggest pain, users, existing systems and data, what AI can safely automate, what needs
+  human approval, the success metric, and the smallest valuable MVP.
+- **Vertical slice** — a thin but complete, usable path through a product (backend, data,
+  minimal UI) shipped early to validate the idea before full build-out.
+- **Evidence grading** — an LLM-as-judge step that returns a structured good/weak verdict
+  on retrieved context before any answer is generated from it.
+- **Web fallback** — a controlled path to a web search tool used only when private
+  knowledge-base evidence is graded insufficient, with its results graded again before use.
+- **Decision trace** — the ordered record of routing and grading decisions an agentic
+  workflow made for one request, returned alongside the answer and sources for
+  transparency and auditing.
+- **Pinecone namespace** — a logical partition (table-like) inside one index, used to keep
+  different departments' or tenants' vectors separate while sharing one index.
